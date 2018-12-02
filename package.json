@@ -64,7 +64,7 @@
     "client": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "nodemon src/server/bin/www",
+    "server": "node src/server/bin/www",
     "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
