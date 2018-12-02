@@ -1,53 +1,50 @@
-var express = require("express");
-var router = express.Router();
+var express = require('express')
+var router = express.Router()
 
-const json = [
-  {
-    id: 1,
-    first_name: "Ahmed",
-    last_name: "Magdy",
-    bday: "NULL",
-    Type: "Mentor",
-    Slack_nickname: "ttps://github.com/a-magdy",
-    Admission_date: "NULL",
-    Status: "Active"
-  },
-  {
-    id: 2,
-    first_name: "Daniel",
-    last_name: "Fernandes",
-    bday: "NULL",
-    Type: "Mentor",
-    Slack_nickname: "https://github.com/dpfernandes/",
-    Admission_date: "NULL",
-    Status: "Active"
-  },
-  {
-    id: 3,
-    first_name: "Jacob",
-    last_name: "Andresen",
-    bday: "NULL",
-    Type: "Mentor",
-    Slack_nickname: "https://github.com/jacobandresen",
-    Admission_date: "NULL",
-    Status: "Active"
-  },
-  {
-    id: 4,
-    first_name: "Zaki",
-    last_name: "Wasik",
-    bday: "NULL",
-    Type: "Mentor",
-    Slack_nickname: "https://github.com/zkwsk",
-    Admission_date: "NULL",
-    Status: "Active"
-  }
-];
+
+const json = [{
+  "id": 1,
+  "first_name": "Ahmed",
+  "last_name": "Magdy",
+  "bday": "NULL",
+  "Type": "Mentor",
+  "Slack_nickname": "ttps://github.com/a-magdy",
+  "Admission_date": "NULL",
+  "Status": "Active"
+}, {
+  "id": 2,
+  "first_name": "Daniel",
+  "last_name": "Fernandes",
+  "bday": "NULL",
+  "Type": "Mentor",
+  "Slack_nickname": "https://github.com/dpfernandes/",
+  "Admission_date": "NULL",
+  "Status": "Active"
+}, {
+  "id": 3,
+  "first_name": "Jacob",
+  "last_name": "Andresen",
+  "bday": "NULL",
+  "Type": "Mentor",
+  "Slack_nickname": "https://github.com/jacobandresen",
+  "Admission_date": "NULL",
+  "Status": "Active"
+}, {
+  "id": 4,
+  "first_name": "Zaki",
+  "last_name": "Wasik",
+  "bday": "NULL",
+  "Type": "Mentor",
+  "Slack_nickname": "https://github.com/zkwsk",
+  "Admission_date": "NULL",
+  "Status": "Active"
+}]
 
 /* GET home page. */
-router.get("/api/mentors", function(req, res, next) {
+router.get('/api/mentors', function (req, res, next) {
   // res.render('index', { title: 'Express' });
-  res.send(json);
-});
+  res.send(json)
+})
 
-module.exports = router;
+
+module.exports = router
