@@ -1,6 +1,9 @@
 {
   "name": "hyf-finalproject-class6-group2",
   "version": "0.1.0",
+  "engines": {
+    "yarn": "1.x"
+  },
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",
@@ -123,5 +126,5 @@
       "react-app"
     ]
   },
-  "proxy":"http://localhost:4000/"
+  "proxy": "http://localhost:4000/"
 }
