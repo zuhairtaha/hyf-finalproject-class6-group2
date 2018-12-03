@@ -69,6 +69,7 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "server": "node src/server/bin/www",
+    "postinstall": "npm rebuild node-sass",
     "start": "concurrently \"yarn run server\" \"yarn run client\""
   },
   "eslintConfig": {
