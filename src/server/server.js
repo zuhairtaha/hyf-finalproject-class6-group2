@@ -11,10 +11,10 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
 
 // API calls
-app.get("/api/mentors", (req, res) => {
-  const mentors = fs.readFileSync(path.join(__dirname, 'mentors.json'), 'utf8')
-  res.send(mentors)
+app.get('/api/mentors', (req, res) => {
+  fs.readFile(path.join(__dirname, './mentors.json'), 'utf8', (err, data) => res.send(data))
 })
+
 
 if (process.env.NODE_ENV === "production") {
   // Serve any static files
