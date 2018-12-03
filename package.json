@@ -1,9 +1,6 @@
 {
   "name": "hyf-finalproject-class6-group2",
   "version": "0.1.0",
-  "engines": {
-    "npm": "6.4.1"
-  },
   "private": true,
   "dependencies": {
     "@babel/core": "7.1.0",
@@ -15,15 +12,12 @@
     "babel-plugin-named-asset-import": "^0.2.3",
     "babel-preset-react-app": "^6.1.0",
     "bfj": "6.1.1",
+    "body-parser": "^1.18.3",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
-    "concurrently": "^4.1.0",
-    "cookie-parser": "~1.4.3",
     "css-loader": "1.0.0",
-    "debug": "~2.6.9",
     "dotenv": "6.0.0",
     "dotenv-expand": "4.2.0",
-    "ejs": "~2.5.7",
     "eslint": "5.6.0",
     "eslint-config-react-app": "^3.0.5",
     "eslint-loader": "2.1.1",
@@ -36,15 +30,11 @@
     "fork-ts-checker-webpack-plugin-alt": "0.4.14",
     "fs-extra": "7.0.0",
     "html-webpack-plugin": "4.0.0-alpha.2",
-    "http-errors": "~1.6.2",
     "identity-obj-proxy": "3.0.0",
     "jest": "23.6.0",
     "jest-pnp-resolver": "1.0.1",
     "jest-resolve": "23.6.0",
     "mini-css-extract-plugin": "0.4.3",
-    "morgan": "~1.9.0",
-    "node-sass": "^4.10.0",
-    "nodemon": "^1.18.7",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -69,10 +59,13 @@
     "client": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "node src/server/bin/www",
-    "postinstall": "npm rebuild node-sass",
-    "start": "concurrently \"npm run server\" \"npm run client\""
+    "server": "nodemon src/server/server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "dev:server": "npm run build && npm run start",
+    "start": "node src/server/server.js",
+    "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build"
   },
+  "proxy": "http://localhost:4000/",
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -127,6 +120,5 @@
     "presets": [
       "react-app"
     ]
-  },
-  "proxy": "http://localhost:4000/"
+  }
 }

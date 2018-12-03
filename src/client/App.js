@@ -1,40 +1,19 @@
 import React, {Component} from 'react'
-import logo from './logo.svg'
-import './App.css'
 
 class App extends Component {
 
 
-  state = {
-    mentors: []
-  }
-
   componentDidMount() {
-    fetch('/api/mentors')
+    fetch('/api/hello')
       .then(res => res.json())
-      .then(mentors => this.setState({mentors}))
+      .then(console.log)
       .catch(console.log)
   }
 
   render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-            Hello World
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-          <p>{JSON.stringify(this.state.mentors)}</p>
-        </header>
+        test
       </div>
     )
   }
