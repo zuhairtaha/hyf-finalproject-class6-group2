@@ -65,8 +65,8 @@
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
     "server": "node src/server/bin/www",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild": "npm install && npm run build"
+    "start": "concurrently \"yarn run server\" \"yarn run client\"",
+    "heroku-postbuild": "yarn && yarn run build"
   },
   "eslintConfig": {
     "extends": "react-app"
