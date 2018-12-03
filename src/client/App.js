@@ -1,4 +1,5 @@
 import React, {Component} from 'react'
+import Mentor from "./components/Mentor"
 
 class App extends Component {
 
@@ -7,16 +8,17 @@ class App extends Component {
   }
 
   componentDidMount() {
-    fetch('/api/hello')
+    fetch('/api/mentors')
       .then(res => res.json())
       .then(mentors => this.setState({mentors}))
       .catch(console.log)
   }
 
   render() {
+    const {mentors} = this.state
     return (
       <div className="App">
-        {JSON.stringify(this.state.mentors)}
+        {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
       </div>
     )
   }

@@ -4,13 +4,16 @@ const bodyParser = require("body-parser");
 
 const app = express();
 const port = process.env.PORT || 4000;
+const fs = require('fs');
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // API calls
-app.get("/api/hello", (req, res) => {
-  res.send({ express: "Hello From Express" });
+app.get("/api/mentors", (req, res) => {
+  const mentors = fs.readFileSync(path.join(__dirname,'mentors.json'), 'utf8');
+  res.send(mentors);
 });
 
 app.post("/api/world", (req, res) => {
