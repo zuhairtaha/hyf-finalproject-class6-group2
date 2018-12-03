@@ -2,7 +2,7 @@
   "name": "hyf-finalproject-class6-group2",
   "version": "0.1.0",
   "engines": {
-    "yarn": "1.10.1"
+    "npm": "6.4.1"
   },
   "private": true,
   "dependencies": {
@@ -71,7 +71,7 @@
     "test": "node scripts/test.js",
     "server": "node src/server/bin/www",
     "postinstall": "npm rebuild node-sass",
-    "start": "concurrently \"yarn run server\" \"yarn run client\""
+    "start": "concurrently \"npm run server\" \"npm run client\""
   },
   "eslintConfig": {
     "extends": "react-app"
