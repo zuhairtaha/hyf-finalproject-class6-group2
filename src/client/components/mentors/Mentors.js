@@ -1,9 +1,9 @@
-import Mentor from "./Mentor"
-import React from "react"
-import Progress from "./layouts/Progress"
+import Mentor from './Mentor'
+import React from 'react'
+import Progress from '../layouts/Progress'
+import AddMentor from './AddMentor'
 
 class Mentors extends React.Component {
-
   state = {
     mentors: []
   }
@@ -19,11 +19,14 @@ class Mentors extends React.Component {
     const {mentors} = this.state
     return (
       <div className="container">
-        <h2>Mentors <span className="btn btn-xs btn-primary" href="add"><i class="fa fa-plus"></i> add mentor</span></h2>
+        <h2>Mentors </h2>
+        <AddMentor />
         {mentors.length === 0
           ? <Progress />
           : <div className="row">
-            {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
+            {mentors.map(mentor => (
+              <Mentor key={mentor.id} mentor={mentor} />
+            ))}
           </div>
         }
       </div>

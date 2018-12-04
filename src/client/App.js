@@ -1,7 +1,7 @@
 import React, {Component, Fragment} from 'react'
 import Navbar from "./components/layouts/Navbar"
 import Jumbotron from "./components/layouts/Jumbotron"
-import Mentors from "./components/Mentors"
+import Mentors from "./components/mentors/Mentors"
 
 class App extends Component {
 
