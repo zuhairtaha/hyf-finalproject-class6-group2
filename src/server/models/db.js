@@ -17,7 +17,7 @@ const db = process.env.JAWSDB_URL
 // connect
 db.connect(err => {
   if (err) throw err
-  else console.log("MySQL connected")
+  else console.log('MySQL connected')
 })
 
 module.exports = db
