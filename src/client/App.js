@@ -1,27 +1,24 @@
-import React, {Component} from 'react'
-import Mentor from "./components/Mentor"
+import React, { Component, Fragment } from 'react'
+import Navbar from "./components/layouts/Navbar"
+import Jumbotron from "./components/layouts/Jumbotron"
+import Mentors from "./components/mentors/Mentors"
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
+import AddMentor from './components/mentors/AddMentor';
 
 class App extends Component {
 
-  state = {
-    mentors: []
-  }
-
-  componentDidMount() {
-    fetch('/api/mentors')
-      .then(res => res.json())
-      .then(mentors => this.setState({mentors}))
-      .catch(console.log)
-  }
-
-  render() {
-    const {mentors} = this.state
-    return (
-      <div className="App">
-        {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
-      </div>
-    )
-  }
+  render = () =>
+    <Fragment>
+      <Navbar />
+      <Jumbotron />
+      <BrowserRouter>
+        <Switch>
+          <Route path="/" component={Mentors} exact />
+          <Route path="/mentors/add" component={AddMentor} />
+          <Route render={() => "Page not found"} />
+        </Switch>
+      </BrowserRouter>
+    </Fragment>
 }
 
 export default App
