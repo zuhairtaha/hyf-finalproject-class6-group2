@@ -1,7 +1,7 @@
 import Mentor from './Mentor'
 import React from 'react'
 import Progress from '../layouts/Progress'
-import AddMentor from './AddMentor'
+import NavLink from "react-router-dom/es/NavLink"
 
 class Mentors extends React.Component {
   state = {
@@ -19,8 +19,7 @@ class Mentors extends React.Component {
     const {mentors} = this.state
     return (
       <div className="container">
-        <h2>Mentors </h2>
-        <AddMentor />
+        <h2>Mentors <NavLink to="/mentors/add" className="btn btn-sm btn-success"><i className="fa fa-plus text-white" /></NavLink></h2>       
         {mentors.length === 0
           ? <Progress />
           : <div className="row">
