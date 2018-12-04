@@ -1,5 +1,6 @@
 import Mentor from "./Mentor"
 import React from "react"
+import Progress from "./layouts/Progress"
 
 class Mentors extends React.Component {
 
@@ -19,9 +20,12 @@ class Mentors extends React.Component {
     return (
       <div className="container">
         <p>Next mentors list is comming from MySQL database</p>
-        <div className="row">
-          {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
-        </div>
+        {mentors.length === 0
+          ? <Progress />
+          : <div className="row">
+            {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
+          </div>
+        }
       </div>
     )
   }

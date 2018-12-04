@@ -2,11 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="25bc32ba-9df6-407a-b52c-0eba134104f3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/client/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/client/components/Mentor.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Mentor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/client/components/Mentors.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/client/components/Mentors.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,7 +43,7 @@
           <entry key="css" value="2" />
           <entry key="gitignore" value="1" />
           <entry key="html" value="2" />
-          <entry key="js" value="17" />
+          <entry key="js" value="18" />
           <entry key="json" value="4" />
           <entry key="lock" value="1" />
           <entry key="sql" value="1" />
@@ -58,7 +55,7 @@
           <entry key="CSS" value="2" />
           <entry key="HTML" value="2" />
           <entry key="JSON" value="4" />
-          <entry key="JavaScript" value="18" />
+          <entry key="JavaScript" value="19" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="Scratch" value="1" />
           <entry key="yarn.lock" value="1" />
@@ -68,7 +65,7 @@
         <counts>
           <entry key="gitignore" value="95" />
           <entry key="html" value="16" />
-          <entry key="js" value="1204" />
+          <entry key="js" value="1282" />
           <entry key="json" value="61" />
           <entry key="sql" value="21" />
           <entry key="www" value="36" />
@@ -78,7 +75,7 @@
         <counts>
           <entry key="HTML" value="16" />
           <entry key="JSON" value="61" />
-          <entry key="JavaScript" value="1240" />
+          <entry key="JavaScript" value="1318" />
           <entry key="PLAIN_TEXT" value="95" />
           <entry key="Scratch" value="21" />
         </counts>
@@ -102,7 +99,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/components/layouts/Jumbotron.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="72">
@@ -111,11 +108,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/client/components/Mentor.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
+            <state relative-caret-position="264">
+              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
             </state>
           </provider>
         </entry>
@@ -132,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="336">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="360">
+              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
               <folding>
                 <element signature="e#0#48#0" expanded="true" />
               </folding>
@@ -142,10 +139,19 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/client/components/layouts/Progress.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="48">
+              <caret line="2" column="14" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/client/components/Mentors.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+            <state relative-caret-position="768">
+              <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
               <folding>
                 <element signature="e#0#29#0" expanded="true" />
               </folding>
@@ -195,10 +201,11 @@
         <option value="$PROJECT_DIR$/public/index.html" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/client/components/layouts/Navbar.js" />
+        <option value="$PROJECT_DIR$/src/client/components/layouts/Jumbotron.js" />
         <option value="$PROJECT_DIR$/src/client/App.js" />
+        <option value="$PROJECT_DIR$/src/client/components/layouts/Progress.js" />
         <option value="$PROJECT_DIR$/src/client/components/Mentors.js" />
         <option value="$PROJECT_DIR$/src/client/components/Mentor.js" />
-        <option value="$PROJECT_DIR$/src/client/components/layouts/Jumbotron.js" />
       </list>
     </option>
   </component>
@@ -388,12 +395,12 @@
       <option name="presentableId" value="Default" />
       <updated>1543862491488</updated>
       <workItem from="1543862495831" duration="22000" />
-      <workItem from="1543865791718" duration="15289000" />
+      <workItem from="1543865791718" duration="15787000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="15311000" />
+    <option name="totallyTimeSpent" value="15809000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1592" y="-8" width="1936" height="1056" extended-state="6" />
@@ -543,16 +550,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-          <folding>
-            <element signature="e#0#48#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/server/mentors.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="363">
@@ -560,10 +557,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/components/layouts/Jumbotron.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="72">
+          <caret line="3" column="65" selection-start-line="3" selection-start-column="65" selection-end-line="3" selection-end-column="65" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="360">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/client/components/layouts/Progress.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="48">
+          <caret line="2" column="14" selection-start-line="2" selection-start-column="6" selection-end-line="2" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/client/components/Mentors.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="20" column="10" selection-start-line="20" selection-start-column="10" selection-end-line="20" selection-end-column="10" />
+        <state relative-caret-position="768">
+          <caret line="32" lean-forward="true" selection-start-line="32" selection-end-line="32" />
           <folding>
             <element signature="e#0#29#0" expanded="true" />
           </folding>
@@ -572,15 +593,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/client/components/Mentor.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="5" column="33" selection-start-line="5" selection-start-column="33" selection-end-line="5" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/client/components/layouts/Jumbotron.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="72">
-          <caret line="3" column="65" selection-start-line="3" selection-start-column="65" selection-end-line="3" selection-end-column="65" />
+        <state relative-caret-position="264">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
