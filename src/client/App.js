@@ -16,6 +16,7 @@ class App extends Component {
           <Route path="/" component={Mentors} exact />
           <Route path="/mentors/add" component={AddMentor} />
           <Route render={() => "Page not found"} />
+          
         </Switch>
       </BrowserRouter>
     </Fragment>
