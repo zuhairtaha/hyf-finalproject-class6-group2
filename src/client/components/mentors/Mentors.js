@@ -19,7 +19,7 @@ class Mentors extends React.Component {
     const {mentors} = this.state
     return (
       <div className="container">
-        <p>Next mentors list is comming from MySQL database</p>
+        <h2>Mentors <span className="btn btn-xs btn-primary" href="add"><i class="fa fa-plus"></i> add mentor</span></h2>
         {mentors.length === 0
           ? <Progress />
           : <div className="row">
