@@ -62,7 +62,7 @@
     "client": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "server": "nodemon src/server/bin/www --ignore client",
+    "server": "nodemon src/server/bin/www",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev:server": "npm run build && npm run start",
     "start": "node src/server/bin/www",

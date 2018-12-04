@@ -1,27 +1,17 @@
-import React, {Component} from 'react'
-import Mentor from "./components/Mentor"
+import React, {Component, Fragment} from 'react'
+import Navbar from "./components/layouts/Navbar"
+import Jumbotron from "./components/layouts/Jumbotron"
+import Mentors from "./components/Mentors"
 
 class App extends Component {
 
-  state = {
-    mentors: []
-  }
+  render = () =>
+    <Fragment>
+      <Navbar />
+      <Jumbotron />
+      <Mentors />
+    </Fragment>
 
-  componentDidMount() {
-    fetch('/api/mentors')
-      .then(res => res.json())
-      .then(mentors => this.setState({mentors}))
-      .catch(console.log)
-  }
-
-  render() {
-    const {mentors} = this.state
-    return (
-      <div className="App">
-        {mentors.map(mentor => <Mentor key={mentor.id} mentor={mentor} />)}
-      </div>
-    )
-  }
 }
 
 export default App
