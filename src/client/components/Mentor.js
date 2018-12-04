@@ -20,7 +20,8 @@ const Mentor = props => {
             Birth date: {bday}<br />
             Admission date: {admission_date}
           </p>
-          <a href={slack_nickname} className="card-link">Slack nickname</a>
+          <a href={slack_nickname} className="btn btn-info">
+            <i className="fa fa-github" aria-hidden="true"> </i> Github</a>
         </div>
       </div>
     </div>
