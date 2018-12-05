@@ -2,10 +2,10 @@ const mysql = require('mysql')
 
 // local database
 const localDB = {
-  host: 'jfrpocyduwfg38kq.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
-  user: 'qlhi3go2pyq3971u',
-  password: 'wh43h6xkqkipi89z',
-  database: 'g1rb97g4lgyxgccx'
+  host: 'localhost',
+  user: 'hyf',
+  password: 'password',
+  database: 'hyf_fp_c6_g2'
 }
 
 // @link: https://devcenter.heroku.com/articles/jawsdb
@@ -16,7 +16,7 @@ const db = process.env.JAWSDB_URL
 
 // connect
 db.connect(err => {
-  if (err) throw err
+  if (err) console.log(err)
   else console.log('MySQL connected')
 })
 
