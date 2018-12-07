@@ -6,7 +6,6 @@ class AddMentor extends React.Component {
     super(props)
         this.state = {
             mentorData: {
-              "id" : "13",
               "first_name": "",
               "last_name": "",
               "bday": "",
@@ -57,11 +56,10 @@ class AddMentor extends React.Component {
     .catch(error => console.error('Error:', error));
 }
   render = () =>
-  <form onSubmit={this.submitForm}>
     <div className="container">
     <h3>Add mentor</h3>
       <div className="card shadow-sm p-3 mb-3">
-        <form onSubmit={this.addMentorHandler}>
+        <form onSubmit={this.submitForm}>
 
           <div className="row">
             <div className="col-md-6 mb-2">
@@ -105,7 +103,6 @@ class AddMentor extends React.Component {
         </form>
       </div>
     </div>
-    </form>
 }
 
 export default AddMentor
