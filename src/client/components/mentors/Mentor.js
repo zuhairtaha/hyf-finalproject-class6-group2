@@ -1,7 +1,9 @@
 import React from 'react'
+import { Link } from "react-router-dom";
 
 const Mentor = props => {
   const {
+    id,
           first_name,
           last_name,
           slack_nickname,
@@ -22,6 +24,7 @@ const Mentor = props => {
           </p>
           <a href={slack_nickname} className="btn btn-info">
             <i className="fa fa-github" aria-hidden="true"> </i> Github</a>
+            <Link to={`/Mentor/edit/${id}`} target="_blank">Edit</Link>
         </div>
       </div>
     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import NavLink from "react-router-dom/es/NavLink"
 
-class AddMentor extends React.Component {
+class EditMentor extends React.Component {
   constructor(props) {
     super(props)
         this.state = {
@@ -10,7 +10,7 @@ class AddMentor extends React.Component {
               "last_name": "",
               "bday": "",
               "type": "Mentor",
-              "slack_nickname": "ttps://github.com/a-magdy",
+              "slack_nickname": "",
               "admission_date": "",
               "status": ""
             }
@@ -21,7 +21,7 @@ class AddMentor extends React.Component {
 
     }
 
- // addMentorHandler = e => {
+ // EditMentorHandler = e => {
    // e.preventDefault()
   //}
   updateField = (e) => {
@@ -36,7 +36,25 @@ class AddMentor extends React.Component {
     })
 }
 
+componentDidMount() {
+  const url = '/api/mentor/edit'
+  const id = this.props.match.params.id;
 
+  // TODO handle failure (404)
+
+  fetch(`${url}/${id}`)
+  .then(
+      response => response.json()
+  ).then(
+      data => this.setState({
+          isLoading: false,
+          mentorData: data
+      })
+  )
+  // .catch(error => this.setState({
+  //     message: error
+  // })) 
+}
   submitForm = (e) => {
     e.preventDefault();
 
@@ -57,7 +75,7 @@ class AddMentor extends React.Component {
 }
   render = () =>
     <div className="container">
-    <h3>Add mentor</h3>
+    <h3>Edit Mentor</h3>
       <div className="card shadow-sm p-3 mb-3">
         <form onSubmit={this.submitForm}>
 
@@ -105,4 +123,4 @@ class AddMentor extends React.Component {
     </div>
 }
 
-export default AddMentor
+export default EditMentor
