@@ -70,6 +70,10 @@
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:4000/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HackYourFuture-CPH/class06-final-project"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
