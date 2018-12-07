@@ -2,10 +2,10 @@ const mysql = require('mysql')
 
 // local database
 const localDB = {
-  host: 'jfrpocyduwfg38kq.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
-  user: 'qlhi3go2pyq3971u',
-  password: 'wh43h6xkqkipi89z',
-  database: 'g1rb97g4lgyxgccx'
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'hyf-fp-c6-g2'
 }
 
 // @link: https://devcenter.heroku.com/articles/jawsdb
