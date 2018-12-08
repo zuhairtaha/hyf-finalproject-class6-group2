@@ -131,3 +131,7 @@ fabric.properties
 .idea/inspectionProfiles/Project_Default.xml
 .idea/workspace.xml
 package-lock.json
+
+/src/client/libs
+
+src/server/config/db.js
