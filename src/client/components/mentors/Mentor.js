@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from "react-router-dom";
 
+
 const Mentor = props => {
   const {
     id,
@@ -11,7 +12,6 @@ const Mentor = props => {
           bday,
           admission_date
         } = props.mentor
-
   return (
     <div className="col-md-6">
       <div className="card shadow-sm mb-3">
@@ -24,7 +24,8 @@ const Mentor = props => {
           </p>
           <a href={slack_nickname} className="btn btn-info">
             <i className="fa fa-github" aria-hidden="true"> </i> Github</a>
-            <Link to={`/Mentor/edit/${id}`} target="_blank">Edit</Link>
+            <Link to={`/mentors/edit/${id}`} target="_blank">{console.log(id)}Edit</Link>
+       
         </div>
       </div>
     </div>

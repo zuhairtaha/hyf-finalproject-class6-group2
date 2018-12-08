@@ -6,6 +6,7 @@ class EditMentor extends React.Component {
     super(props)
         this.state = {
             mentorData: {
+              "id" :"",
               "first_name": "",
               "last_name": "",
               "bday": "",
@@ -36,15 +37,19 @@ class EditMentor extends React.Component {
     })
 }
 
-componentDidMount() {
-  const url = '/api/mentor/edit'
-  const id = this.props.match.params.id;
 
+componentDidMount() {
+  const url = '/api/mentors'
+  const id = this.props.match.params.id;
   // TODO handle failure (404)
 
   fetch(`${url}/${id}`)
+  .then(console.log('aaa', `${url}/${id}`))
   .then(
-      response => response.json()
+      response =>{
+        console.log(response)
+        response.json()
+      }
   ).then(
       data => this.setState({
           isLoading: false,

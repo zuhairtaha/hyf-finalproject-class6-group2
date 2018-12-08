@@ -16,7 +16,7 @@ class App extends Component {
         <Switch>
           <Route path="/" component={Mentors} exact />
           <Route path="/mentors/add" component={AddMentor} />
-          <Route path={`/mentor/edit/:id`} component={EditMentor} />
+          <Route path={`/mentors/edit/:id`} component={EditMentor} />
 
           <Route render={() => "Page not found"} />
 
