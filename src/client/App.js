@@ -1,17 +1,16 @@
-import React, { Component, Fragment } from 'react'
-import Navbar from "./components/layouts/Navbar"
-import Jumbotron from "./components/layouts/Jumbotron"
-import Mentors from "./components/mentors/Mentors"
-import { BrowserRouter, Route, Switch } from 'react-router-dom'
-import AddMentor from './components/mentors/AddMentor';
-import EditMentor from './components/mentors/EditMentor';
+import React, {Component} from 'react'
+import Navbar from './components/layouts/Navbar'
+import Jumbotron from './components/layouts/Jumbotron'
+import Main from './components'
+import Footer from './components/layouts/Footer'
 
 class App extends Component {
 
   render = () =>
-    <Fragment>
+    <>
       <Navbar />
       <Jumbotron />
+<<<<<<< HEAD
       <BrowserRouter>
         <Switch>
           <Route path="/" component={Mentors} exact />
@@ -23,6 +22,11 @@ class App extends Component {
         </Switch>
       </BrowserRouter>
     </Fragment>
+=======
+      <Main />
+      <Footer />
+    </>
+>>>>>>> 346123fb819aca330870d795414af30ba2008ba8
 }
 
 export default App

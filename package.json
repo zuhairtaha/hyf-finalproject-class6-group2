@@ -37,7 +37,7 @@
     "jest-resolve": "23.6.0",
     "mini-css-extract-plugin": "0.4.3",
     "morgan": "^1.9.1",
-    "mysql": "^2.16.0",
+    "mysql2": "^1.6.4",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "pnp-webpack-plugin": "1.1.0",
     "postcss-flexbugs-fixes": "4.1.0",
@@ -51,6 +51,7 @@
     "react-router-dom": "^4.3.1",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
+    "sqlstring": "^2.3.1",
     "style-loader": "0.23.0",
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
@@ -70,6 +71,10 @@
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build"
   },
   "proxy": "http://localhost:4000/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/HackYourFuture-CPH/class06-final-project"
+  },
   "eslintConfig": {
     "extends": "react-app"
   },
