@@ -18,20 +18,15 @@ class MentorForm extends Component {
         } else {
             this.state = {
                 mentorData: {
-                    "first_name": "",
-                    "last_name": "",
-                    "email": "",
-                    "gender": "",
-                    "profile_picture": "",
-                    "mentor_description": "",
-                    "languages": "",
-                    "availability": "",
-                    "offering": "",
-                    "area_location": "",
-                    "preferred_meeting_place": "",
-                    "affiliation": "",
-                    "active": 1
-                }
+              "first_name": "",
+              "last_name": "",
+              "bday": "",
+              "type": "Mentor",
+              "slack_nickname": "ttps://github.com/a-magdy",
+              "admission_date": "",
+              "status": ""
+            }
+                
             }
         }
     }
@@ -76,9 +71,8 @@ class MentorForm extends Component {
 
     render () {
         return (
-            <form onSubmit={this.submitForm}>
                 <div className="container">
-    <h3>Edit Mentor</h3>
+    <h3>{this.props.isEditing ? "Edit Mentor" :"Add Mentor"}</h3>
       <div className="card shadow-sm p-3 mb-3">
         <form onSubmit={this.submitForm}>
 
@@ -118,13 +112,12 @@ class MentorForm extends Component {
           </div>
 
           <button type="submit" className="btn btn-primary">
-            <i className="fa fa-plus" aria-hidden="true" /> Add mentor
+            <i className="fa fa-plus" aria-hidden="true" /> {this.props.isEditing ? "Edit Mentor" :"Add Mentor"}
         </button>
         <NavLink className="btn btn-light ml-3" to="/"><i className="fa fa-caret-left"></i> back</NavLink>
         </form>
       </div>
     </div>
-            </form>
         )
     }
 }
