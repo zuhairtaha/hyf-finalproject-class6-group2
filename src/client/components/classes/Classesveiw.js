@@ -16,6 +16,7 @@ class Class extends React.Component {
 
      return (
       <div className="container">
+      <h5 className="card-title">{this.props.classdata.classname} </h5>
         <div className="row">
           <div className="col-md-6">
             <div className="card shadow-sm mb-3">
