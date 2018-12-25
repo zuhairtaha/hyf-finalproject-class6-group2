@@ -8,20 +8,28 @@ class Class extends React.Component {
         super(props);
         this.state = {
             class: []
-          };
+          }
+          //this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this)
       }
-  
-
+     
+      componentWillReceiveProps({classdata}) {
+        this.setState({class :this.props.classdata})
+        console.log(this.state.class)
+}
+componentDidCatch(){
+  this.setState({class :this.props.classdata})
+  console.log(this.state.class)
+}
      render () {
 
      return (
       <div className="container">
-      <h5 className="card-title">{this.props.classdata.classname} </h5>
+      <h5 className="card-title">{this.props.classdata} </h5>
         <div className="row">
           <div className="col-md-6">
             <div className="card shadow-sm mb-3">
               <div className="card-body">
-                <h5 className="card-title">{this.props.classdata.classname} </h5>
+                <h5 className="card-title">{this.state.classdata} </h5>
               </div>
             </div>
           </div>

@@ -5,24 +5,23 @@ import 'react-picky/dist/picky.css'
 import Picky from "react-picky";
 import "react-picky/dist/picky.css";
 import Class from './Classesveiw'
-import { NULL } from 'mysql2/lib/constants/types';
+
+let colors = ['orange', 'red', 'blue', 'purple']
 class Classes extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: NULL,
-      arrayValue:[],
+      value: [],
+      arrayValue: [],
       bigList :[]
     }
     this.selectMultipleOption = this.selectMultipleOption.bind(this);
   }
   
   selectMultipleOption(value) {
-    console.log("Val", value)
-    this.setState({arrayValue : value })
-    
-
-        console.log("array value = ",this.state.arrayValue)
+    console.log("Val", value);
+    this.setState({arrayValue : value });
+    console.log(this.state.arrayValue)
   }
   
   deleteMentor(id) {
@@ -38,13 +37,16 @@ class Classes extends React.Component {
     })
   }
   componentDidMount() {
+    this.setState({arrayValue : this.state.value });
+    console.log(this.state.arrayValue)
+
     fetch('/api/classes')
       .then(res => res.json())
       .then(respons => {
         console.log(respons)
         this.setState({bigList : respons })
         //this.setState({bigList:respons})
-      //console.log(this.state.bigList)
+      console.log(this.state.bigList)
 
       })
       .catch(console.log)
@@ -63,16 +65,12 @@ class Classes extends React.Component {
               valueKey="id"
               labelKey="name"
               multiple={true}
+              includeSelectAll={true}
+              includeFilter={true}
               dropdownHeight={600}
             />
           </div>
-          {this.state.arrayValue.map(data => {
-                  return(        
-                   <Class classdata={data}/>
-                    )
-                  
-                })
-              }
+          <Class classdata={this.state.arrayValue} />
         </div>
       </div>
     );
