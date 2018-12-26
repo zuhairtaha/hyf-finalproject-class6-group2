@@ -1,7 +1,7 @@
 import React from 'react'
 //import Progress from '../layouts/Progress'
 //import NavLink from 'react-router-dom/es/NavLink'
-//import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 class Class extends React.Component {
     constructor(props) {
@@ -23,18 +23,31 @@ componentDidCatch(){
      render () {
 
      return (
-      <div className="container">
-      <h5 className="card-title">{this.props.classdata} </h5>
-        <div className="row">
+      <div >
           <div className="col-md-6">
             <div className="card shadow-sm mb-3">
               <div className="card-body">
-                <h5 className="card-title">{this.state.classdata} </h5>
+                <h5 className="card-title">{this.props.classdata}  </h5>
+            
+                <button
+                      className="btn btn-danger"
+                      onClick={() => console.log('delete')}
+
+                    >
+                      <i className="fa fa-trash" />
+                    </button>
+              
               </div>
             </div>
           </div>
-        </div>
       </div>
+//
+
+
+
+
+
+
     )
   }
 }

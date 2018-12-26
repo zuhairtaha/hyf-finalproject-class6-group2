@@ -2,29 +2,28 @@ import React from 'react'
 //import NavLink from 'react-router-dom/es/NavLink'
 //import { Link } from 'react-router-dom'
 import 'react-picky/dist/picky.css'
-import Picky from "react-picky";
-import "react-picky/dist/picky.css";
+import Picky from 'react-picky'
+import 'react-picky/dist/picky.css'
 import Class from './Classesveiw'
-import { NULL } from 'mysql2/lib/constants/types';
+import { NULL } from 'mysql2/lib/constants/types'
 class Classes extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       value: NULL,
-      arrayValue:[],
-      bigList :[]
+      arrayValue: [],
+      bigList: []
     }
-    this.selectMultipleOption = this.selectMultipleOption.bind(this);
+    this.selectMultipleOption = this.selectMultipleOption.bind(this)
   }
-  
-  selectMultipleOption(value) {
-    console.log("Val", value)
-    this.setState({arrayValue : value })
-    
 
-        console.log("array value = ",this.state.arrayValue)
+  selectMultipleOption(value) {
+    console.log('Val', value)
+    this.setState({ arrayValue: value })
+
+    console.log('array value = ', this.state.arrayValue)
   }
-  
+
   deleteMentor(id) {
     this.setState(state => ({
       classes: [...state.classes.filter(state => state.id !== id)]
@@ -42,43 +41,43 @@ class Classes extends React.Component {
       .then(res => res.json())
       .then(respons => {
         console.log(respons)
-        this.setState({bigList : respons })
+        this.setState({ bigList: respons })
         //this.setState({bigList:respons})
-      //console.log(this.state.bigList)
-
+        //console.log(this.state.bigList)
       })
       .catch(console.log)
   }
   render() {
     return (
       <div className="container">
-        <div className="row">
-          <div className="col">
-            <h3>Multi select</h3>
+        
+            <h3>Classes</h3>
             <Picky
               value={this.state.arrayValue}
               onChange={this.selectMultipleOption}
-              options={this.state.bigList.map(data => {return data.classname}  )}
+              options={this.state.bigList.map(data => {
+                return data.classname
+              })}
               open={true}
               valueKey="id"
               labelKey="name"
               multiple={true}
               dropdownHeight={600}
             />
-          </div>
+         
+          <div className="container">
+
           {this.state.arrayValue.map(data => {
-                  return(        
-                   <Class classdata={data}/>
-                    )
-                  
-                })
-              }
-        </div>
+            return <Class classdata={data} />
+          })}
+            </div>
+
       </div>
-    );
+         
+    )
   }
 }
- /* render() {
+/* render() {
     const {classes}  = this.state
     console.log(classes)
     return (
