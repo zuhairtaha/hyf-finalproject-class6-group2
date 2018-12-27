@@ -16,10 +16,11 @@ class Class extends React.Component {
 
   componentWillReceiveProps({ classdata }) {
     this.setState({ class: this.props.classdata })
-    console.log(this.state.class)
   }
   componentDidMount() {
-    fetch('/api/modules')
+    const id = this.props.classdata.classid
+    console.log(id)
+    fetch(`/api/classesmodules/${id}`)
       .then(res => res.json())
       .then(modulesarr => this.setState({ modulesarr }))
       .catch(console.log)
@@ -30,12 +31,15 @@ class Class extends React.Component {
     console.log(this.state.class)
   }
   render() {
+    const { classm } = this.state
+
+    // classdata
     return (
       <div>
-        <div className="col-md-6">
+        <div  className="col-md-6"> 
           <div className="card shadow-sm mb-3">
             <div className="card-body">
-              <h5 className="card-title">{this.props.classdata} </h5>
+              <h5 className="card-title">{this.props.classdata.classname} </h5>
 
               <div className="row">
                 {this.state.modulesarr.map(datacm => {

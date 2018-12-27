@@ -12,42 +12,43 @@ class Classes extends React.Component {
     this.state = {
       value: NULL,
       arrayValue: [],
-      bigList: []
+      bigList: [],
+      senddata :[]
     }
     this.selectMultipleOption = this.selectMultipleOption.bind(this)
   }
 
   selectMultipleOption(value) {
     console.log('Val', value)
-    this.setState({ arrayValue: value })
+    var result =[]
+    value.forEach(element => {
+      //const x = this.state.bigList.filter(w => w.classname === element)
+      //console.log( x)
+      //result = Object.assign({}, x, ...result);
+      result.push(this.state.bigList.find(w => w.classname === element))
+    });
+    this.setState({arrayValue: value})
+    this.setState({senddata:result})
+    console.log(result)
+    console.log(this.state.senddata)
 
-    console.log('array value = ', this.state.arrayValue)
   }
 
-  deleteMentor(id) {
-    this.setState(state => ({
-      classes: [...state.classes.filter(state => state.id !== id)]
-    }))
-
-    fetch(`api/classes/${id}`, {
-      method: 'DELETE',
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-  }
+  
   componentDidMount() {
     fetch('/api/classes')
       .then(res => res.json())
       .then(respons => {
         console.log(respons)
         this.setState({ bigList: respons })
-        //this.setState({bigList:respons})
-        console.log(this.state.bigList)
+        //console.log(this.state.bigList)
       })
       .catch(console.log)
   }
   render() {
+    var send = this.state.senddata
+   // console.log(send)
+    //console.log(list)
     return (
       <div className="container">
         
@@ -67,7 +68,7 @@ class Classes extends React.Component {
          
           <div className="container">
 
-          {this.state.arrayValue.map(data => {
+          {send.map(data => {
             return <Class classdata={data} />
           })}
             </div>

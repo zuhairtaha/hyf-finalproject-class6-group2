@@ -12,7 +12,7 @@ const modulesRoute = require('./classesmodules')
 /* routers middleware: */
 router.use("/mentors", mentorsRoute)
 router.use("/classes", classesRoute)
-router.use("/modules", modulesRoute)
+router.use("/classesmodules", modulesRoute)
 
 // router.use("/others", othersRoute)
 // router.use("/others", othersRoute)

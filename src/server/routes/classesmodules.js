@@ -5,7 +5,7 @@ const db = require('../config/db')
 // --------------------------
 
 router
-  .get('/', listclassesmodules)
+  .get('/:id', listclassesmodules)
   .get('/:id', getMentorById)
   .post('/', createMentor)
   .delete('/:id', deleteMentor)
@@ -14,7 +14,8 @@ router
 // --------------------------
 // GET all mentors
 function listclassesmodules(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = 2')
+  console.log('req is' + req)
+  const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = ?',[req.params.id])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)

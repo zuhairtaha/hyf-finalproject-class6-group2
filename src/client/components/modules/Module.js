@@ -10,14 +10,15 @@ class Module extends React.Component {
   
   
   render = () => {
-      console.log(this.props.cllmod)
+    
+     // console.log(this.props.cllmod)
     //const { mentors } = this.state
     return (
       <div>
                            
                   
                     <a href='#' className="btn btn-info">
-                      <i className="fa fa-github" aria-hidden="true">
+                      <i className="fa " aria-hidden="true">
                         {this.props.cllmod.module}
                       </i>
                     </a>
