@@ -43,7 +43,7 @@ class Classes extends React.Component {
         console.log(respons)
         this.setState({ bigList: respons })
         //this.setState({bigList:respons})
-        //console.log(this.state.bigList)
+        console.log(this.state.bigList)
       })
       .catch(console.log)
   }
