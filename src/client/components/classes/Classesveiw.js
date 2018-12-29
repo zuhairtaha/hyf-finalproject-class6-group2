@@ -40,16 +40,14 @@ class Class extends React.Component {
           <div className="card shadow-sm mb-3">
             <div className="card-body">
               <h5 className="card-title">{this.props.classdata.classname} </h5>
-
               <div className="row">
                 {this.state.modulesarr.map(datacm => {
                   return <Module cllmod={datacm} />
                 })}
               </div>
               <button
-                className="btn btn-danger"
-                onClick={() => console.log('delete')}
-              >
+                          className="btn btn-danger"
+                onClick={() => console.log('delete')}>
                 <i className="fa fa-trash" />
               </button>
             </div>
