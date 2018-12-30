@@ -79,7 +79,9 @@
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
     "dev:server": "npm run build && npm run start",
     "start": "node src/server/bin/www",
-    "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build"
+    "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build",
+    "migrate": "knex migrate:rollback && knex migrate:latest",
+    "seed": "knex seed:run"
   },
   "proxy": "http://localhost:4000/",
   "repository": {
