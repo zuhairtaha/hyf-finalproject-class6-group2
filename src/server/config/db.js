@@ -1,3 +1,4 @@
+require('dotenv/config')
 const mysql = require('mysql2')
 
 const DATABASE_URL = process.env.JAWSDB_URL
