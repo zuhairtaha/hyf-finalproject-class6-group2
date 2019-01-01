@@ -1,11 +1,11 @@
 import React from 'react'
-//import NavLink from 'react-router-dom/es/NavLink'
-//import { Link } from 'react-router-dom'
 import 'react-picky/dist/picky.css'
 import Picky from 'react-picky'
 import 'react-picky/dist/picky.css'
 import Class from './Classesveiw'
 import { NULL } from 'mysql2/lib/constants/types'
+import AddClass from './AddClass';
+
 class Classes extends React.Component {
   constructor(props) {
     super(props)
@@ -33,7 +33,17 @@ class Classes extends React.Component {
     console.log(this.state.senddata)
 
   }
-
+  addItemHandler = () => {
+    //const newItem = {
+      //id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
+      //group: item.classname,
+      //title: item.status,
+      //className: item.status,
+     // start: moment(new Date(item.start)),
+      //end: moment(new Date(item.end)),
+    //}
+    //this.setState({bigList:this.state.bigList})
+  }
   
   componentDidMount() {
     fetch('/api/classes')
@@ -44,6 +54,7 @@ class Classes extends React.Component {
         //console.log(this.state.bigList)
       })
       .catch(console.log)
+
   }
   render() {
     var send = this.state.senddata
@@ -69,10 +80,10 @@ class Classes extends React.Component {
           <div className="container">
 
           {send.map(data => {
-            return <Class classdata={data} />
+            return <Class classdata={data} key={data.classid} />
           })}
             </div>
-
+            <AddClass onAddItem={this.addItemHandler}/>
       </div>
          
     )

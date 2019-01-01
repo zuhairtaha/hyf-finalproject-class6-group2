@@ -4,11 +4,15 @@ import Mentors from './mentors/Mentors'
 import MentorForms from "./mentor-form";
 import Calender from './calender/Calender'
 import Classes from './classes/Classes';
+import AddClass from './classes/AddClass';
+import Classitem from './classes/Classesveiw'
 class Main extends React.Component {
   render = _ =>
     <Switch>
       <Route path="/" component={Calender} exact />
       <Route path="/Classes" component={Classes} exact />
+      <Route path="/Classes/add" component={AddClass} exact />
+      <Route path={"/Classes/delete/:id"} component={Classitem} exact />
 
       <Route path="/Mentors" component={Mentors} exact />
       <Route exact path="/Mentors/add" component={MentorForms.AddMentor} />

@@ -1,8 +1,5 @@
 import React from 'react'
 import Module from '../modules/Module'
-//import Progress from '../layouts/Progress'
-//import NavLink from 'react-router-dom/es/NavLink'
-//import { Link } from 'react-router-dom'
 
 class Class extends React.Component {
   constructor(props) {
@@ -11,13 +8,18 @@ class Class extends React.Component {
       class: [],
       modulesarr: []
     }
-    //this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this)
   }
-
   componentWillReceiveProps({ classdata }) {
     this.setState({ class: this.props.classdata })
   }
+  deleteClass(id) {
+      fetch(`api/classes/${id}`, {
+      method: 'DELETE',
+         })
+         .then(req=>console.log(req))
+  }
   componentDidMount() {
+    
     const id = this.props.classdata.classid
     console.log(id)
     fetch(`/api/classesmodules/${id}`)
@@ -31,9 +33,7 @@ class Class extends React.Component {
     console.log(this.state.class)
   }
   render() {
-    const { classm } = this.state
-
-    // classdata
+   
     return (
       <div>
         <div  className="col-md-6"> 
@@ -47,7 +47,7 @@ class Class extends React.Component {
               </div>
               <button
                           className="btn btn-danger"
-                onClick={() => console.log('delete')}>
+                onClick={() => this.deleteClass(this.props.classdata.classid)}>
                 <i className="fa fa-trash" />
               </button>
             </div>
