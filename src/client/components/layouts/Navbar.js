@@ -1,25 +1,26 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Navbar = () => (
 
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
-      <a className="navbar-brand" href="#">HFY Final Project</a>
+      <NavLink className="navbar-brand" to="/">HFY Final Project</NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
               aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"> </span>
       </button>
       <div id="navbarNavDropdown" className="navbar-collapse collapse">
         <ul className="navbar-nav mr-auto">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/">link 1</a>
-          </li>
-          <li className="nav-item">
-            <a className="nav-link" href="/">link 2</a>
-          </li>
+          {/*<li className="nav-item active">*/}
+            {/*<NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>*/}
+          {/*</li>*/}
+          {/*<li className="nav-item">*/}
+            {/*<a className="nav-link" href="/">link 1</a>*/}
+          {/*</li>*/}
+          {/*<li className="nav-item">*/}
+            {/*<a className="nav-link" href="/">link 2</a>*/}
+          {/*</li>*/}
 
         </ul>
         <ul className="navbar-nav">
@@ -34,16 +35,16 @@ const Navbar = () => (
           {/*</div>*/ }
           {/*</li>*/ }
           <li className="nav-item">
-            <a className="nav-link" href="/Mentors/">Mentors</a>
+            <NavLink className="nav-link" to="/Mentors/">Mentors</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/classes/">Classes</a>
+            <NavLink className="nav-link" to="/classes/">Classes</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/js/">JavaScript</a>
+            <NavLink className="nav-link" to="/js/">JavaScript</NavLink>
           </li>
           <li className="nav-item">
-            <a className="nav-link" href="/jquery/">jQuery</a>
+            <NavLink className="nav-link" to="/jquery/">jQuery</NavLink>
           </li>
         </ul>
       </div>
