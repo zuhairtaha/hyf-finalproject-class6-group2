@@ -67,7 +67,7 @@
     "terser-webpack-plugin": "1.1.0",
     "url-loader": "1.1.1",
     "webpack": "4.19.1",
-    "webpack-dev-server": "3.1.9",
+    "webpack-dev-server": "^3.1.14",
     "webpack-manifest-plugin": "2.0.4",
     "workbox-webpack-plugin": "3.6.3"
   },
@@ -80,8 +80,8 @@
     "dev:server": "npm run build && npm run start",
     "start": "node src/server/bin/www",
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build",
-    "migrate": "knex migrate:rollback && knex migrate:latest",
-    "seed": "knex seed:run"
+    "migrate": "cd src/server/database && knex migrate:rollback && knex migrate:latest",
+    "seed": "cd src/server/database && knex seed:run"
   },
   "proxy": "http://localhost:4000/",
   "repository": {
