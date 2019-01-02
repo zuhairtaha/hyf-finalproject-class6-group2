@@ -55,8 +55,10 @@ class MentorForm extends Component {
       }
     })
       .then(res => res.text())
+      
       .then(response => {
         console.log('Success:', response)
+
         // TODO redirect to the Mentors list page (/Mentors)
         console.log('updated....')
         this.props.history.goBack()

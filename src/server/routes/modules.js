@@ -5,18 +5,16 @@ const db = require('../config/db')
 // --------------------------
 
 router
-  .get('/:id', listclassesmodules)
+  .get('/', listAllModules)
   .get('/:id', getMentorById)
-  .post('/', createModule)
+  .post('/', createMentor)
   .delete('/:id', deleteMentor)
-  .put('/:id', updateModule)
-  .put('/:id',addtoclass)
+  .put('/:id', updateMentor)
 
 // --------------------------
-// GET all mentors
-function listclassesmodules(req, res, next) {
-  console.log('req is' + req)
-  const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = ?',[req.params.id])
+// GET all modules
+function listAllModules(req, res, next) {
+  const sql = sqlString.format('SELECT * FROM modules')
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
@@ -25,24 +23,15 @@ function listclassesmodules(req, res, next) {
 
 // --------------------------
 // CREATE a new mentor
-function createModule(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
+function createMentor(req, res, next) {
+  const sql = sqlString.format(`INSERT INTO mentors SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     res.send('New mentor added successfully')
   })
 }
-// --------------------------
-// ADD a new module to class
-function addtoclass(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
-  db.execute(sql, (err, result) => {
-    if (err) return next(err)
-    res.send('New mentor added successfully')
-  })
-}
 // --------------------------
 // DELETE a mentor by ID (soft delete)
 function deleteMentor(req, res, next) {
@@ -60,7 +49,7 @@ function deleteMentor(req, res, next) {
 
 // --------------------------
 // UPDATE a mentor by ID
-function updateModule(req, res, next) {
+function updateMentor(req, res, next) {
   const sql = sqlString.format(`UPDATE mentors SET ? WHERE id = ?`, [
     req.body,
     req.params.id

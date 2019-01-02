@@ -5,8 +5,8 @@ const Navbar = () => (
     <span className="navbar-brand mb-0 h1 container">
       HFY Final Project
       <nav>
-        <a href="/Mentors/">Mentors</a> |<a href="/classes/">Classes</a> |
-        <a href="/js/">JavaScript</a> |<a href="/jquery/">jQuery</a>
+        <a href="/Mentors/">Mentors</a> |<a href="/Classes/">Classes</a> |
+        <a href="/Modules/">Modules</a> |<a href="/jquery/">jQuery</a>
       </nav>
     </span>
   </nav>

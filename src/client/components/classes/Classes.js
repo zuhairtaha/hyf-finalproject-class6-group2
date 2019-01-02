@@ -19,15 +19,16 @@ class Classes extends React.Component {
   }
 
   selectMultipleOption(value) {
+    //select class from list
     console.log('Val', value)
     var result =[]
+// all information of selected classes in result 
     value.forEach(element => {
-      //const x = this.state.bigList.filter(w => w.classname === element)
-      //console.log( x)
-      //result = Object.assign({}, x, ...result);
-      result.push(this.state.bigList.find(w => w.classname === element))
+     result.push(this.state.bigList.find(w => w.classname === element))
     });
+// names of selected classes
     this.setState({arrayValue: value})
+    // classes to be rendered
     this.setState({senddata:result})
     console.log(result)
     console.log(this.state.senddata)
@@ -44,26 +45,22 @@ class Classes extends React.Component {
     //}
     //this.setState({bigList:this.state.bigList})
   }
-  
+  // fetch classes names
   componentDidMount() {
     fetch('/api/classes')
       .then(res => res.json())
       .then(respons => {
         console.log(respons)
         this.setState({ bigList: respons })
-        //console.log(this.state.bigList)
       })
       .catch(console.log)
 
   }
   render() {
     var send = this.state.senddata
-   // console.log(send)
-    //console.log(list)
     return (
       <div className="container">
-        
-            <h3>Classes</h3>
+                    <h3>Classes</h3>
             <Picky
               value={this.state.arrayValue}
               onChange={this.selectMultipleOption}
