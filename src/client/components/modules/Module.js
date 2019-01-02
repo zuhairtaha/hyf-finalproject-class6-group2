@@ -7,25 +7,25 @@ class Module extends React.Component {
   state = {
     modules: []
   }
-  
-  
+
+
   render = () => {
-    
+
      // console.log(this.props.cllmod)
     //const { mentors } = this.state
     return (
       <div>
-                           
-                  
-                    <a href='#' className="btn btn-info">
+
+
+                    <a href=" " className="btn btn-info">
                       <i className="fa " aria-hidden="true">
                         {this.props.cllmod.module}
                       </i>
                     </a>
-                   
-                    
-                
-       
+
+
+
+
       </div>
     )
   }

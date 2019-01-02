@@ -14,41 +14,41 @@ class Class extends React.Component {
     //this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this)
   }
 
-  componentWillReceiveProps({ classdata }) {
-    this.setState({ class: this.props.classdata })
+  componentWillReceiveProps({classdata}) {
+    this.setState({class: this.props.classdata})
   }
+
   componentDidMount() {
     const id = this.props.classdata.classid
     console.log(id)
-    fetch(`/api/classesmodules/${id}`)
+    fetch(`/api/classesmodules/${ id }`)
       .then(res => res.json())
-      .then(modulesarr => this.setState({ modulesarr }))
+      .then(modulesarr => this.setState({modulesarr}))
       .catch(console.log)
   }
 
   componentDidCatch() {
-    this.setState({ class: this.props.classdata })
+    this.setState({class: this.props.classdata})
     console.log(this.state.class)
   }
-  render() {
-    const { classm } = this.state
 
+  render() {
     // classdata
     return (
       <div>
-        <div  className="col-md-6"> 
+        <div className="col-md-6">
           <div className="card shadow-sm mb-3">
             <div className="card-body">
-              <h5 className="card-title">{this.props.classdata.classname} </h5>
+              <h5 className="card-title">{ this.props.classdata.classname } </h5>
               <div className="row">
-                {this.state.modulesarr.map(datacm => {
-                  return <Module cllmod={datacm} />
-                })}
+                { this.state.modulesarr.map(datacm => {
+                  return <Module cllmod={ datacm }/>
+                }) }
               </div>
               <button
-                          className="btn btn-danger"
-                onClick={() => console.log('delete')}>
-                <i className="fa fa-trash" />
+                className="btn btn-danger"
+                onClick={ () => console.log('delete') }>
+                <i className="fa fa-trash"/>
               </button>
             </div>
           </div>
