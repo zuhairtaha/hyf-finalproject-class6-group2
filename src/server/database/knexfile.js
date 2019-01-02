@@ -1,10 +1,10 @@
-require('dotenv/config')
+require('dotenv').config({path: '../../../.env'})
 
 module.exports = {
   client: 'mysql2',
   connection: {
-    user: 'root',
-    password: null,
-    database: 'hyf-fp-c6-g2'
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
   }
 }
