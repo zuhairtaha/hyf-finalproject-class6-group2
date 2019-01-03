@@ -135,3 +135,5 @@ package-lock.json
 /src/client/libs
 
 src/server/config/db.js
+
+/.env
