@@ -2,16 +2,6 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 
 const Navbar = () => (
-<<<<<<< HEAD
-  <nav className="navbar navbar-dark bg-dark">
-    <span className="navbar-brand mb-0 h1 container">
-      HFY Final Project
-      <nav>
-        <a href="/Mentors/">Mentors</a> |<a href="/Classes/">Classes</a> |
-        <a href="/Modules/">Modules</a> |<a href="/jquery/">jQuery</a>
-      </nav>
-    </span>
-=======
 
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
@@ -59,7 +49,6 @@ const Navbar = () => (
         </ul>
       </div>
     </div>
->>>>>>> master
   </nav>
 
 )
