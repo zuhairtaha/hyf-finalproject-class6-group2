@@ -14,7 +14,7 @@ router
 // --------------------------
 // GET all classes
 function listAllclasses(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM classes')
+  const sql = sqlString.format('SELECT * FROM classes WHERE active=?', [1])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
@@ -35,7 +35,7 @@ function createclasse(req, res, next) {
 // --------------------------
 // DELETE a classe by ID (soft delete)
 function deleteclasse(req, res, next) {
-  const sql = sqlString.format(`UPDATE classes SET ? WHERE id = ?`, [
+  const sql = sqlString.format(`UPDATE classes SET ? WHERE classid = ?`, [
     {active: 0},
     req.params.id
   ])

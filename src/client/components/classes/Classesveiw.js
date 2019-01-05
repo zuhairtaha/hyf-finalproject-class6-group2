@@ -1,8 +1,5 @@
 import React from 'react'
 import Module from '../modules/Module'
-//import Progress from '../layouts/Progress'
-//import NavLink from 'react-router-dom/es/NavLink'
-//import { Link } from 'react-router-dom'
 
 class Class extends React.Component {
   constructor(props) {
@@ -11,14 +8,20 @@ class Class extends React.Component {
       class: [],
       modulesarr: []
     }
-    //this.componentWillReceiveProps=this.componentWillReceiveProps.bind(this)
   }
 
-  componentWillReceiveProps({classdata}) {
-    this.setState({class: this.props.classdata})
+  componentWillReceiveProps({ classdata }) {
+    this.setState({ class: this.props.classdata })
+  }
+  deleteClass(id) {
+      fetch(`api/classes/${id}`, {
+      method: 'DELETE',
+         })
+         .then(req=>console.log(req))
   }
 
   componentDidMount() {
+    
     const id = this.props.classdata.classid
     console.log(id)
     fetch(`/api/classesmodules/${ id }`)
@@ -33,22 +36,35 @@ class Class extends React.Component {
   }
 
   render() {
-    // classdata
+   
+
+
     return (
       <div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-3">
             <div className="card-body">
-              <h5 className="card-title">{ this.props.classdata.classname } </h5>
+
+              <h5 className="card-title">{this.props.classdata.classname} </h5>
+              <div>
+              
+                <button classid={this.props.classdata.classid}
+                
+                
+                >Add Module</button>
+              </div>
+
               <div className="row">
                 { this.state.modulesarr.map(datacm => {
                   return <Module cllmod={ datacm }/>
                 }) }
               </div>
               <button
-                className="btn btn-danger"
-                onClick={ () => console.log('delete') }>
-                <i className="fa fa-trash"/>
+
+                          className="btn btn-danger"
+                onClick={() => this.deleteClass(this.props.classdata.classid)}>
+                <i className="fa fa-trash" />
+
               </button>
             </div>
           </div>

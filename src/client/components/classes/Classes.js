@@ -1,11 +1,11 @@
 import React from 'react'
-//import NavLink from 'react-router-dom/es/NavLink'
-//import { Link } from 'react-router-dom'
 import 'react-picky/dist/picky.css'
 import Picky from 'react-picky'
 import 'react-picky/dist/picky.css'
 import Class from './Classesveiw'
 import { NULL } from 'mysql2/lib/constants/types'
+import AddClass from './AddClass';
+
 class Classes extends React.Component {
   constructor(props) {
     super(props)
@@ -19,40 +19,48 @@ class Classes extends React.Component {
   }
 
   selectMultipleOption(value) {
+    //select class from list
     console.log('Val', value)
     var result =[]
+// all information of selected classes in result 
     value.forEach(element => {
-      //const x = this.state.bigList.filter(w => w.classname === element)
-      //console.log( x)
-      //result = Object.assign({}, x, ...result);
-      result.push(this.state.bigList.find(w => w.classname === element))
+     result.push(this.state.bigList.find(w => w.classname === element))
     });
+// names of selected classes
     this.setState({arrayValue: value})
+    // classes to be rendered
     this.setState({senddata:result})
     console.log(result)
     console.log(this.state.senddata)
 
   }
-
-  
+  addItemHandler = () => {
+    //const newItem = {
+      //id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
+      //group: item.classname,
+      //title: item.status,
+      //className: item.status,
+     // start: moment(new Date(item.start)),
+      //end: moment(new Date(item.end)),
+    //}
+    //this.setState({bigList:this.state.bigList})
+  }
+  // fetch classes names
   componentDidMount() {
     fetch('/api/classes')
       .then(res => res.json())
       .then(respons => {
         console.log(respons)
         this.setState({ bigList: respons })
-        //console.log(this.state.bigList)
       })
       .catch(console.log)
+
   }
   render() {
     var send = this.state.senddata
-   // console.log(send)
-    //console.log(list)
     return (
       <div className="container">
-        
-            <h3>Classes</h3>
+                    <h3>Classes</h3>
             <Picky
               value={this.state.arrayValue}
               onChange={this.selectMultipleOption}
@@ -69,10 +77,10 @@ class Classes extends React.Component {
           <div className="container">
 
           {send.map(data => {
-            return <Class classdata={data} />
+            return <Class classdata={data} key={data.classid} />
           })}
             </div>
-
+            <AddClass onAddItem={this.addItemHandler}/>
       </div>
          
     )

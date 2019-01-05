@@ -7,9 +7,10 @@ const db = require('../config/db')
 router
   .get('/:id', listclassesmodules)
   .get('/:id', getMentorById)
-  .post('/', createMentor)
+  .post('/', createModule)
   .delete('/:id', deleteMentor)
-  .put('/:id', updateMentor)
+  .put('/:id', updateModule)
+  .put('/:id',addtoclass)
 
 // --------------------------
 // GET all mentors
@@ -24,15 +25,24 @@ function listclassesmodules(req, res, next) {
 
 // --------------------------
 // CREATE a new mentor
-function createMentor(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO mentors SET ?`, req.body)
+function createModule(req, res, next) {
+  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     res.send('New mentor added successfully')
   })
 }
+// --------------------------
+// ADD a new module to class
+function addtoclass(req, res, next) {
+  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
+  db.execute(sql, (err, result) => {
+    if (err) return next(err)
+    res.send('New mentor added successfully')
+  })
+}
 // --------------------------
 // DELETE a mentor by ID (soft delete)
 function deleteMentor(req, res, next) {
@@ -50,7 +60,7 @@ function deleteMentor(req, res, next) {
 
 // --------------------------
 // UPDATE a mentor by ID
-function updateMentor(req, res, next) {
+function updateModule(req, res, next) {
   const sql = sqlString.format(`UPDATE mentors SET ? WHERE id = ?`, [
     req.body,
     req.params.id
