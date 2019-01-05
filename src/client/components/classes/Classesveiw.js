@@ -1,6 +1,6 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 import Module from '../modules/Module'
-
 class Class extends React.Component {
   constructor(props) {
     super(props)
@@ -36,29 +36,28 @@ class Class extends React.Component {
   }
 
   render() {
-   
-
-
-    return (
+       return (
       <div>
         <div className="col-md-6">
           <div className="card shadow-sm mb-3">
             <div className="card-body">
 
               <h5 className="card-title">{this.props.classdata.classname} </h5>
-              <div>
-              
-                <button classid={this.props.classdata.classid}
-                
-                
-                >Add Module</button>
-              </div>
-
               <div className="row">
-                { this.state.modulesarr.map(datacm => {
-                  return <Module cllmod={ datacm }/>
-                }) }
+              <Link
+                      to={`/modules/addtoclass/${this.props.classdata.classid}`}
+                      //params={{ testvalue: "hello" }}
+                      className="btn btn-info mr-2 ml-2"
+                    >
+                      <i className="fa fa-pencil" /> Add a module
+                    </Link>
               </div>
+              <div className="row">
+                {this.state.modulesarr.map(datacm => {
+                  return <Module cllmod={datacm} />
+                })}
+              </div>
+              
               <button
 
                           className="btn btn-danger"

@@ -41,7 +41,7 @@ const Navbar = () => (
             <NavLink className="nav-link" to="/classes/">Classes</NavLink>
           </li>
           <li className="nav-item">
-            <NavLink className="nav-link" to="/js/">JavaScript</NavLink>
+            <NavLink className="nav-link" to="/modules/">Modules</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/jquery/">jQuery</NavLink>

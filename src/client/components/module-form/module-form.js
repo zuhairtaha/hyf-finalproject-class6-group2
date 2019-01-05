@@ -9,13 +9,7 @@ class ModuleForm extends Component {
       this.state = {
         moduleData: this.props.moduleData,
       }
-    } else if (this.props.addtoclass) {
-        this.state = {      
-               // moduleData: this.props.moduleData,
-
-            //classid=this.props.classid,
-
-          }
+    
     }  else {
       this.state = {
         moduleData: {
@@ -46,11 +40,7 @@ class ModuleForm extends Component {
     if (this.props.isEditing) {
       url = `/api/modules/${this.props.match.params.id}`
       method = 'PUT'
-    } else if(this.props.addtoclass){
-        url = `/api/modules/${this.props.match.params.classid}/${this.props.match.params.moduleid}`
-        method = 'post'
-
-    }  else {
+    } else {
       url = `/api/modules`
       method = 'POST'
     }
@@ -73,8 +63,7 @@ class ModuleForm extends Component {
   render() {
     return (
       <div className="container">
-        <h3>{this.props.isEditing ? 'Edit Module' : ''}
-        {this.props.addtoclass ? 'Adding Module to Class' : 'Add Module'}</h3>
+        <h3>{this.props.isEditing ? 'Edit Module' : 'Add Module'}</h3>
         <div className="card shadow-sm p-3 mb-3">
           <form onSubmit={this.submitForm}>
             <div className="row">
@@ -93,7 +82,7 @@ class ModuleForm extends Component {
                   type="text"
                   className="form-control"
                   name="description"
-                  placeholder="Last name"
+                  placeholder="Description"
                   defaultValue={this.state.moduleData.description}
                   onChange={this.updateField}
                 />
@@ -104,7 +93,7 @@ class ModuleForm extends Component {
                   type="text"
                   className="form-control"
                   name="start"
-                  placeholder="Birth date"
+                  placeholder="Start"
                   defaultValue={this.state.moduleData.start}
                   onChange={this.updateField}
                 />
@@ -115,7 +104,7 @@ class ModuleForm extends Component {
                   type="text"
                   className="form-control"
                   name="github"
-                  placeholder="GitHub url"
+                  placeholder="Length"
                   defaultValue={this.state.moduleData.length}
                   onChange={this.updateField}
                 />
@@ -127,11 +116,10 @@ class ModuleForm extends Component {
 
             <button type="submit" className="btn btn-primary">
               <i className="fa fa-floppy-o" aria-hidden="true" />{' '}
-              {this.props.isEditing ? 'Update Module' : ''}
-              {this.props.addtoclass ? 'Add To Class' : 'Add Module'}
+              {this.props.isEditing ? 'Update Module' : 'Add Module'}
 
             </button>
-            <NavLink className="btn btn-light ml-3" to="/">
+            <NavLink className="btn btn-light ml-3" to="/modules">
               <i className="fa fa-caret-left" /> back
             </NavLink>
           </form>

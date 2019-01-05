@@ -15,6 +15,7 @@ class EditModule extends Component {
         moduleData: null
     }
     componentDidMount() {
+        console.log(this.props.match.params.id)
         const url = '/api/modules'
         const id = this.props.match.params.id;
         // TODO handle failure (404)

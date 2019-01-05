@@ -6,7 +6,7 @@ const db = require('../config/db')
 
 router
   .get('/', listAllModules)
-  .get('/:id', getMentorById)
+  .get('/:id', getModuleById)
   .post('/', createMentor)
   .delete('/:id', deleteMentor)
   .put('/:id', updateMentor)
@@ -64,10 +64,10 @@ function updateMentor(req, res, next) {
 
 // --------------------------
 // GET one mentor by ID
-function getMentorById(req, res, next) {
+function getModuleById(req, res, next) {
   const sql = sqlString.format(
-    'SELECT * FROM mentors WHERE id = ? AND status = ?',
-    [req.params.id, "Active"]
+    'SELECT * FROM modules WHERE moduleid = ? ',
+    [req.params.id]
   )
   db.execute(sql, (err, rows) => {
     if (err) return next(err)

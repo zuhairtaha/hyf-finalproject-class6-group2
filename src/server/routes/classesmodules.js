@@ -6,7 +6,7 @@ const db = require('../config/db')
 
 router
   .get('/:id', listclassesmodules)
-  .get('/:id', getMentorById)
+  //.get('/:id', getMentorById)
   .post('/', createModule)
   .delete('/:id', deleteMentor)
   .put('/:id', updateModule)

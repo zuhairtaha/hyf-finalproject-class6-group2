@@ -6,7 +6,7 @@ import Fab from '@material-ui/core/Fab'
 import { withRouter } from 'react-router-dom'
 
 
-const styles = theme => ({
+/*const styles = theme => ({
   root: {
     flexGrow: 1,
     margin: '1rem 5rem',
@@ -36,7 +36,7 @@ const styles = theme => ({
     bottom: '2rem',
     zIndex: 9
   }
-})
+})*/
 class Addclass extends React.Component {
   //status: '',
   // start: '2019-01-01',

@@ -3,8 +3,8 @@ import EditModule from './edit-module';
 import AddtoClass from './add-module-class'
 
 export default {
-    // ModuleForm,
+    //ModuleForm,
     AddModule,
     EditModule,
-    //AddtoClass
+    AddtoClass
 }

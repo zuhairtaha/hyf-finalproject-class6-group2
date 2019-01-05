@@ -20,7 +20,7 @@ class Main extends React.Component {
       <Route path="/Modules" component={Modules} exact />
       <Route exact path="/Modules/add" component={ModuleForms.AddModule} />
       <Route exact path={`/Modules/edit/:id`} component={ModuleForms.EditModule} />
-            <Route exact path="/Modules/addtoclass" component={ModuleForms.Addtoclass} />
+            <Route exact path="/Modules/addtoclass/:id" component={ModuleForms.AddtoClass} />
 
       <Route path="/Mentors" component={Mentors} exact />
       <Route exact path="/Mentors/add" component={MentorForms.AddMentor} />
