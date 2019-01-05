@@ -14,7 +14,7 @@ router
 // --------------------------
 // GET all mentors
 function listAllMentors(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM mentors WHERE status=?', ["Active"])
+  const sql = sqlString.format('SELECT * FROM mentors WHERE active=?', [true])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
@@ -35,8 +35,8 @@ function createMentor(req, res, next) {
 // --------------------------
 // DELETE a mentor by ID (soft delete)
 function deleteMentor(req, res, next) {
-  const sql = sqlString.format(`UPDATE mentors SET ? WHERE id = ?`, [
-    {active: 0},
+  const sql = sqlString.format(`UPDATE mentors SET active = ? WHERE id = ?`, [
+    false,
     req.params.id
   ])
 

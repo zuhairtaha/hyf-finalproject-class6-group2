@@ -6,5 +6,5 @@ export default {
     // ModuleForm,
     AddModule,
     EditModule,
-    //AddtoClass
+    AddtoClass
 }

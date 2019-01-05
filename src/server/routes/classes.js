@@ -14,7 +14,7 @@ router
 // --------------------------
 // GET all classes
 function listAllclasses(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM classes WHERE active=?', [1])
+  const sql = sqlString.format('SELECT * FROM classes')
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)

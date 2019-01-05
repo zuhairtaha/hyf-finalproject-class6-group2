@@ -1,20 +1,19 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex('students')
     .del()
-    .then(function() {
+    .then(function () {
       // Inserts seed entries
       return knex('students').insert([
         {
-          name: 'Ibrahim',
+          first_name: 'Ibrahim',
           active: true,
-          cv: 'this is my cv',
           email: 'ibrahim@gmail.com'
         },
         {
-          name: 'zuhair',
+          first_name: 'Zuhair',
+          last_name: 'Taha',
           active: true,
-          cv: 'this is my cv....',
           email: 'zuhair@gmail.com'
         }
       ])

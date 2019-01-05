@@ -35,17 +35,14 @@ const Navbar = () => (
           {/*</div>*/ }
           {/*</li>*/ }
           <li className="nav-item">
-            <NavLink className="nav-link" to="/Mentors/">Mentors</NavLink>
+            <NavLink className="nav-link" to="/mentors/">Mentors</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/classes/">Classes</NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/js/">JavaScript</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/jquery/">jQuery</NavLink>
-          </li>
+          {/*<li className="nav-item">*/}
+            {/*<NavLink className="nav-link" to="/js/">JavaScript</NavLink>*/}
+          {/*</li>*/}
         </ul>
       </div>
     </div>
