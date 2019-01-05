@@ -1,5 +1,5 @@
-exports.up = function(knex, Promise) {
-  return knex.schema.createTable('mentors', table => {
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('students', table => {
     table.increments()
     table.string('first_name')
     table.string('last_name')
@@ -7,7 +7,6 @@ exports.up = function(knex, Promise) {
     table.boolean('email_confirmed').defaultTo(false)
     table.string('photo')
     table.date('birth_date')
-    table.string('type')
     table.string('slack_nickname')
     table.date('admission_date')
     table.string('status')
@@ -17,6 +16,4 @@ exports.up = function(knex, Promise) {
   })
 }
 
-exports.down = function(knex, Promise) {
-  return knex.schema.dropTable('mentors')
-}
+exports.down = (knex, Promise) => knex.schema.dropTable('students')

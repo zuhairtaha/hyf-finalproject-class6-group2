@@ -80,7 +80,9 @@
     "dev:server": "npm run build && npm run start",
     "start": "node src/server/bin/www",
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build",
+    "migrate1": "cd src/server/database && knex migrate:latest",
     "migrate": "cd src/server/database && knex migrate:rollback && knex migrate:latest",
+    "rollback": "cd src/server/database && knex migrate:rollback",
     "seed": "cd src/server/database && knex seed:run"
   },
   "proxy": "http://localhost:4000/",

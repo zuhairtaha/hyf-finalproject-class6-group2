@@ -5,58 +5,58 @@ exports.seed = function (knex, Promise) {
       // Inserts seed entries
       return knex('classes').insert([
         {
-          "classid": 1,
-          "classname": "class01",
-          "active": true
-        },
-        {
-          "classid": 2,
-          "classname": "class02",
-          "active": true
-        },
-        {
-          "classid": 3,
-          "classname": "class03",
-          "active": true
-        },
-        {
-          "classid": 4,
-          "classname": "class04",
-          "active": true
-        },
-        {
-          "classid": 20,
-          "classname": "class05",
+          "id": 1,
+          "classname": "Class 1",
           "active": false
         },
         {
-          "classid": 21,
-          "classname": "class06",
+          "id": 2,
+          "classname": "Class 2",
+          "active": false
+        },
+        {
+          "id": 3,
+          "classname": "Class 3",
+          "active": false
+        },
+        {
+          "id": 4,
+          "classname": "Class 4",
+          "active": false
+        },
+        {
+          "id": 5,
+          "classname": "Class 5",
+          "active": false
+        },
+        {
+          "id": 6,
+          "classname": "Class 6",
           "active": true
         },
         {
-          "classid": 22,
-          "classname": "class07",
-          "active": false
-        },
-        {
-          "classid": 23,
-          "classname": "c8",
-          "active": false
-        },
-        {
-          "classid": 24,
-          "classname": "cla",
-          "active": false
-        },
-        {
-          "classid": 25,
-          "classname": "class08",
+          "id": 7,
+          "classname": "Class 7",
           "active": true
         },
         {
-          "classid": 26,
-          "classname": "class9",
+          "id": 8,
+          "classname": "Class 8",
+          "active": true
+        },
+        {
+          "id": 9,
+          "classname": "Class 9",
+          "active": true
+        },
+        {
+          "id": 10,
+          "classname": "Class 10",
+          "active": true
+        },
+        {
+          "id": 11,
+          "classname": "Class 11",
           "active": true
         }])
     })
