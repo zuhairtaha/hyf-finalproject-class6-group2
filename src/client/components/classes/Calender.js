@@ -36,7 +36,7 @@ export default class Calender extends Component {
               id: index + 1,
               start: moment(new Date(item.start)),
               end: moment(new Date(item.end)),
-              className: 'confirm',
+              className: (item.title.replace(/ /g, "_")),
               canMove: true,
               canResize: false,
               canChangeGroup: false

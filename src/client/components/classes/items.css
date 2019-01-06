@@ -11,25 +11,32 @@
     background-color: #D88948 !important;
 }
 
-.pending {
-    background-color: #FA6E59 !important;
+.CSS {
+    background-color: #4897D8 !important;
+
+    color:#fff;
+
 }
 
-.htmlCss {
+.HTML {
     background-color: #429970 !important;
+    color: #fff;
 }
 
-.js1 {
+.Javascript_1 {
     background-color: #FFDB5C !important;
     color: #000;
 }
 
-.js2 {
+.javascript_2 {
     background-color: #FA6E59 !important;
+    color: #fff;
+
 }
 
-.js3 {
+.javascript_3 {
     background-color: #BE59FA !important;
+    color: #fff;
 }
 
 .nodejs {

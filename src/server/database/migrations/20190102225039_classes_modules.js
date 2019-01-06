@@ -14,6 +14,7 @@ exports.up = function (knex, Promise) {
       .references('id')
       .inTable('modules')
       .onDelete('CASCADE')
+    table.string('github_page')
     table.date('start_date').defaultTo(new Date().toISOString().slice(0, 10))
     table.date('end_date')
     table.primary(['classid', 'moduleid'])
