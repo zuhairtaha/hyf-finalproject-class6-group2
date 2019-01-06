@@ -10,6 +10,7 @@ import SundaysMarker from './SundaysMarker'
 import keys from './keys'
 import AddItemsForm from './AddItemsForm'
 import axios from "axios"
+import Progress from '../layouts/Progress'
 
 export default class Calender extends Component {
   state = {
@@ -23,6 +24,8 @@ export default class Calender extends Component {
     axios.get('/api/classes').then(classes => {
       axios.get(`/api/classesmodules`)
         .then(modules => {
+          const endDates = modules.data.map(item => new Date(item.end))
+          const startDates = modules.data.map(item => new Date(item.start))
           this.setState({
             groups: classes.data.map(item => ({
               id: item.id,
@@ -39,9 +42,10 @@ export default class Calender extends Component {
               canChangeGroup: false
             })),
 
-            defaultTimeStart: moment(new Date(modules.data.sort((a, b) => a.start - b.start)[0].start)),
-            defaultTimeEnd: moment(new Date(modules.data.sort((a, b) => b.end - a.end)[modules.data.length - 1].end))
+            defaultTimeStart: moment(new Date(Math.min(...startDates))).add(-1, "week"),
+            defaultTimeEnd: moment(new Date(Math.max(...endDates))).add(1, "week")
           })
+          console.log(endDates, startDates)
         })
     })
   }
@@ -111,42 +115,43 @@ export default class Calender extends Component {
   }
 
   render() {
-    const {keys, groups, items, y19} = this.state
+    const {keys, groups, items, defaultTimeStart, defaultTimeEnd} = this.state
     return (
       <>
         {
           groups.length > 0
-          && <Timeline
-            keys={ keys }
-            groups={ groups }
-            // onItemClick={() => alert(1)}
-            items={ items }
-            sidebarContent="Mentors"
-            lineHeight={ 75 }
-            itemRenderer={ itemRender }
-            defaultTimeStart={ moment(y19).add(-1, 'month') }
-            defaultTimeEnd={ moment(y19).add(1.5, 'month') }
-            maxZoom={ 1.5 * 365.24 * 86400 * 1000 }
-            minZoom={ 1.24 * 86400 * 1000 * 7 * 3 }
-            fullUpdate
-            itemTouchSendsClick={ false }
-            stackItems
-            itemHeightRatio={ 0.75 }
-            showCursorLine
-            canMove={ true }
-            canResize={ 'both' }
-            onItemMove={ this.handleItemMove }
-            onItemResize={ this.handleItemResize }
-          >
-            <TimelineMarkers>
-              <TodayMarker>
-                { ({styles, date}) => <div
-                  style={ {...styles, width: '0.5rem', backgroundColor: 'rgba(255,0,0,0.5)'} }/>
-                }
-              </TodayMarker>
-              <SundaysMarker/>
-            </TimelineMarkers>
-          </Timeline>
+            ? <Timeline
+              keys={ keys }
+              groups={ groups }
+              // onItemClick={() => alert(1)}
+              items={ items }
+              sidebarContent="Classes"
+              lineHeight={ 75 }
+              itemRenderer={ itemRender }
+              defaultTimeStart={ defaultTimeStart }
+              defaultTimeEnd={ defaultTimeEnd }
+              maxZoom={ 1.5 * 365.24 * 86400 * 1000 }
+              minZoom={ 1.24 * 86400 * 1000 * 7 * 3 }
+              fullUpdate
+              itemTouchSendsClick={ false }
+              stackItems
+              itemHeightRatio={ 0.75 }
+              showCursorLine
+              canMove={ true }
+              canResize={ 'both' }
+              onItemMove={ this.handleItemMove }
+              onItemResize={ this.handleItemResize }
+            >
+              <TimelineMarkers>
+                <TodayMarker>
+                  { ({styles, date}) => <div
+                    style={ {...styles, width: '0.5rem', backgroundColor: 'rgba(255,0,0,0.5)'} }/>
+                  }
+                </TodayMarker>
+                <SundaysMarker/>
+              </TimelineMarkers>
+            </Timeline>
+            : <Progress/>
         }
         <AddItemsForm onAddItem={ this.addItemHandler }/>
       </>

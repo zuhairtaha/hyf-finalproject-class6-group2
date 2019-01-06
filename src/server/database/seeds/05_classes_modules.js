@@ -32,7 +32,7 @@ exports.seed = function (knex, Promise) {
           {
             "classid": 2,
             "moduleid": 1,
-            "start_date": "2019-01-01",
+            "start_date": "2019-02-01",
             "end_date": "2019-03-01"
           },
           {
