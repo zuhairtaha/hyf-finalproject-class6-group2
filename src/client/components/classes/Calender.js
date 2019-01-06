@@ -50,12 +50,10 @@ export default class Calender extends Component {
     })
   }
 
-  // addItemHandler = newItems => {
-  //   console.log(newItems)
-  //   this.setState(state => ({
-  //     items: {...state.items, newItems}
-  //   }))
-  // }
+  componentWillMount() {
+    document.title = 'Classes'
+  }
+
   toTimestamp = strDate => {
     const d = new Date(strDate)
     return (Date.parse(d)) / 1000
