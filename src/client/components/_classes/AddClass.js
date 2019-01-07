@@ -6,6 +6,7 @@ import Fab from '@material-ui/core/Fab'
 import { withRouter } from 'react-router-dom'
 
 
+<<<<<<< HEAD:src/client/components/classes/AddClass.js
 /*const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -37,6 +38,8 @@ import { withRouter } from 'react-router-dom'
     zIndex: 9
   }
 })*/
+=======
+>>>>>>> master:src/client/components/_classes/AddClass.js
 class Addclass extends React.Component {
   //status: '',
   // start: '2019-01-01',
@@ -155,7 +158,7 @@ class Addclass extends React.Component {
                   </Grid>
 
                   {/*Submit*/}
-                   
+
                 <button type="submit" className="btn btn-primary"
                  onClick={() => {
                     this.onCloseModal()

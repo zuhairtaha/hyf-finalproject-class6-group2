@@ -8,6 +8,7 @@
     "@material-ui/core": "^3.7.1",
     "@material-ui/icons": "^3.0.1",
     "@svgr/webpack": "2.4.1",
+    "axios": "^0.18.0",
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "9.0.0",
     "babel-jest": "23.6.0",
@@ -80,7 +81,9 @@
     "dev:server": "npm run build && npm run start",
     "start": "node src/server/bin/www",
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build",
+    "migrate1": "cd src/server/database && knex migrate:latest",
     "migrate": "cd src/server/database && knex migrate:rollback && knex migrate:latest",
+    "rollback": "cd src/server/database && knex migrate:rollback",
     "seed": "cd src/server/database && knex seed:run"
   },
   "proxy": "http://localhost:4000/",

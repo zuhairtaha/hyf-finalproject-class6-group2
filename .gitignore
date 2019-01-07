@@ -137,3 +137,4 @@ package-lock.json
 src/server/config/db.js
 
 /.env
+src/server/database/schema.schemaxml

@@ -5,7 +5,7 @@ const Navbar = () => (
 
   <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
     <div className="container">
-      <NavLink className="navbar-brand" to="/">HFY Final Project</NavLink>
+      <NavLink className="navbar-brand" to="/">HYFER-CPH</NavLink>
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
               aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"> </span>
@@ -35,17 +35,23 @@ const Navbar = () => (
           {/*</div>*/ }
           {/*</li>*/ }
           <li className="nav-item">
-            <NavLink className="nav-link" to="/Mentors/">Mentors</NavLink>
+            <NavLink className="nav-link" to="/mentors/">Mentors</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/classes/">Classes</NavLink>
           </li>
+<<<<<<< HEAD
           <li className="nav-item">
             <NavLink className="nav-link" to="/modules/">Modules</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/jquery/">jQuery</NavLink>
           </li>
+=======
+          {/*<li className="nav-item">*/}
+            {/*<NavLink className="nav-link" to="/js/">JavaScript</NavLink>*/}
+          {/*</li>*/}
+>>>>>>> master
         </ul>
       </div>
     </div>

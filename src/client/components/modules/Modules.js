@@ -7,21 +7,21 @@ class Modules extends React.Component {
   state = {
     modules: [],
   }
-  
+
   componentDidMount() {
     fetch('/api/modules')
       .then(res => res.json())
       .then(modules => this.setState({ modules }))
       .catch(console.log)
   }
- 
+
   render = () => {
     const { modules } = this.state
     return (
       <div className="container">
         <h2>
           Modules{' '}
-          <NavLink to="/Modules/add" className="btn btn-sm btn-success">
+          <NavLink to="/modules/add" className="btn btn-sm btn-success">
             <i className="fa fa-plus text-white" />
           </NavLink>
         </h2>
@@ -47,7 +47,7 @@ class Modules extends React.Component {
                       <br />
                       length: {module.length}
                     </p>
-                    
+
                     <Link
                       to={`/modules/edit/${module.moduleid}`}
                       className="btn btn-info mr-2 ml-2"
