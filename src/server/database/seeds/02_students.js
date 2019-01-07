@@ -7,6 +7,7 @@ exports.seed = function (knex, Promise) {
       return knex('students').insert([
         {
           first_name: 'Ibrahim',
+          last_name: 'Taha',
           active: true,
           email: 'ibrahim@gmail.com'
         },

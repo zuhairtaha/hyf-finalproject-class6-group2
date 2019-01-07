@@ -17,17 +17,11 @@ class Main extends React.Component {
       <Route path="/classes/add" component={ AddClass } exact/>
       <Route path="/classes/delete/:id" component={ Classitem } exact/>
 
-<<<<<<< HEAD
-      <Route path="/Modules" component={Modules} exact />
-      <Route exact path="/Modules/add" component={ModuleForms.AddModule} />
-      <Route exact path={`/Modules/edit/:id`} component={ModuleForms.EditModule} />
-            <Route exact path="/Modules/addtoclass/:id" component={ModuleForms.AddtoClass} />
-=======
       <Route path="/modules" component={ Modules } exact/>
       <Route exact path="/modules/add" component={ ModuleForms.AddModule }/>
       <Route exact path="/Modules/edit/:id" component={ ModuleForms.EditModule }/>
       <Route exact path="/modules/addtoclass" component={ ModuleForms.Addtoclass }/>
->>>>>>> master
+
 
       <Route path="/mentors" component={ Mentors } exact/>
       <Route exact path="/mentors/add" component={ MentorForms.AddMentor }/>

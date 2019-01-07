@@ -40,18 +40,14 @@ const Navbar = () => (
           <li className="nav-item">
             <NavLink className="nav-link" to="/classes/">Classes</NavLink>
           </li>
-<<<<<<< HEAD
+
           <li className="nav-item">
             <NavLink className="nav-link" to="/modules/">Modules</NavLink>
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/jquery/">jQuery</NavLink>
           </li>
-=======
-          {/*<li className="nav-item">*/}
-            {/*<NavLink className="nav-link" to="/js/">JavaScript</NavLink>*/}
-          {/*</li>*/}
->>>>>>> master
+
         </ul>
       </div>
     </div>

@@ -6,40 +6,7 @@ import Fab from '@material-ui/core/Fab'
 import { withRouter } from 'react-router-dom'
 
 
-<<<<<<< HEAD:src/client/components/classes/AddClass.js
-/*const styles = theme => ({
-  root: {
-    flexGrow: 1,
-    margin: '1rem 5rem',
-    [theme.breakpoints.down('sm')]: {
-      margin: '1rem 1rem'
-    }
-  },
-  paper: {
-    padding: theme.spacing.unit * 2,
-    color: theme.palette.text.secondary
-  },
-  margin: {
-    margin: theme.spacing.unit
-  },
-  withoutLabel: {
-    marginTop: theme.spacing.unit * 3
-  },
-  textField: {
-    flexBasis: 200
-  },
-  mt1: {
-    marginTop: '1rem'
-  },
-  floatingBtn: {
-    position: 'absolute',
-    right: '2rem',
-    bottom: '2rem',
-    zIndex: 9
-  }
-})*/
-=======
->>>>>>> master:src/client/components/_classes/AddClass.js
+
 class Addclass extends React.Component {
   //status: '',
   // start: '2019-01-01',
