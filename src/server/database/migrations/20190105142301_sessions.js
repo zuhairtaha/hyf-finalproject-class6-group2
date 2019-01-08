@@ -1,4 +1,4 @@
-exports.up = function(knex, Promise) {
+exports.up = function (knex, Promise) {
   return knex.schema.createTable('sessions', table => {
     table.increments()
     table
@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
       .onDelete('CASCADE')
     table.string('location')
     table.string('description')
+    table.text('recordings_links')
     table.string('mentors')
     table.timestamp('session_date', true).defaultTo(knex.fn.now())
     table.timestamps(true, true)

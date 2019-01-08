@@ -14,7 +14,7 @@ router
 // --------------------------
 // GET all mentors
 function listAllMentors(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM mentors WHERE active=?', [true])
+  const sql = sqlString.format('SELECT * FROM users WHERE active=?', [true])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)

@@ -1,53 +1,51 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Button from '@material-ui/core/Button'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import { Link } from 'react-router-dom'
+const styles = {
+  root: {
+    flexGrow: 1,
+  },
+  grow: {
+    flexGrow: 1,
+  },
+  menuButton: {
+    marginLeft: -12,
+    marginRight: 20,
+  },
+}
 
-const Navbar = () => (
+function Navbar(props) {
+  const {classes} = props
+  return (
+    <div className={ classes.root }>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton className={ classes.menuButton } color="inherit" aria-label="Menu">
+            <MenuIcon/>
+          </IconButton>
+          <Typography variant="h6" color="inherit" className={ classes.grow }>
+            News
+          </Typography>
 
-  <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div className="container">
-      <NavLink className="navbar-brand" to="/">HYFER-CPH</NavLink>
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
-              aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"> </span>
-      </button>
-      <div id="navbarNavDropdown" className="navbar-collapse collapse">
-        <ul className="navbar-nav mr-auto">
-          {/*<li className="nav-item active">*/}
-            {/*<NavLink className="nav-link" to="/">Home <span className="sr-only">(current)</span></NavLink>*/}
-          {/*</li>*/}
-          {/*<li className="nav-item">*/}
-            {/*<a className="nav-link" href="/">link 1</a>*/}
-          {/*</li>*/}
-          {/*<li className="nav-item">*/}
-            {/*<a className="nav-link" href="/">link 2</a>*/}
-          {/*</li>*/}
 
-        </ul>
-        <ul className="navbar-nav">
-          {/*<li className="nav-item dropdown">*/ }
-          {/*<a className="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink"*/ }
-          {/*data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">*/ }
-          {/*Dropdown*/ }
-          {/*</a>*/ }
-          {/*<div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">*/ }
-          {/*<a className="dropdown-item" href="#">Action</a>*/ }
-          {/*<a className="dropdown-item" href="#">Another action</a>*/ }
-          {/*</div>*/ }
-          {/*</li>*/ }
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/mentors/">Mentors</NavLink>
-          </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/classes/">Classes</NavLink>
-          </li>
-          {/*<li className="nav-item">*/}
-            {/*<NavLink className="nav-link" to="/js/">JavaScript</NavLink>*/}
-          {/*</li>*/}
-        </ul>
-      </div>
+          <Button component={Link} to="/mentors/" color="inherit">Mentors</Button>
+          <Button component={Link} to="/classes/" color="inherit">Classes</Button>
+
+        </Toolbar>
+      </AppBar>
     </div>
-  </nav>
+  )
+}
 
-)
+Navbar.propTypes = {
+  classes: PropTypes.object.isRequired,
+}
 
-export default Navbar
+export default withStyles(styles)(Navbar)

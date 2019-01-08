@@ -12,7 +12,7 @@ exports.up = function (knex, Promise) {
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('mentors')
+      .inTable('users')
       .onDelete('CASCADE')
     table.primary(['skill_id', 'mentor_id'])
   })
