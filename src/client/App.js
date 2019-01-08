@@ -3,13 +3,13 @@ import Navbar from './components/layouts/Navbar'
 //import Jumbotron from './components/layouts/Jumbotron'
 import Main from './components'
 // import Footer from './components/layouts/Footer'
-import Auth from './components/auth/containers/App'
+import AuthApp from './components/auth/containers/AuthApp'
 class App extends Component {
 
   render = () =>
     <>
       <Navbar />
-      <Auth />
+      <AuthApp />
       {/*<Main />*/}
       {/*<Footer />*/}
     </>
