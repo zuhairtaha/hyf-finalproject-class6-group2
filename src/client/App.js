@@ -3,7 +3,7 @@ import Navbar from './components/layouts/Navbar'
 //import Jumbotron from './components/layouts/Jumbotron'
 // import Main from './components'
 // import Footer from './components/layouts/Footer'
-import AuthApp from './components/auth/containers/AuthApp'
+// import AuthApp from './components/auth/containers/AuthApp'
 class App extends Component {
 
   render = () =>
