@@ -204,7 +204,7 @@ exports.seed = (knex, Promise) =>
         },
         {
           type: 'alumni',
-          name: 'Mohammed Abd',
+          name: 'Mohammed Abd..',
           email: 'moha.abd.99@gmail.com',
           avatar: '3.jpg',
           slack_nickname: 'http://link-goes-here.com/github',
