@@ -1,44 +1,143 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# HackYourFuture Final Project
+### (Class 6 - Group 2)
+ 
+![logo](/public/images/logo_black.svg)
 
-## Available Scripts
+Web application to manage HackYourFuture programming school (Copenhagen). This application allow users (admin, mentors, students) to 
+view/ manage classes, modules, events, ...
 
-In the project directory, you can run:
+## .dotenv
+It's important to install `npm i dotenv` to be able to use `.env` file at the project.
+after installing it create `.env` file: you can use command line `touch .env`
 
-### `npm start`
+Your file could be like this:
+```dotenv
+NODE_ENV=development
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+###### Github OAuth ######
+GITHUB_CLIENT_ID=
+GITHUB_CLIENT_SECRET=
+CALLBACK=
+COOKIE_KEY=
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+##### Databases ########
+DB_PORT=3306
 
-### `npm test`
+# local database
+DB_USER=
+DB_PASSWORD=
+DB_NAME=
+DB_HOST=
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+#Heroku online database
+#DB_NAME=
+#DB_HOST=
+#DB_PASSWORD=
+#DB_USER=
+```
+***Notes:*** 
+* Dont forget to add `.env` to `.gitignore` file
+* I added both local/online databases, but comment one of them and uncomment what you want to work with
 
-### `npm run build`
+### Set config vars at heroku
+![heroku_config_vars](public/images/readme/heroku_config_vars.png) 
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+open your repo at heroku > settings > Reveal Config Vars
+and fill the same `.env` data here:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+![heroku_config_vars](public/images/readme/heroku_config_vars2.png) 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Database (knex)
+ERD (Entity Relationship Diagram)
+![ERD](/public/images/readme/erd.JPG)
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+database generated with [knex js](https://knexjs.org/) 
+to generate the same database at your localhost/ hosting:
+* **install knex globally** ` npm i -g knex` ***This is important step (Locally is not enough)***
+* install it locally at your project `npm i knex`
+* navigate to database folder witch located at `src/server/database` by running this command 
+`cd src/server/database`. After navigating to it you can run next steps:
+* To **migrate** the database structure run: `knex migrate:latest`
+* To fill the database with data (**seed**) run: `knex seed:run`
+Now you should have the same database (structure & data)
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+_You can migrate/seed to heroku database by comment the local database data at `.env` file and uncomment heroku data then do the same previous steps_
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+## More detais about knex
+* If you want to use knex from scratch at your project at first you need to install it globally/ locally as I mentioned up and navigate to the folder we want to put your migration/seed files in.
+* After that, run `knex init` this will create `knexfile.js`
+* replace `knexfile.js` content with:
+```javascript
+require('dotenv').config({path: '../../../.env'})
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+module.exports = {
+  client: 'mysql2',
+  connection: {
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_NAME
+  }
+}
+```
+you can use `mysql2` / `mysql` or any other module to handle with your database.
+At first line we have set the path where `.env` file exists. I tried to run knex commands without setting it, but it didn't work, so it's important to set it with your `.env` relative path.
+* create your database. Because knex don't create it, so we have to do that manually.
+* navigate to your database path. in our project `cd src/server/database`
+* to create a table at the database, for example users table run:
+```javascript
+knex migrate:make users
+```
+* This will create a file similar to `20181230010800_users.js` replace it contents with:
+```javascript
+exports.up = function (knex, Promise) {
+  return knex.schema.createTable('mentors', table => {
+    table.increments()
+    table.string('name').notNullable()
+    table.string('email')
+    table.string('password')
+    table.timestamps(true, true)
+  })
+}
 
-## Learn More
+exports.down = (knex, Promise) => knex.schema.dropTable('users')
+```
+don't forget to set the table name at the two places. the last code will generate a table with
+id primary key. also name, email, and password varchar fields. and finally created_at and updated_at fields.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+_Read more about [Schema Builder](https://knexjs.org/#Schema)_
+* Now we are ready to migrate this table to the database by running: 
+```javascript
+knex migrate:latest
+```
+* If we made changes at the database we can undo last changes by run:
+```javascript
+knex migrate:rollback
+```
+* **Seeding** data to last table: to create seed file run
+```javascript
+knex seed:make users
+```
+This will create a file called `users` at the folder `seeds`
+* fil the seed file with `json` data. You can use some npm modules like `faker` to crate dummy data
+* finally run 
+```javascript
+knex seed:run
+```
+and the table(s) will be filled with the data
+###Note:
+- Migrate/Seed files order is important. For example: to create `students_classes` table with relations between tables, we must create
+both `students`/`users` and `classes` before.
+Also for seeding we cannot seed `students_classes` before seeding `classes` ... **So rename files by numbers prefix or alphabetically** 
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- There is also some scripts at `package.json` to run migrate/seed quickly. We can run them locally or online.
+To run them online at heroku open console
+
+![heroku_console](/public/images/readme/heroku_console.png)
+
+and write the migrate/seed:
+
+![npm_migrate_heroku](/public/images/readme/run_migrate.png)
+
+

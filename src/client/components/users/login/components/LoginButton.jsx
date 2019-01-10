@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Button from '@material-ui/core/Button'
 require('dotenv').config()
 
 let URLPrefix =
@@ -9,15 +10,25 @@ export default class LoginButton extends Component {
     //checks if user is signed in and render a login or logout button accordingly
     return !this.props.isAuthenticated ? (
       <li>
-        <a href={URLPrefix + '/auth/github'} className='loginbutton'>
+        <Button
+          variant='contained'
+          color='primary'
+          className='loginbutton'
+          href={URLPrefix + '/auth/github'}
+        >
           login
-        </a>
+        </Button>
       </li>
     ) : (
       <li>
-        <a href={URLPrefix + '/auth/github/logout'} className='loginbutton'>
+        <Button
+          variant='contained'
+          color='secondary'
+          className='loginbutton'
+          href={URLPrefix + '/auth/github/logout'}
+        >
           logout
-        </a>
+        </Button>
       </li>
     )
   }
