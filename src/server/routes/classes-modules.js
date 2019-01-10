@@ -7,14 +7,14 @@ const db = require('../config/db')
 router
   .get('/', getAllModulesWithClasses)
   .get('/:id', listclassesmodules)
-  .get('/:id', getMentorById)
+  .get('/:id', getUserById)
   .post('/', createModule)
-  .delete('/:id', deleteMentor)
+  .delete('/:id', deleteUser)
   .put('/:id', updateModule)
   .put('/:id', addtoclass)
 
 // --------------------------
-// GET all mentors
+// GET all users
 function getAllModulesWithClasses(req, res, next) {
   console.log('req is' + req)
   const sql = sqlString.format(`SELECT
@@ -32,7 +32,7 @@ FROM
     res.send(rows)
   })
 }// --------------------------
-// GET all mentors
+// GET all users
 function listclassesmodules(req, res, next) {
   console.log('req is' + req)
   const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = ?', [req.params.id])
@@ -43,13 +43,13 @@ function listclassesmodules(req, res, next) {
 }
 
 // --------------------------
-// CREATE a new mentor
+// CREATE a new user
 function createModule(req, res, next) {
   const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New mentor added successfully')
+    res.send('New user added successfully')
   })
 }
 
@@ -60,50 +60,50 @@ function addtoclass(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New mentor added successfully')
+    res.send('New user added successfully')
   })
 }
 
 // --------------------------
-// DELETE a mentor by ID (soft delete)
-function deleteMentor(req, res, next) {
-  const sql = sqlString.format(`UPDATE mentors SET ? WHERE id = ?`, [
+// DELETE a user by ID (soft delete)
+function deleteUser(req, res, next) {
+  const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
     {active: 0},
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'Mentor not find'})
-    res.send('Mentor Deleted')
+    if (!result.affectedRows) return next({message: 'User not find'})
+    res.send('User Deleted')
   })
 }
 
 // --------------------------
-// UPDATE a mentor by ID
+// UPDATE a user by ID
 function updateModule(req, res, next) {
-  const sql = sqlString.format(`UPDATE mentors SET ? WHERE id = ?`, [
+  const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
     req.body,
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'Mentor not find'})
-    res.send('Mentor updated')
+    if (!result.affectedRows) return next({message: 'User not find'})
+    res.send('User updated')
   })
 }
 
 // --------------------------
-// GET one mentor by ID
-function getMentorById(req, res, next) {
+// GET one user by ID
+function getUserById(req, res, next) {
   const sql = sqlString.format(
-    'SELECT * FROM mentors WHERE id = ? AND status = ?',
+    'SELECT * FROM users WHERE id = ? AND status = ?',
     [req.params.id, "Active"]
   )
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'Mentor not find'})
+    if (rows.length === 0) return next({message: 'User not find'})
     res.send(rows[0])
   })
 }

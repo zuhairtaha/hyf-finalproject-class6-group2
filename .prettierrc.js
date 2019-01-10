@@ -1,4 +1,6 @@
 module.exports = {
   singleQuote: true,
-  semi: false
-};
+  jsxSingleQuote: true,
+  semi: false,
+  proseWrap: 'never'
+}

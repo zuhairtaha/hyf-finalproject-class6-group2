@@ -1,27 +1,28 @@
 import React, { Component } from 'react'
-import ModuleForm from './module-form'
+import UserForm from './user-form'
 import axios from 'axios'
+
 // export default (props) => {
 //     // Do the fetching, and render the form only when the data is here
 //     return (
-//         <moduleForm {...props} isEditing={true} />
+//         <UserForm {...props} isEditing={true} />
 //     )
 // }
 
-class EditModule extends Component {
+class EditUser extends Component {
   state = {
     isLoading: true,
     message: 'Hang in there...',
-    moduleData: null
+    userData: null
   }
   componentDidMount() {
-    const url = '/api/modules'
+    const url = '/api/users'
     const id = this.props.match.params.id
     // TODO handle failure (404)
     axios.get(`${url}/${id}`).then(res =>
       this.setState({
         isLoading: false,
-        moduleData: res.data
+        userData: res.data
       })
     )
     // .catch(error => this.setState({
@@ -32,9 +33,9 @@ class EditModule extends Component {
     return this.state.isLoading ? (
       <div>{this.state.message}</div>
     ) : (
-      <ModuleForm
+      <UserForm
         {...this.props}
-        moduleData={this.state.moduleData}
+        userData={this.state.userData}
         id={this.props.match.params.id}
         isEditing={true}
       />
@@ -42,4 +43,4 @@ class EditModule extends Component {
   }
 }
 
-export default EditModule
+export default EditUser

@@ -45,7 +45,6 @@ export default class Calender extends Component {
             defaultTimeStart: moment(new Date(Math.min(...startDates))).add(-1, "week"),
             defaultTimeEnd: moment(new Date(Math.max(...endDates))).add(1, "week")
           })
-          console.log(endDates, startDates)
         })
     })
   }

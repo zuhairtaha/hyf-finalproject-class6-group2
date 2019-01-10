@@ -4,9 +4,9 @@ const pool = mysql.createPool({
   connectionLimit: 10,
   host: process.env.DB_HOST,
   port: process.env.DB_PORT,
-  user: process.env.DB_USERNAME,
+  user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
-  database: process.env.DB_DATABASE
+  database: process.env.DB_NAME
 })
 // const connection = mysql.createConnection(process.env.JAWSDB_URL)
 const passport = require('passport')
@@ -57,7 +57,7 @@ passport.use(
           ) {
             //If no user is found with the provided id, create one.
             pool.query(
-              'INSERT INTO users (github_id, first_name, github_login, role, avatar) VALUES( ?, ?, ?, ?, ?)',
+              'INSERT INTO users (github_id, name, github_login, type, avatar) VALUES( ?, ?, ?, ?, ?)',
               [
                 profile._json.id,
                 profile._json.name,
@@ -77,7 +77,7 @@ passport.use(
                     github_login: profile._json.login,
                     github_id: profile._json.id
                   }
-                  console.log(user)
+                  console.log("passport setup:80, user:",user)
                   //then send to passport.js for serialization the user we just created and tell it that we're done
                   //checking if the user exists
                   done(null, user)
@@ -86,7 +86,7 @@ passport.use(
               }
             )
           } else {
-            console.log(results)
+            console.log("passport-setup:89, results",results)
             //if user already exists and there is no need for a new user send the existing user to passport.js for serialization
             done(null, results[0])
             return results[0]

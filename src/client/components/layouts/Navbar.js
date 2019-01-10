@@ -10,34 +10,42 @@ import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
 const styles = {
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   menuButton: {
     marginLeft: -12,
-    marginRight: 20,
-  },
+    marginRight: 20
+  }
 }
 
 function Navbar(props) {
-  const {classes} = props
+  const { classes } = props
   return (
-    <div className={ classes.root }>
-      <AppBar position="static">
+    <div className={classes.root}>
+      <AppBar position='static'>
         <Toolbar>
-          <IconButton className={ classes.menuButton } color="inherit" aria-label="Menu">
-            <MenuIcon/>
+          <IconButton
+            className={classes.menuButton}
+            color='inherit'
+            aria-label='Menu'
+          >
+            <MenuIcon />
           </IconButton>
-          <Typography variant="h6" color="inherit" className={ classes.grow }>
-            News
+          <Typography variant='h6' color='inherit' className={classes.grow}>
+            <Button component={Link} to='/' color='inherit'>
+              HYFR
+            </Button>
           </Typography>
 
-
-          <Button component={Link} to="/mentors/" color="inherit">Mentors</Button>
-          <Button component={Link} to="/classes/" color="inherit">Classes</Button>
-
+          <Button component={Link} to='/users/' color='inherit'>
+            Users
+          </Button>
+          <Button component={Link} to='/classes/' color='inherit'>
+            Classes
+          </Button>
         </Toolbar>
       </AppBar>
     </div>
@@ -45,7 +53,7 @@ function Navbar(props) {
 }
 
 Navbar.propTypes = {
-  classes: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Navbar)

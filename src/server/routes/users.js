@@ -5,16 +5,16 @@ const db = require('../config/db')
 // --------------------------
 
 router
-  .get('/', listAllModules)
+  .get('/', listAllUsers)
   .get('/:id', getUserById)
   .post('/', createUser)
   .delete('/:id', deleteUser)
   .put('/:id', updateUser)
 
 // --------------------------
-// GET all modules
-function listAllModules(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM modules')
+// GET all users
+function listAllUsers(req, res, next) {
+  const sql = sqlString.format('SELECT * FROM users WHERE active=?', [true])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
@@ -35,14 +35,14 @@ function createUser(req, res, next) {
 // --------------------------
 // DELETE a user by ID (soft delete)
 function deleteUser(req, res, next) {
-  const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
-    {active: 0},
+  const sql = sqlString.format(`UPDATE users SET active = ? WHERE id = ?`, [
+    false,
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'User not find'})
+    if (!result.affectedRows) return next({ message: 'User not find' })
     res.send('User Deleted')
   })
 }
@@ -57,7 +57,7 @@ function updateUser(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'User not find'})
+    if (!result.affectedRows) return next({ message: 'User not find' })
     res.send('User updated')
   })
 }
@@ -65,13 +65,12 @@ function updateUser(req, res, next) {
 // --------------------------
 // GET one user by ID
 function getUserById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM users WHERE id = ? AND status = ?',
-    [req.params.id, "Active"]
-  )
+  const sql = sqlString.format('SELECT * FROM users WHERE id = ?', [
+    req.params.id
+  ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'User not find'})
+    if (rows.length === 0) return next({ message: 'User not find' })
     res.send(rows[0])
   })
 }
