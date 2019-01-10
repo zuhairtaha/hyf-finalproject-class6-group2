@@ -68,7 +68,8 @@ class Users extends React.Component {
                 tags,
                 slack_nickname,
                 linkedin,
-                email
+                email,
+                type
               } = user
               return (
                 <Paper key={id} className='user'>
@@ -80,8 +81,8 @@ class Users extends React.Component {
                             <img
                               alt={name}
                               src={
-                                role === 'alumni'
-                                  ? '/images/alumni/' + avatar
+                                type === 'alumni'
+                                  ? '/images/users/' + avatar
                                   : avatar
                               }
                             />

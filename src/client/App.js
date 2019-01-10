@@ -5,13 +5,14 @@ import Main from './components'
 // import Footer from './components/layouts/Footer'
 
 class App extends Component {
-
-  render = () =>
+  render = () => (
     <>
       <Navbar />
       <Main />
+
       {/*<Footer />*/}
     </>
+  )
 }
 
 export default App
