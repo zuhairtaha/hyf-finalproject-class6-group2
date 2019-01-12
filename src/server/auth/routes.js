@@ -29,7 +29,7 @@ const authCheck = (req, res, next) => {
 router.get('/github', passport.authenticate('github', { scope: ['profile'] }))
 
 const homePageURL =
-  process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/'
+        process.env.NODE_ENV === 'development' ? 'http://localhost:3000/' : '/'
 
 /*
  * This route logs out the user and strips the "logged in" information from their cookie
