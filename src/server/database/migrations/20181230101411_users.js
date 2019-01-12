@@ -14,7 +14,7 @@ exports.up = function(knex, Promise) {
       .inTable('roles')
     table.string('status')
     table.string('github_username')
-    table.string('github_id')
+    table.string('github_token')
     table.string('linkedin')
     table.string('type')
     table.boolean('active').defaultTo(true)

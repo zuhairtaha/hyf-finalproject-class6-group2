@@ -13,14 +13,14 @@ const passport = require('passport')
 const GitHubStrategy = require('passport-github').Strategy
 
 //serialize or "encrypt" a user into a cookie to send to the client
-passport.serializeUser((user, done) => {
-  done(null, user.github_id)
+passport.serializeUser((user, done) => {//db
+  done(null, user.github_token)
 })
 
 //deserialize or "decrypt" the cookie into readable information
 passport.deserializeUser((id, done) => {
   pool.query(
-    'select * FROM users where github_id = ?',
+    'select * FROM users where github_token = ?',
     [id],
     (err, results, fields) => {
       if (err) {
@@ -42,22 +42,23 @@ passport.use(
       clientSecret: process.env.GITHUB_CLIENT_SECRET,
       callbackURL: process.env.CALLBACK
     },
-    (accessToken, refreshToken, profile, done) => {
+    (accessToken, refreshToken, profile, done) => { // profile: github
       //passport callbaack, that uses our mysql database to first check if we already have a user with the unique github_ID
       pool.query(
-        'select * FROM users WHERE github_id = ?',
+        'select * FROM users WHERE github_token = ?',
         [profile._json.id],
-        async (err, results, fields) => {
+        async (err, results, fields) => { // results: db
           if (err) {
             throw new Error('Something went wrong in fething a user!' + err)
           } else if (
             results === undefined ||
             results.length === 0 ||
-            results[0].github_id === undefined
+            results[0].github_token === undefined
           ) {
+
             //If no user is found with the provided id, create one.
             pool.query(
-              'INSERT INTO users (github_id, name, github_username, type, avatar) VALUES( ?, ?, ?, ?, ?)',
+              'INSERT INTO users (github_token, name, github_username, type, avatar) VALUES( ?, ?, ?, ?, ?)',
               [
                 profile._json.id,
                 profile._json.name,
@@ -75,7 +76,7 @@ passport.use(
                     name: profile._json.name,
                     type: profile._json.type,
                     github_username: profile._json.login,
-                    github_id: profile._json.id
+                    github_token: profile._json.id
                   }
                   //then send to passport.js for serialization the user we just created and tell it that we're done
                   //checking if the user exists

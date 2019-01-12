@@ -244,7 +244,7 @@ exports.seed = (knex, Promise) =>
           type: 'User',
           role_id: 2,
           github_username: 'marcodca',
-          github_id: '38817334'
+          github_token: '38817334'
         },
         {
           avatar: 'https://avatars1.githubusercontent.com/u/19361362?v=4',
@@ -252,7 +252,7 @@ exports.seed = (knex, Promise) =>
           type: 'User',
           role_id: 2,
           github_username: 'T1ish',
-          github_id: '19361362'
+          github_token: '19361362'
         },
         {
           avatar: 'https://avatars1.githubusercontent.com/u/955233?v=4',
@@ -260,13 +260,13 @@ exports.seed = (knex, Promise) =>
           type: 'User',
           role_id: 3,
           github_username: 'zuhairtaha',
-          github_id: '955233'
+          github_token: '955233'
         },
         {
           name: 'Ibrahim Kadoura Mater',
           avatar: 'https://avatars3.githubusercontent.com/u/32614855?v=4',
           github_username: 'ibrsal',
-          github_id: '32614855',
+          github_token: '32614855',
           role_id: 3
         },
         {
@@ -275,7 +275,7 @@ exports.seed = (knex, Promise) =>
           type: 'User',
           role_id: 3,
           github_username: 'YousofMersal',
-          github_id: '29578565'
+          github_token: '29578565'
         }
       ])
     )
