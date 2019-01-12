@@ -57,7 +57,7 @@ passport.use(
           ) {
             //If no user is found with the provided id, create one.
             pool.query(
-              'INSERT INTO users (github_id, name, github_login, type, avatar) VALUES( ?, ?, ?, ?, ?)',
+              'INSERT INTO users (github_id, name, github_username, type, avatar) VALUES( ?, ?, ?, ?, ?)',
               [
                 profile._json.id,
                 profile._json.name,
@@ -74,7 +74,7 @@ passport.use(
                     avatar: profile._json.avatar_url,
                     name: profile._json.name,
                     type: profile._json.type,
-                    github_login: profile._json.login,
+                    github_username: profile._json.login,
                     github_id: profile._json.id
                   }
                   console.log("passport setup:80, user:",user)

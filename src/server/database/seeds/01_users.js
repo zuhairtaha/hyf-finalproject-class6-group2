@@ -207,40 +207,35 @@ exports.seed = (knex, Promise) =>
           role_id: 2,
           name: 'Katsisaac50',
           email: 'katsisaac50@gmail.com',
-          avatar: '1.jpg',
-          remarks: 'Looking for jobs'
+          avatar: '1.jpg'
         },
         {
           type: 'alumni',
           role_id: 2,
           name: 'Hala Kasim',
           email: 'halakasim16@gmail.com',
-          avatar: '2.jpg',
-          remarks: 'Looking for new opportunities'
+          avatar: '2.jpg'
         },
         {
           type: 'alumni',
           role_id: 2,
           name: 'Rufaida Jumaa',
           email: 'eng.rufaidajumaa@gmail.com',
-          avatar: '',
-          remarks: 'Looking for jobs'
+          avatar: ''
         },
         {
           type: 'alumni',
           role_id: 2,
           name: 'Mohammed Abd',
           email: 'moha.abd.99@gmail.com',
-          avatar: '3.jpg',
-          remarks: 'looking for internship'
+          avatar: '3.jpg'
         },
         {
           type: 'alumni',
           role_id: 2,
           name: 'Richard Paredes',
           email: 'chard.paredes@gmail.com',
-          avatar: '4.jpg',
-          remarks: 'Looking for jobs'
+          avatar: '4.jpg'
         },
 
         {
