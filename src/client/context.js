@@ -6,7 +6,6 @@ const Context = React.createContext()
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DELETE_USER':
-
       axios
         .delete(`/api/users/${action.payload}`)
         .then(console.log)
@@ -15,6 +14,10 @@ const reducer = (state, action) => {
         ...state,
         users: state.users.filter(user => user.id !== action.payload)
       }
+    // case 'ADD_USEER':
+    // axios.post(`/api/users/${action.payload}`)
+    // .then(users=>({users}))
+
     default:
       return state
   }
@@ -23,7 +26,6 @@ const reducer = (state, action) => {
 export class Provider extends React.Component {
   state = {
     users: [],
-    title: 'Top 10',
     dispatch: action => this.setState(state => reducer(state, action))
   }
 

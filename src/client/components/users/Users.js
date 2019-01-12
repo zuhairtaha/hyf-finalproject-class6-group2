@@ -6,9 +6,7 @@ import User from './User'
 import { Consumer } from '../../context'
 
 class Users extends React.Component {
-  state = {
-    users: []
-  }
+ 
 
   componentWillMount() {
     document.title = 'Users'
@@ -27,7 +25,7 @@ class Users extends React.Component {
                   <i className='fa fa-plus text-white' />
                 </NavLink>
               </h2>
-              {users.length === 0
+              {value.users.length === 0
                 ? <Progress />
                : <div className='members mb-3'>
                 {users.map(user => <User key={user.id} user={user} />)}

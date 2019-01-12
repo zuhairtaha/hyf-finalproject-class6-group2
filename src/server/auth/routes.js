@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const passport = require('passport')
+require('dotenv').config()
 
 /*
  * This acts as an axpress middleware that checks the client request
@@ -27,12 +28,17 @@ const authCheck = (req, res, next) => {
  */
 router.get('/github', passport.authenticate('github', { scope: ['profile'] }))
 
+const homePageURL =process.env.NODE_ENV === 'development' 
+? 'http://localhost:3000/'
+: '/'
+
+
 /*
  * This route logs out the user and strips the "logged in" information from their cookie
  */
 router.get('/github/logout', (req, res) => {
   req.logout()
-  res.redirect('/')
+  res.redirect(homePageURL)
 })
 
 /*
@@ -40,7 +46,7 @@ router.get('/github/logout', (req, res) => {
  * It checks if the cookie is valid and then redirects to home path.
  */
 router.get('/github/redirect', passport.authenticate('github'), (req, res) => {
-  res.redirect('/')
+  res.redirect(homePageURL)
 })
 
 module.exports = { router, authCheck }

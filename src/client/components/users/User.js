@@ -10,7 +10,10 @@ import './user.css'
 
 class User extends React.Component {
 
-  deleteUser = (id, dispatch) => dispatch({ type: 'DELETE_USER', payload: id })
+  deleteUser = (id, dispatch) => dispatch({ 
+    type: 'DELETE_USER', 
+    payload: id 
+  })
 
   render() {
     const {
