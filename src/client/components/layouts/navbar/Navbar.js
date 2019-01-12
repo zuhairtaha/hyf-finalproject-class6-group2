@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import { Link } from 'react-router-dom'
+import UserMenu from './UserMenu'
 const styles = {
   root: {
     flexGrow: 1
@@ -18,6 +19,9 @@ const styles = {
   menuButton: {
     marginLeft: -12,
     marginRight: 20
+  },
+  logo: {
+    height: '40px'
   }
 }
 
@@ -36,7 +40,11 @@ function Navbar(props) {
           </IconButton>
           <Typography variant='h6' color='inherit' className={classes.grow}>
             <Button component={Link} to='/' color='inherit'>
-              HYFR
+              <img
+                className={classes.logo}
+                src='/images/logo-white.svg'
+                alt='HackYourFuture Copenhagen'
+              />
             </Button>
           </Typography>
 
@@ -46,6 +54,7 @@ function Navbar(props) {
           <Button component={Link} to='/classes/' color='inherit'>
             Classes
           </Button>
+          <UserMenu />
         </Toolbar>
       </AppBar>
     </div>

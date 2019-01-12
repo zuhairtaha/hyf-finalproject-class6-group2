@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom'
-import LoginButton from './components/LoginButton'
-import Public from './components/Public'
-import Profile from './components/Profile'
-import { getProfileInfo, isLoggedIn } from './api/apiCalls'
-import './style.css'
+import LoginButton from './LoginButton'
+import Public from './Public'
+import Profile from './Profile'
+import { getProfileInfo, isLoggedIn } from './OAuth-api-calls'
 
 export default class Login extends Component {
   constructor(props) {
