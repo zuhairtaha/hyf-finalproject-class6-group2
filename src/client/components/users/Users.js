@@ -2,7 +2,7 @@ import React from 'react'
 import Progress from '../layouts/Progress'
 import NavLink from 'react-router-dom/es/NavLink'
 import './users.css'
-import User from './User'
+import UserItem from './UserItem'
 import { Consumer } from '../../context'
 
 class Users extends React.Component {
@@ -30,7 +30,7 @@ class Users extends React.Component {
               {users.length === 0
                 ? <Progress />
                : <div className='members mb-3'>
-                {users.map(user => <User key={user.id} user={user} />)}
+                {users.map(user => <UserItem key={user.id} user={user} />)}
               </div>}
             </div>
           )

@@ -8,7 +8,7 @@ import { Consumer } from '../../context'
 
 import './user.css'
 
-class User extends React.Component {
+class UserItem extends React.Component {
 
   deleteUser = (id, dispatch) => dispatch({ type: 'DELETE_USER', payload: id })
 
@@ -57,6 +57,7 @@ class User extends React.Component {
                 )}
               </div>
               <h3 className='userName'>{name}</h3>
+              <span className='userName'>{type}</span>
               {role && <p className='memberRole'>{role}</p>}
               {summary && <p>{summary}</p>}
               {tags && (
@@ -118,4 +119,4 @@ class User extends React.Component {
   }
 }
 
-export default User
+export default UserItem

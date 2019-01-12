@@ -20,17 +20,11 @@ class UserMenu extends Component {
   }
 
   componentDidMount() {
-    //Checks if the user is logged in and authenticated after mounting
     isLoggedIn()
-      .then(res => {
-        res ? this.setState({ auth: true }) : this.setState({ auth: false })
-      })
+      .then(res => this.setState({ auth: !!res }))
       .then(() => {
-        /*if the user is authenticated fetch information from db and store it in state*/
-
-        if (this.state.auth) {
+        if (this.state.auth)
           getProfileInfo().then(res => this.setState({ user: res.data }))
-        }
       })
   }
 
@@ -53,7 +47,7 @@ class UserMenu extends Component {
                   updateAnchorEl(event.currentTarget)
                 }}
               >
-                {auth  ? (
+                {auth ? (
                   <img
                     alt={user.name}
                     style={{ height: '40px', borderRadius: '50%' }}
@@ -76,7 +70,7 @@ class UserMenu extends Component {
                     href={URLPrefix + '/auth/github'}
                     onClick={handleClose}
                   >
-                    Login
+                    Sign in with GitHub
                   </MenuItem>
                 )}
                 {auth && (

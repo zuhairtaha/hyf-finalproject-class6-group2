@@ -1,6 +1,5 @@
-import React from 'react';
-import UserForm from './user-form';
+import React from 'react'
+import UserForm from './user-form'
 
-export default (props) => (
-    <UserForm {...props} isEditing={false} />
-)
+const AddUser = props => <UserForm {...props} isEditing={false} />
+export default AddUser
