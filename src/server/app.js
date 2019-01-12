@@ -6,20 +6,14 @@ require('dotenv').config()
 const authRouter = require('./auth/routes')
 // eslint-disable-next-line no-unused-vars
 const passportSetup = require('./auth/passport-setup')
-const cookieSession = require('cookie-session')
 const passport = require('passport')
-
+const session = require('./config/session')
 const clientRouter = require('./routes/client')
 const apiRoutes = require('./routes')
 
 const app = express()
 
-app.use(
-  cookieSession({
-    maxAge: 7 * 24 * 60 * 60 * 1000,
-    keys: [process.env.COOKIE_KEY]
-  })
-)
+app.use(session)
 
 // Then we initialize passport and start the sessions.
 app.use(passport.initialize())
@@ -29,7 +23,6 @@ app.use(logger('dev'))
 app.use(express.json())
 app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
-app.use(express.static(path.join(__dirname, 'public')))
 
 app.get('/tahasoft', (req, res) => {
   res.send('tahasoft')
@@ -46,6 +39,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500)
   res.json(err.message)
 })
+
+app.use(express.static(path.join(__dirname, 'public')))
 
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files

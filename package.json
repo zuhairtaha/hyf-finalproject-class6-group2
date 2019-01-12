@@ -83,7 +83,7 @@
     "test": "node scripts/test.js",
     "server": "nodemon src/server/bin/www",
     "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
-    "dev:server": "npm run build && npm run start",
+    "dev:production": "concurrently --kill-others-on-fail \"npm run build && npm run server\" \"npm run client\"",
     "start": "node src/server/bin/www",
     "heroku-postbuild": "npm i && npm i --only=dev --no-shrinkwrap && npm run build",
     "rollback": "cd src/server/database && knex migrate:rollback",

@@ -1,12 +1,12 @@
 import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Users from './users/Users'
-import MentorForms from "./user-form"
+import MentorForms from "./users/user-form"
 import Calender from './calender/Calender'
 import ClassesCalender from './classes/Calender'
 import AddClass from './_classes/AddClass'
 import Modules from './modules/Modules'
-import ModuleForms from "./module-form"
+import ModuleForms from "./modules/module-form"
 import Login from "./users/login"
 
 class Main extends React.Component {

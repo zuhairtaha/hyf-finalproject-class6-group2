@@ -1,5 +1,5 @@
 import React from 'react'
-import Progress from '../layouts/Progress'
+import Progress from '../../layouts/Progress'
 import NavLink from 'react-router-dom/es/NavLink'
 import { Link } from 'react-router-dom'
 import axios from 'axios'

@@ -4,7 +4,7 @@ import LoginButton from '../components/LoginButton'
 import Public from '../components/Public'
 import Profile from '../components/Profile'
 import { getProfileInfo, isLoggedIn } from '../api/apiCalls'
-import  '../style.css'
+import '../style.css'
 export default class AuthApp extends Component {
   constructor(props) {
     super(props)
