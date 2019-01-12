@@ -16,7 +16,6 @@ router
 // --------------------------
 // GET all users
 function getAllModulesWithClasses(req, res, next) {
-  console.log('req is' + req)
   const sql = sqlString.format(`SELECT
     \`modules\`.\`id\`
     , \`classes_modules\`.\`classid\` AS \`group\`
@@ -34,7 +33,6 @@ FROM
 }// --------------------------
 // GET all users
 function listclassesmodules(req, res, next) {
-  console.log('req is' + req)
   const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = ?', [req.params.id])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)

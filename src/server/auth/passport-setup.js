@@ -77,7 +77,6 @@ passport.use(
                     github_username: profile._json.login,
                     github_id: profile._json.id
                   }
-                  console.log("passport setup:80, user:",user)
                   //then send to passport.js for serialization the user we just created and tell it that we're done
                   //checking if the user exists
                   done(null, user)
@@ -86,7 +85,6 @@ passport.use(
               }
             )
           } else {
-            console.log("passport-setup:89, results",results)
             //if user already exists and there is no need for a new user send the existing user to passport.js for serialization
             done(null, results[0])
             return results[0]
