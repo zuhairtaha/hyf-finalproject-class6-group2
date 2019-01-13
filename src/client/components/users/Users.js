@@ -6,7 +6,7 @@ import UserItem from './UserItem'
 import { Consumer } from '../../context'
 
 class Users extends React.Component {
- 
+
 
   componentWillMount() {
     document.title = 'Users'
@@ -19,12 +19,12 @@ class Users extends React.Component {
           const { users } = value
           return (
             <div className='container'>
-              <h2>
-                Users{' '}
-                <NavLink to='/users/add' className='btn btn-sm btn-success'>
-                  <i className='fa fa-plus text-white' />
-                </NavLink>
-              </h2>
+              {/*<h2>*/}
+                {/*Users{' '}*/}
+                {/*<NavLink to='/users/add' className='btn btn-sm btn-success'>*/}
+                  {/*<i className='fa fa-plus text-white' />*/}
+                {/*</NavLink>*/}
+              {/*</h2>*/}
               {value.users.length === 0
                 ? <Progress />
                : <div className='members mb-3'>

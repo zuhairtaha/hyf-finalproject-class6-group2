@@ -151,7 +151,7 @@ export default class Calender extends Component {
             defaultTimeStart={defaultTimeStart}
             defaultTimeEnd={defaultTimeEnd}
             maxZoom={1.5 * 365.24 * 86400 * 1000}
-            minZoom={1.24 * 86400 * 1000 * 7 * 3}
+            minZoom={60 * 60 * 1000*24*7}
             fullUpdate
             itemTouchSendsClick={false}
             stackItems
