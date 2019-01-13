@@ -9,7 +9,6 @@ exports.up = function(knex, Promise) {
     table
       .integer('role_id')
       .unsigned()
-      .notNullable()
       .references('id')
       .inTable('roles')
     table.string('status')
