@@ -127,7 +127,5 @@ package-lock.json
 
 /src/client/libs
 
-src/server/config/db.js
-
 /.env
-src/server/database/schema.schemaxml
+/src/server/database/SQLyog.schemaxml
