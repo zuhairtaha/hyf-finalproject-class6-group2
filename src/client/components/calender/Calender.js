@@ -1,6 +1,6 @@
-import React, {Component} from 'react'
+import React, { Component } from 'react'
 import moment from 'moment'
-import Timeline, {TimelineMarkers, TodayMarker} from 'react-calendar-timeline'
+import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './style.css'
 import itemRender from './itemRender'
@@ -15,7 +15,7 @@ export default class Calender extends Component {
     keys,
     groups,
     items,
-    y19: new Date('2019/1/1'),
+    y19: new Date('2019/1/1')
   }
 
   // addItemHandler = newItems => {
@@ -26,27 +26,30 @@ export default class Calender extends Component {
   // }
   toTimestamp = strDate => {
     const d = new Date(strDate)
-    return (Date.parse(d)) / 1000
+    return Date.parse(d) / 1000
   }
 
   addItemHandler = item => {
     const newItem = {
-      id: 1 + this.state.items.reduce((max, value) => value.id > max ? value.id : max, 0),
+      id:
+        1 +
+        this.state.items.reduce(
+          (max, value) => (value.id > max ? value.id : max),
+          0
+        ),
       group: item.mentor,
       title: item.status,
       className: item.status,
       start: moment(new Date(item.start)),
-      end: moment(new Date(item.end)),
+      end: moment(new Date(item.end))
     }
-
 
     this.setState(state => ({
       items: [...state.items, newItem]
     }))
-
   }
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
-    const {items, groups} = this.state
+    const { items, groups } = this.state
 
     const group = groups[newGroupOrder]
 
@@ -54,10 +57,10 @@ export default class Calender extends Component {
       items: items.map(item =>
         item.id === itemId
           ? Object.assign({}, item, {
-            start: dragTime,
-            end: dragTime + (item.end - item.start),
-            group: group.id
-          })
+              start: dragTime,
+              end: dragTime + (item.end - item.start),
+              group: group.id
+            })
           : item
       )
     })
@@ -66,15 +69,15 @@ export default class Calender extends Component {
   }
 
   handleItemResize = (itemId, time, edge) => {
-    const {items} = this.state
+    const { items } = this.state
 
     this.setState({
       items: items.map(item =>
         item.id === itemId
           ? Object.assign({}, item, {
-            start: edge === 'left' ? time : item.start,
-            end: edge === 'left' ? item.end : time
-          })
+              start: edge === 'left' ? time : item.start,
+              end: edge === 'left' ? item.end : time
+            })
           : item
       )
     })
@@ -83,7 +86,7 @@ export default class Calender extends Component {
   }
 
   render() {
-    const {keys, groups, items, y19} = this.state
+    const { keys, groups, items, y19 } = this.state
     return (
       <>
         <Timeline
@@ -92,8 +95,8 @@ export default class Calender extends Component {
           // onItemClick={() => alert(1)}
           items={items}
           rightSidebarWidth={200}
-          rightSidebarContent="Skills"
-          sidebarContent="Mentors"
+          rightSidebarContent='Skills'
+          sidebarContent='Mentors'
           lineHeight={75}
           itemRenderer={itemRender}
           defaultTimeStart={moment(y19).add(-1, 'month')}
@@ -112,8 +115,15 @@ export default class Calender extends Component {
         >
           <TimelineMarkers>
             <TodayMarker>
-              {({styles, date}) => <div style={{...styles, width: '0.5rem', backgroundColor: 'rgba(255,0,0,0.5)'}} />
-              }
+              {({ styles, date }) => (
+                <div
+                  style={{
+                    ...styles,
+                    width: '0.5rem',
+                    backgroundColor: 'rgba(255,0,0,0.5)'
+                  }}
+                />
+              )}
             </TodayMarker>
             <SundaysMarker />
           </TimelineMarkers>
@@ -122,5 +132,4 @@ export default class Calender extends Component {
       </>
     )
   }
-
 }

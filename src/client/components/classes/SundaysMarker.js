@@ -1,9 +1,8 @@
 import React from 'react'
-import {CustomMarker, TimelineMarkers} from 'react-calendar-timeline'
+import { CustomMarker, TimelineMarkers } from 'react-calendar-timeline'
 import moment from 'moment'
 
 class SundaysMarker extends React.Component {
-
   state = {
     markerDates: []
   }
@@ -15,29 +14,27 @@ class SundaysMarker extends React.Component {
         id: i,
         date: moment('2018/01/05').add(i * 7, 'day')
       })
-      this.setState({markerDates: dates})
+      this.setState({ markerDates: dates })
     }
   }
 
-  render = () =>
+  render = () => (
     <TimelineMarkers>
-      {this.state.markerDates
-        .map(marker =>
-          <CustomMarker
-            key={marker.id}
-            date={Number(marker.date)}>
-            {({styles}) => {
-              const customStyles = {
-                ...styles,
-                background: `repeating-linear-gradient(
+      {this.state.markerDates.map(marker => (
+        <CustomMarker key={marker.id} date={Number(marker.date)}>
+          {({ styles }) => {
+            const customStyles = {
+              ...styles,
+              background: `repeating-linear-gradient(
                 0deg, transparent, transparent 5px, white 5px, red 10px )`,
-                width: '1px',
-              }
-              return <div style={customStyles} />
-            }}
-          </CustomMarker>
-        )}
+              width: '1px'
+            }
+            return <div style={customStyles} />
+          }}
+        </CustomMarker>
+      ))}
     </TimelineMarkers>
+  )
 }
 
 export default SundaysMarker

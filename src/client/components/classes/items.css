@@ -1,52 +1,57 @@
-.confirm, .assign, .pending, .htmlCss, .js2, .js3, .nodejs, .mySql, .react {
-    color: #fff;
+.confirm,
+.assign,
+.pending,
+.htmlCss,
+.js2,
+.js3,
+.nodejs,
+.mySql,
+.react {
+  color: #fff;
 }
 
 .confirm {
-    background-color: #4897D8 !important;
-
+  background-color: #4897d8 !important;
 }
 
 .assign {
-    background-color: #D88948 !important;
+  background-color: #d88948 !important;
 }
 
 .CSS {
-    background-color: #4897D8 !important;
+  background-color: #4897d8 !important;
 
-    color:#fff;
-
+  color: #fff;
 }
 
 .HTML {
-    background-color: #429970 !important;
-    color: #fff;
+  background-color: #429970 !important;
+  color: #fff;
 }
 
 .Javascript_1 {
-    background-color: #FFDB5C !important;
-    color: #000;
+  background-color: #ffdb5c !important;
+  color: #000;
 }
 
 .javascript_2 {
-    background-color: #FA6E59 !important;
-    color: #fff;
-
+  background-color: #fa6e59 !important;
+  color: #fff;
 }
 
 .javascript_3 {
-    background-color: #BE59FA !important;
-    color: #fff;
+  background-color: #be59fa !important;
+  color: #fff;
 }
 
 .nodejs {
-    background-color: #4897D8 !important;
+  background-color: #4897d8 !important;
 }
 
 .mySql {
-    background-color: #6d6d6d !important;
+  background-color: #6d6d6d !important;
 }
 
 .react {
-    background-color: #59E5FA !important;
+  background-color: #59e5fa !important;
 }
