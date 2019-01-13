@@ -1,7 +1,6 @@
 exports.seed = (knex, Promise) =>
   knex('users')
     .del()
-    .then(() => knex('mentors_modules').del())
     .then(() =>
       knex('users').insert([
         {

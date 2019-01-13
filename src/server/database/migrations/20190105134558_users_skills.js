@@ -1,21 +1,21 @@
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('module_students', table => {
+  return knex.schema.createTable('users_skills', table => {
     table
-      .integer('module_id')
+      .integer('skill_id')
       .unsigned()
       .notNullable()
       .references('id')
-      .inTable('modules')
+      .inTable('skills')
       .onDelete('CASCADE')
     table
-      .integer('student_id')
+      .integer('user_id')
       .unsigned()
       .notNullable()
       .references('id')
       .inTable('users')
       .onDelete('CASCADE')
-    table.primary(['module_id', 'student_id'])
+    table.primary(['skill_id', 'user_id'])
   })
 }
 
-exports.down = (knex, Promise) => knex.schema.dropTable('module_students')
+exports.down = (knex, Promise) => knex.schema.dropTable('users_skills')
