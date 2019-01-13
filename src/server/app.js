@@ -45,7 +45,13 @@ app.use(express.static(path.join(__dirname, 'public')))
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, '../../build')))
-  app.use('/', clientRouter)
+  app.get('/*', (req, res) => {
+    const indexPath = path.join(
+      path.join(__dirname, '../../build'),
+      'index.html'
+    )
+    res.sendFile(indexPath)
+  })
 }
 
 module.exports = app
