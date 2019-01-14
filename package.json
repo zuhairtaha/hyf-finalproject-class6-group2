@@ -20,6 +20,7 @@
     "body-parser": "^1.18.3",
     "case-sensitive-paths-webpack-plugin": "2.1.2",
     "chalk": "2.4.1",
+    "classnames": "latest",
     "cookie-parser": "^1.4.3",
     "cookie-session": "^2.0.0-beta.3",
     "css-loader": "1.0.0",
@@ -50,6 +51,7 @@
     "moment": "^2.23.0",
     "morgan": "^1.9.1",
     "mysql2": "^1.6.4",
+    "node-sass": "^4.11.0",
     "optimize-css-assets-webpack-plugin": "5.0.1",
     "passport": "^0.4.0",
     "passport-github": "^1.1.0",
@@ -58,6 +60,7 @@
     "postcss-loader": "3.0.0",
     "postcss-preset-env": "6.0.6",
     "postcss-safe-parser": "4.0.1",
+    "prop-types": "latest",
     "react": "^16.6.3",
     "react-app-polyfill": "^0.1.3",
     "react-calendar-timeline": "^0.22.0",
@@ -67,6 +70,7 @@
     "react-responsive-modal": "^3.5.1",
     "react-router-dom": "^4.3.1",
     "react-widgets": "^4.4.8",
+    "recompose": "latest",
     "resolve": "1.8.1",
     "sass-loader": "7.1.0",
     "sqlstring": "^2.3.1",
@@ -76,10 +80,7 @@
     "webpack": "4.19.1",
     "webpack-dev-server": "^3.1.14",
     "webpack-manifest-plugin": "2.0.4",
-    "workbox-webpack-plugin": "3.6.3",
-    "prop-types": "latest",
-    "recompose": "latest",
-    "classnames": "latest"
+    "workbox-webpack-plugin": "3.6.3"
   },
   "scripts": {
     "client": "node scripts/start.js",

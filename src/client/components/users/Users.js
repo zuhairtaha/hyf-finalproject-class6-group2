@@ -1,13 +1,10 @@
 import React from 'react'
 import Progress from '../layouts/Progress'
-import NavLink from 'react-router-dom/es/NavLink'
 import './users.css'
 import UserItem from './UserItem'
 import { Consumer } from '../../context'
 
 class Users extends React.Component {
-
-
   componentWillMount() {
     document.title = 'Users'
   }
@@ -20,16 +17,20 @@ class Users extends React.Component {
           return (
             <div className='container'>
               {/*<h2>*/}
-                {/*Users{' '}*/}
-                {/*<NavLink to='/users/add' className='btn btn-sm btn-success'>*/}
-                  {/*<i className='fa fa-plus text-white' />*/}
-                {/*</NavLink>*/}
+              {/*Users{' '}*/}
+              {/*<NavLink to='/users/add' className='btn btn-sm btn-success'>*/}
+              {/*<i className='fa fa-plus text-white' />*/}
+              {/*</NavLink>*/}
               {/*</h2>*/}
-              {value.users.length === 0
-                ? <Progress />
-               : <div className='members mb-3'>
-                {users.map(user => <UserItem key={user.id} user={user} />)}
-              </div>}
+              {value.users.length === 0 ? (
+                <Progress />
+              ) : (
+                <div className='members mb-3'>
+                  {users.map(user => (
+                    <UserItem key={user.id} user={user} />
+                  ))}
+                </div>
+              )}
             </div>
           )
         }}

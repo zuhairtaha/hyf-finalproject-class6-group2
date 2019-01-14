@@ -6,14 +6,14 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
 
-import './user.css'
+import './user.scss'
 
 class UserItem extends React.Component {
-
-  deleteUser = (id, dispatch) => dispatch({ 
-    type: 'DELETE_USER', 
-    payload: id 
-  })
+  deleteUser = (id, dispatch) =>
+    dispatch({
+      type: 'DELETE_USER',
+      payload: id
+    })
 
   render() {
     const {
@@ -59,7 +59,9 @@ class UserItem extends React.Component {
                   />
                 )}
               </div>
-              <h3 className='userName'>{name}</h3>
+              <Link className='userName' to={`/users/${id}`}>
+                <h3>{name}</h3>
+              </Link>
               <span className='userName'>{type}</span>
               {role && <p className='memberRole'>{role}</p>}
               {summary && <p>{summary}</p>}

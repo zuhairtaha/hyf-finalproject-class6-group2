@@ -6,10 +6,10 @@
   box-sizing: border-box;
   display: inline-block;
   float: left;
-}
 
-.user img {
-  width: 100%;
+  img {
+    width: 100%;
+  }
 }
 
 .image {
@@ -28,28 +28,29 @@
   line-height: 1.7rem;
   text-decoration: none;
   color: inherit;
-}
-.userName:hover {
-  text-decoration: underline;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }
 
 .socialIcons {
   margin-top: 1rem;
-}
 
-.socialIcons a {
-  margin-right: 1rem;
-  display: inline-block;
-  color: #6c6c6c;
-}
+  i {
+    background-repeat: no-repeat;
+  }
 
-.socialIcons a:hover {
-  color: #293a7d;
-  transition: all 0.5s;
-}
+  a {
+    margin-right: 1rem;
+    display: inline-block;
+    color: #6c6c6c;
 
-.socialIcons a i {
-  background-repeat: no-repeat;
+    &:hover {
+      color: #293a7d;
+      transition: all 0.5s;
+    }
+  }
 }
 
 .defaultPhoto {
@@ -63,37 +64,35 @@ figure {
   padding: 0;
   background: #fff;
   overflow: hidden;
-}
-
-figure:hover + span {
-  bottom: -36px;
-  opacity: 1;
+  &:hover + span {
+    bottom: -36px;
+    opacity: 1;
+  }
 }
 
 .shine figure {
   position: relative;
-}
 
-.shine figure::before {
-  position: absolute;
-  top: 0;
-  left: -75%;
-  z-index: 2;
-  display: block;
-  content: '';
-  width: 50%;
-  height: 100%;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.3) 100%
-  );
-  transform: skewX(-25deg);
-}
-
-.shine figure:hover::before {
-  -webkit-animation: shine 0.75s;
-  animation: shine 0.75s;
+  &::before {
+    position: absolute;
+    top: 0;
+    left: -75%;
+    z-index: 2;
+    display: block;
+    content: '';
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(
+      to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.3) 100%
+    );
+    transform: skewX(-25deg);
+  }
+  &:hover::before {
+    -webkit-animation: shine 0.75s;
+    animation: shine 0.75s;
+  }
 }
 
 @keyframes shine {
@@ -102,14 +101,16 @@ figure:hover + span {
   }
 }
 
-.zoomIn1 figure img {
-  transform: scale(1);
-  transition: 0.23s ease-in-out;
-}
+.zoomIn1 figure {
+  img {
+    transform: scale(1);
+    transition: 0.23s ease-in-out;
+  }
 
-.zoomIn1 figure:hover img {
-  transform: scale(1.2);
-  filter: grayscale(100%);
+  &:hover img {
+    transform: scale(1.2);
+    filter: grayscale(100%);
+  }
 }
 
 .tag {
