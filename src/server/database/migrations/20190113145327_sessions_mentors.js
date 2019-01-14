@@ -1,5 +1,6 @@
-exports.up = function (knex, Promise) {
-  return knex.schema.createTable('sessions_mentors', table => {
+const tableName = 'sessions_mentors'
+exports.up = knex =>
+  knex.schema.createTable(tableName, table => {
     table
       .integer('session_id')
       .unsigned()
@@ -17,6 +18,5 @@ exports.up = function (knex, Promise) {
     table.string('status') // pending | assign | confirmed
     table.primary(['session_id', 'mentor_id'])
   })
-}
 
-exports.down = (knex, Promise) => knex.schema.dropTable('sessions_mentors')
+exports.down = knex => knex.schema.dropTable(tableName)

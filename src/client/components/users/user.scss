@@ -26,6 +26,11 @@
   text-align: center;
   padding: auto 1rem;
   line-height: 1.7rem;
+  text-decoration: none;
+  color: inherit;
+}
+.userName:hover {
+  text-decoration: underline;
 }
 
 .socialIcons {
