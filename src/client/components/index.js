@@ -9,6 +9,7 @@ import Modules from './modules/Modules'
 import ModuleForms from './modules/module-form'
 import Home from './pages/home'
 import Profile from './users/profile'
+import Form from "./form/Form"
 
 class Routers extends React.Component {
   render = () => (
@@ -28,6 +29,7 @@ class Routers extends React.Component {
       <Route path='/users/edit/:id' component={UserForm.EditUser} />
       <Route path='/users/:id' render={() => <Profile />} />
       <Route path='/profile' render={() => <Profile />} />
+        <Route path='/form' component={Form} exact />
 
       <Route render={() => 'Page not found'} />
     </Switch>
