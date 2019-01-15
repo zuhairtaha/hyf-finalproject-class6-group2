@@ -1,6 +1,6 @@
 // import MentorForm from './mentor-form';
-import AddUser from './add-user'
-import EditUser from './edit-user'
+import AddUser from './Add-User'
+import EditUser from './Edit-User'
 
 export default {
   AddUser,
