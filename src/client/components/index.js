@@ -2,14 +2,14 @@ import React from 'react'
 import { Route, Switch } from 'react-router-dom'
 import Users from './users/Users'
 import UserForm from './users/user-form'
-import Calender from './calender/Calender'
-import ClassesCalender from './classes/Calender'
+import Calender from './_calender/Calender'
+import ClassesCalender from './classes'
 import AddClass from './_classes/AddClass'
-import Modules from './modules/Modules'
+import Index from './modules'
 import ModuleForms from './modules/module-form'
 import Home from './pages/home'
-import Profile from './users/profile'
-import Form from "./form/Form"
+import Profile from './users/Profile'
+import Form from "./_form/Form"
 
 class Routers extends React.Component {
   render = () => (
@@ -19,7 +19,7 @@ class Routers extends React.Component {
       <Route path='/classes' component={ClassesCalender} />
       <Route path='/classes/add' component={AddClass} />
 
-      <Route path='/modules' component={Modules} exact />
+      <Route path='/modules' component={Index} exact />
       <Route path='/modules/add' component={ModuleForms.AddModule} />
       <Route path='/modules/edit/:id' component={ModuleForms.EditModule} />
       <Route path='/modules/addtoclass' component={ModuleForms.Addtoclass} />

@@ -3,7 +3,7 @@ exports.up = knex =>
   knex.schema.createTable(tableName, table => {
     table.increments()
     table.string('name')
-    table.string('email')
+    table.string('email') // todo: make it unique and index key
     table.boolean('email_confirmed').defaultTo(false)
     table.string('avatar')
     table.date('birth_date')

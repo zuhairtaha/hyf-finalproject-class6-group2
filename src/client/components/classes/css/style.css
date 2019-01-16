@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Work+Sans');
-@import './items.css';
+@import 'items.css';
 body {
   font-family: 'Work Sans', sans-serif;
   font-size: 18px;

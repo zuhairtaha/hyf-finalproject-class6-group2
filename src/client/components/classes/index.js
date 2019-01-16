@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import moment from 'moment'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
-import './style.css'
-import itemRender from './itemRender'
-import SundaysMarker from './SundaysMarker'
+import './css/style.css'
+import classItem from './class-item'
+import SundaysMarker from './Sundays-marker'
 import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit'
 import AddIcon from '@material-ui/icons/Add'
@@ -13,10 +13,10 @@ import AddIcon from '@material-ui/icons/Add'
 import keys from './keys'
 // import AddItemsForm from './AddItemsForm'
 import axios from 'axios'
-import Progress from '../layouts/Progress'
+import Progress from '../layouts/progress'
 import Button from '@material-ui/core/es/Button/Button'
 
-export default class Calender extends Component {
+export default class Index extends Component {
   state = {
     keys,
     groups: [],
@@ -147,11 +147,11 @@ export default class Calender extends Component {
             rightSidebarWidth={130}
             rightSidebarContent='Skills'
             lineHeight={75}
-            itemRenderer={itemRender}
+            itemRenderer={classItem}
             defaultTimeStart={defaultTimeStart}
             defaultTimeEnd={defaultTimeEnd}
             maxZoom={1.5 * 365.24 * 86400 * 1000}
-            minZoom={60 * 60 * 1000*24*7}
+            minZoom={60 * 60 * 1000 * 24 * 7}
             fullUpdate
             itemTouchSendsClick={false}
             stackItems
@@ -164,7 +164,7 @@ export default class Calender extends Component {
           >
             <TimelineMarkers>
               <TodayMarker>
-                {({ styles, date }) => (
+                {({ styles }) => (
                   <div
                     style={{
                       ...styles,

@@ -10,7 +10,7 @@ class ModuleForm extends Component {
         moduleData: this.props.moduleData,
       }
     } else if (this.props.addtoclass) {
-        this.state = {      
+        this.state = {
                // moduleData: this.props.moduleData,
 
             //classid=this.props.classid,
@@ -36,7 +36,7 @@ class ModuleForm extends Component {
       }
     })
   }
-  changeActive = e => {
+  changeActive = () => {
     this.setState({ status: 'active' })
   }
   submitForm = e => {
@@ -109,7 +109,7 @@ class ModuleForm extends Component {
                   onChange={this.updateField}
                 />
               </div>
-              
+
               <div className="col-md-6 mb-2">
                 <input
                   type="text"
@@ -120,10 +120,10 @@ class ModuleForm extends Component {
                   onChange={this.updateField}
                 />
               </div>
-              
+
             </div>
 
-            
+
 
             <button type="submit" className="btn btn-primary">
               <i className="fa fa-floppy-o" aria-hidden="true" />{' '}

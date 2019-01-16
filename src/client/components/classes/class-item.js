@@ -1,7 +1,7 @@
 import React from 'react'
-import './ripple.css'
+import './css/ripple.css'
 
-const itemRender = ({item, itemContext, getItemProps, getResizeProps}) => {
+const classItem = ({item, itemContext, getItemProps, getResizeProps}) => {
   const {left: leftResizeProps, right: rightResizeProps} = getResizeProps()
   const backgroundColor = itemContext.selected
     ? itemContext.dragging
@@ -49,7 +49,7 @@ const itemRender = ({item, itemContext, getItemProps, getResizeProps}) => {
   )
 }
 
-export default itemRender
+export default classItem
 
 
 

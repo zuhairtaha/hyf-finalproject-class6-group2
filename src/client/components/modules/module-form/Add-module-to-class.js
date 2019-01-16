@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import ModuleForm from './module-form';
+import ModuleForm from './Module-form';
 
 // export default (props) => {
 //     // Do the fetching, and render the form only when the data is here
@@ -8,7 +8,7 @@ import ModuleForm from './module-form';
 //     )
 // }
 
-class AddtoClass extends Component {
+class AddModuleToClass extends Component {
     state = {
         isLoading: true,
         message: 'Hang in there...',
@@ -29,7 +29,7 @@ class AddtoClass extends Component {
             )
         // .catch(error => this.setState({
         //     message: error
-        // })) 
+        // }))
     }
     render() {
         return (
@@ -41,4 +41,4 @@ class AddtoClass extends Component {
     }
 }
 
-export default AddtoClass;
+export default AddModuleToClass;
