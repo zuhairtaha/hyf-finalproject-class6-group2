@@ -26,6 +26,7 @@ const reducer = (state, action) => {
 export class Provider extends React.Component {
   state = {
     users: [],
+    modules:[],
     dispatch: action => this.setState(state => reducer(state, action))
   }
 
@@ -33,6 +34,10 @@ export class Provider extends React.Component {
     axios
       .get('/api/users')
       .then(res => this.setState({ users: res.data }))
+      .catch(console.error)
+      axios
+      .get('/api/modules')
+      .then(res => this.setState({ modules: res.data }))
       .catch(console.error)
   }
 

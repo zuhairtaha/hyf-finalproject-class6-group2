@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import UserForm from './User-Form'
+import UserForm from './User-form'
 import axios from 'axios'
 
 // export default (props) => {
