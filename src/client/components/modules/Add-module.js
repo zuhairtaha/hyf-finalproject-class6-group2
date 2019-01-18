@@ -3,6 +3,7 @@ import NavLink from 'react-router-dom/es/NavLink'
 import { withRouter } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import { Consumer } from '../../context'
+import Paper from '@material-ui/core/Paper'
 
 class AddModule extends Component {
 
@@ -33,7 +34,7 @@ class AddModule extends Component {
     submitForm = (dispatch,e)  => {
         e.preventDefault();
       
-        const { title, description, length, created_at, updated_at } = this.state
+        const { title, description, length } = this.state
         const newModule = {
             title,
             description,
@@ -51,6 +52,8 @@ class AddModule extends Component {
                 {value => {
                     const { dispatch } = value;
                     return (
+                        <Paper className='module'>
+
                         <div className='card mb-3'>
                             <div className='card-header'>
                                 <h3>{'Edit Module'}</h3>
@@ -109,6 +112,7 @@ class AddModule extends Component {
                                 </div>
                             </div>
                         </div>
+                        </Paper>
                     )
                 }}
             </Consumer>

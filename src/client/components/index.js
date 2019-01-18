@@ -9,10 +9,13 @@ import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
 
 
-//import ModuleForms from './modules/module-form'
 import Home from './pages/home'
 import Profile from './users/profile'
 import Form from "./form/Form"
+import Roles from './roles';
+
+import Editrole from './roles/edit-role';
+import AddRole from './roles/Add-role';
 
 class Routers extends React.Component {
   render = () => (
@@ -24,6 +27,10 @@ class Routers extends React.Component {
       <Route path='/modules' component={Modules} exact />
       <Route path='/modules/edit/:id' component={EditModule} exact />
       <Route path='/modules/add' component={AddModule} />
+
+      <Route path='/roles' component={Roles} exact />
+      <Route path='/roles/edit/:id' component={Editrole} exact />
+      <Route path='/roles/add' component={AddRole} />
 
       <Route path='/users' component={Users} exact />
       <Route path='/users/add' component={UserForm.AddUser} />

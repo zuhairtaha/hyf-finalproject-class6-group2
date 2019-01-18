@@ -57,6 +57,9 @@ function Navbar(props) {
           <Button component={Link} to='/modules/' color='inherit'>
             Modules
           </Button>
+          <Button component={Link} to='/roles/' color='inherit'>
+            Roles
+          </Button>
           <UserMenu />
         </Toolbar>
       </AppBar>

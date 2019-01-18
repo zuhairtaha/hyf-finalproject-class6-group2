@@ -31,7 +31,7 @@ class ModuleItem extends React.Component {
         {value => {
           const { dispatch } = value
           return (
-            <Paper className='user'>
+            <Paper className='module'>
               
               <TextField
             label='title'

@@ -1,15 +1,8 @@
 import React, { Component } from 'react'
-//import UserForm from './User-form'
 import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
 import { NavLink } from 'react-router-dom'
-
-// export default (props) => {
-//     // Do the fetching, and render the form only when the data is here
-//     return (
-//         <UserForm {...props} isEditing={true} />
-//     )
-// }
+import Paper from '@material-ui/core/Paper'
 
 class Editmodule extends Component {
   state = {
@@ -26,7 +19,7 @@ class Editmodule extends Component {
     })
   }
   componentDidMount() {
-    document.title = this.props.isEditing ? 'Edit User' : 'Add User'
+    document.title ='Edit module'
     const url = '/api/modules'
     const id = this.props.match.params.id
     // TODO handle failure (404)
@@ -60,7 +53,7 @@ class Editmodule extends Component {
       .then(res => res.text())
       .then(response => {
         console.log('editing module Success:', response)
-        // TODO redirect to the Users list page (/modules)
+        // TODO redirect to the modules list page (/modules)
         console.log('updated....')
         this.props.history.goBack()
       })
@@ -76,8 +69,8 @@ class Editmodule extends Component {
     //
 
     return this.state.moduleData ? (
-      <div>
-        <div className='container'>
+      <Paper className='module'>
+      <div className='container'>
           <h3>{'Edit Module'}</h3>
           <div className='card shadow-sm p-3 mb-3'>
             <form onSubmit={this.submitForm}>
@@ -150,7 +143,7 @@ class Editmodule extends Component {
             </form>
           </div>
         </div>
-      </div>
+      </Paper>
     ) : (
         <div />
     )

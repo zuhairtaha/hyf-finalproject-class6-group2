@@ -1,6 +1,5 @@
 import React from 'react'
 import Progress from '../layouts/Progress'
-//import './modules.css'
 import ModuleItem from './Module-item'
 import { Consumer } from '../../context'
 
@@ -16,12 +15,7 @@ class Modules extends React.Component {
           const { modules } = value
           return (
             <div className='container'>
-              {/*<h2>*/}
-              {/*modules{' '}*/}
-              {/*<NavLink to='/modules/add' className='btn btn-sm btn-success'>*/}
-              {/*<i className='fa fa-plus text-white' />*/}
-              {/*</NavLink>*/}
-              {/*</h2>*/}
+             
               {value.modules.length === 0 ? (
                 <Progress />
               ) : (
