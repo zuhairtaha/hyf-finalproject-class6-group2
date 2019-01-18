@@ -19,17 +19,23 @@ const reducer = (state, action) => {
     // case 'ADD_USEER':
     // axios.post(`/api/users/${action.payload}`)
     // .then(users=>({users}))
-    case 'ADD_MODULE':
-    const params = qs.stringify(action.payload)
 
+    case 'ADD_MODULE':
+    console.log('adding context')
     console.log(action.payload)
-    axios.post(`/api/modules/`,action.payload,{
-      headers: {
-           'content-type': 'application/json',
-      },
- })
-    .then(modules=>({modules}))
-    break;
+
+    axios.post(`/api/modules`, action.payload )
+    .then(response => { 
+      console.log(response)
+    })
+    .catch(error => {
+        console.log(error.response)
+    });
+    return{
+      ...state,
+      modules:[action.payload,
+      ...state.modules]
+    }
     default:
       return state
   }
