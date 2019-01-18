@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+import qs from 'qs'
+
 
 const Context = React.createContext()
 
@@ -17,7 +19,17 @@ const reducer = (state, action) => {
     // case 'ADD_USEER':
     // axios.post(`/api/users/${action.payload}`)
     // .then(users=>({users}))
+    case 'ADD_MODULE':
+    const params = qs.stringify(action.payload)
 
+    console.log(action.payload)
+    axios.post(`/api/modules/`,action.payload,{
+      headers: {
+           'content-type': 'application/json',
+      },
+ })
+    .then(modules=>({modules}))
+    break;
     default:
       return state
   }

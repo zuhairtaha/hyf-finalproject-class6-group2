@@ -17,7 +17,6 @@ class UserForm extends Component {
           birth_date: '',
           type: 'User',
           slack_nickname: 'ttps://github.com/',
-          admission_date: '',
           active: false
         }
       }
@@ -74,6 +73,7 @@ class UserForm extends Component {
         <div className='card shadow-sm p-3 mb-3'>
           <form onSubmit={this.submitForm}>
             <div className='row'>
+              
               <div className='col-md-6 mb-2'>
                 <input
                   type='text'
@@ -116,24 +116,14 @@ class UserForm extends Component {
                   onChange={this.updateField}
                 />
               </div>
-              <div className='col-md-6 mb-2'>
-                <input
-                  type='date'
-                  className='form-control'
-                  name='admission_date'
-                  placeholder='Admission date'
-                  defaultValue={this.state.userData.admission_date}
-                  onChange={this.updateField}
-                />
-              </div>
-            </div>
+             
 
-            <div className='form-group row'>
-              <div className='col-sm-2 col-lg-1'>Status</div>
-              <div className='col-sm-10 col-lg-11'>
-                <div className='form-check'>
-                  <label className='form-check-label' htmlFor='active'>
-                    <input
+             <div className='form-group row'>
+               <div className='col-sm-2 col-lg-1'>Status</div>
+                  <div className='col-sm-10 col-lg-11'>
+                    <div className='form-check'>
+                     <label className='form-check-label' htmlFor='active'>
+                     <input
                       type='checkbox'
                       className='form-check-input'
                       name='active'
@@ -148,7 +138,7 @@ class UserForm extends Component {
                       checked={this.state.userData.active}
                     />{' '}
                     Active
-                  </label>
+                    </label>
                 </div>
               </div>
             </div>
@@ -160,6 +150,7 @@ class UserForm extends Component {
             <NavLink className='btn btn-light ml-3' to='/users'>
               <i className='fa fa-caret-left' /> back
             </NavLink>
+            </div>
           </form>
         </div>
       </div>

@@ -7,25 +7,15 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
 import TextField from '@material-ui/core/TextField'
 
-const styles = {
-    textField: {},
-    dropDownList: {
-      width: '200px'
-    },
-    textarea: {
-      width: '400px'
-    }
-  }
+
 class ModuleItem extends React.Component {
-    handleChange = event =>
-    this.setState({
-      [event.target.name]: event.target.value
-    })
+   
     deleteModule = (id, dispatch) =>
     dispatch({
       type: 'DELETE_MODULE',
       payload: id
     })
+    
 
   render() {
     const {
@@ -89,7 +79,7 @@ class ModuleItem extends React.Component {
              
 
               <div className='socialIcons'>
-                <IconButton component={Link} to={`/module/edit/${id}`}>
+                <IconButton component={Link} to={`/modules/edit/${id}`}>
                   <EditIcon />
                 </IconButton>
 
