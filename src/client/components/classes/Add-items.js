@@ -56,7 +56,7 @@ const mentorsList = [
   },
 ]
 
-class AddItemsForm extends React.Component {
+class AddItems extends React.Component {
   state = {
     mentor: '',
     status: '',
@@ -166,4 +166,4 @@ class AddItemsForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(AddItemsForm)
+export default withStyles(styles)(AddItems)

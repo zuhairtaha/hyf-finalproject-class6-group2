@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Navbar from './components/layouts/navbar/Navbar'
+import Navbar from './components/layouts/navbar/navbar'
 import Routers from './components'
 import { Provider } from './context'
 

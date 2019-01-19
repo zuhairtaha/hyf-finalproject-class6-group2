@@ -127,7 +127,7 @@ class UserForm extends Component {
                       type='checkbox'
                       className='form-check-input'
                       name='active'
-                      onChange={_ =>
+                      onChange={() =>
                         this.setState({
                           userData: {
                             ...this.state.userData,

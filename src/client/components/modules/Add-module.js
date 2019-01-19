@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { Component } from 'react'
 import NavLink from 'react-router-dom/es/NavLink'
 import { withRouter } from 'react-router-dom'
@@ -123,3 +124,27 @@ class AddModule extends Component {
 }
 
 export default withRouter(AddModule)
+=======
+import React from 'react'
+
+class AddModule extends React.Component {
+  state = {
+    localmodules: [],
+    avaiablemodules: []
+  }
+
+  render = () => {
+    return (
+      <div>
+        <a href=' ' className='btn btn-info'>
+          <i className='fa ' aria-hidden='true'>
+            {this.props.cllmod.module}
+          </i>
+        </a>
+      </div>
+    )
+  }
+}
+
+export default AddModule
+>>>>>>> 46e1d7e9316638c71aad46275300e6e044537391

@@ -1,7 +1,7 @@
 import React from 'react'
-import Progress from '../layouts/Progress'
+import Progress from '../layouts/progress'
 import './users.css'
-import UserItem from './UserItem'
+import UserItem from './User-item'
 import { Consumer } from '../../context'
 
 class Users extends React.Component {

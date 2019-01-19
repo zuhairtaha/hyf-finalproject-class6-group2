@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="utf8mb4" collation="utf8mb4_general_ci">hyf-fp-c6-g2</database>
+</source>
+<canvas zoom="100">
+<tables>
+<table name="permissions" view="colnames">
+<left>1371</left>
+<top>897</top>
+<width>121</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `permissions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `role_id` int(10) unsigned NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `permissions_role_id_foreign` (`role_id`),
+  CONSTRAINT `permissions_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="events" view="colnames">
+<left>1229</left>
+<top>701</top>
+<width>110</width>
+<height>197</height>
+<sql_create_table>CREATE TABLE `events` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `event_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="roles" view="colnames">
+<left>1251</left>
+<top>916</top>
+<width>78</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `roles` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="users" view="colnames">
+<left>1050</left>
+<top>816</top>
+<width>145</width>
+<height>322</height>
+<sql_create_table>CREATE TABLE `users` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `email_confirmed` tinyint(1) DEFAULT '0',
+  `avatar` varchar(255) DEFAULT NULL,
+  `birth_date` date DEFAULT NULL,
+  `role_id` int(10) unsigned DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `github_username` varchar(255) DEFAULT NULL,
+  `github_token` varchar(255) DEFAULT NULL,
+  `linkedin` varchar(255) DEFAULT NULL,
+  `type` varchar(255) DEFAULT NULL,
+  `active` tinyint(1) DEFAULT '1',
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `users_role_id_foreign` (`role_id`),
+  CONSTRAINT `users_role_id_foreign` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="users_skills" view="colnames">
+<left>901</left>
+<top>988</top>
+<width>104</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `users_skills` (
+  `skill_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`skill_id`,`user_id`),
+  KEY `users_skills_user_id_foreign` (`user_id`),
+  CONSTRAINT `users_skills_skill_id_foreign` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `users_skills_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="sessions_mentors" view="colnames">
+<left>783</left>
+<top>662</top>
+<width>136</width>
+<height>129</height>
+<sql_create_table>CREATE TABLE `sessions_mentors` (
+  `session_id` int(10) unsigned NOT NULL,
+  `mentor_id` int(10) unsigned NOT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`session_id`,`mentor_id`),
+  KEY `sessions_mentors_mentor_id_foreign` (`mentor_id`),
+  CONSTRAINT `sessions_mentors_mentor_id_foreign` FOREIGN KEY (`mentor_id`) REFERENCES `users` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `sessions_mentors_session_id_foreign` FOREIGN KEY (`session_id`) REFERENCES `sessions` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="students_classes" view="colnames">
+<left>791</left>
+<top>849</top>
+<width>105</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `students_classes` (
+  `student_id` int(10) unsigned NOT NULL,
+  `class_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`student_id`,`class_id`),
+  KEY `students_classes_class_id_foreign` (`class_id`),
+  CONSTRAINT `students_classes_class_id_foreign` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `students_classes_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="skills" view="colnames">
+<left>745</left>
+<top>1036</top>
+<width>110</width>
+<height>146</height>
+<sql_create_table>CREATE TABLE `skills` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="sessions" view="colnames">
+<left>567</left>
+<top>595</top>
+<width>164</width>
+<height>229</height>
+<sql_create_table>CREATE TABLE `sessions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `module_id` int(10) unsigned NOT NULL,
+  `location` varchar(255) DEFAULT NULL,
+  `description` text,
+  `recordings_links` text,
+  `session_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `classes_modules_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `sessions_module_id_foreign` (`module_id`),
+  KEY `sessions_classes_modules_id_foreign` (`classes_modules_id`),
+  CONSTRAINT `sessions_classes_modules_id_foreign` FOREIGN KEY (`classes_modules_id`) REFERENCES `classes_modules` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="classes" view="colnames">
+<left>613</left>
+<top>850</top>
+<width>110</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `classes` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `classname` varchar(255) NOT NULL,
+  `active` tinyint(1) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="modules_skills" view="colnames">
+<left>556</left>
+<top>1071</top>
+<width>122</width>
+<height>112</height>
+<sql_create_table>CREATE TABLE `modules_skills` (
+  `module_id` int(10) unsigned NOT NULL,
+  `skill_id` int(10) unsigned NOT NULL,
+  PRIMARY KEY (`module_id`,`skill_id`),
+  KEY `modules_skills_skill_id_foreign` (`skill_id`),
+  CONSTRAINT `modules_skills_module_id_foreign` FOREIGN KEY (`module_id`) REFERENCES `modules` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `modules_skills_skill_id_foreign` FOREIGN KEY (`skill_id`) REFERENCES `skills` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="modules" view="colnames">
+<left>410</left>
+<top>972</top>
+<width>110</width>
+<height>180</height>
+<sql_create_table>CREATE TABLE `modules` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(255) DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `length` varchar(255) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+<table name="classes_modules" view="colnames">
+<left>221</left>
+<top>813</top>
+<width>134</width>
+<height>163</height>
+<sql_create_table>CREATE TABLE `classes_modules` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `classid` int(10) unsigned NOT NULL,
+  `moduleid` int(10) unsigned NOT NULL,
+  `github_page` varchar(255) DEFAULT NULL,
+  `start_date` date DEFAULT '2019-01-16',
+  `end_date` date DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `classes_modules_classid_foreign` (`classid`),
+  KEY `classes_modules_moduleid_foreign` (`moduleid`),
+  CONSTRAINT `classes_modules_classid_foreign` FOREIGN KEY (`classid`) REFERENCES `classes` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `classes_modules_moduleid_foreign` FOREIGN KEY (`moduleid`) REFERENCES `modules` (`id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
