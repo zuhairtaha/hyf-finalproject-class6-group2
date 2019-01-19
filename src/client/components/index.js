@@ -6,10 +6,11 @@ import Calender from './_calender/Calender'
 import ClassesCalender from './classes'
 import AddClass from './_classes/AddClass'
 import Modules from './modules'
-import ModuleForms from './modules/module-form'
 import Home from './pages/home'
 import Profile from './users/Profile'
 import Form from './_form/Form'
+import AddModule from './modules/Add-module'
+import EditModule from './modules/edit-module'
 
 class Routers extends React.Component {
   render = () => (
@@ -20,9 +21,8 @@ class Routers extends React.Component {
       <Route path='/classes/add' component={AddClass} />
 
       <Route path='/modules' component={Modules} exact />
-      <Route path='/modules/add' component={ModuleForms.AddModule} />
-      <Route path='/modules/edit/:id' component={ModuleForms.EditModule} />
-      <Route path='/modules/addtoclass' component={ModuleForms.Addtoclass} />
+      <Route path='/modules/edit/:id' component={EditModule} exact />
+      <Route path='/modules/add' component={AddModule} />
 
       <Route path='/users' component={Users} exact />
       <Route path='/users/add' component={UserForm.AddUser} />
