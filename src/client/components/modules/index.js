@@ -1,5 +1,5 @@
 import React from 'react'
-import Progress from '../layouts/Progress'
+import Progress from '../layouts/progress'
 import ModuleItem from './Module-item'
 import { Consumer } from '../../context'
 
