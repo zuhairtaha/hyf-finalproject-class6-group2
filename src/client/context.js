@@ -14,6 +14,11 @@ const reducer = (state, action) => {
         ...state,
         users: state.users.filter(user => user.id !== action.payload)
       }
+    case 'TOGGLE_LOADING':
+      return {
+        ...state,
+        loading: !state.loading
+      }
     // case 'ADD_USEER':
     // axios.post(`/api/users/${action.payload}`)
     // .then(users=>({users}))
@@ -26,6 +31,7 @@ const reducer = (state, action) => {
 export class Provider extends React.Component {
   state = {
     users: [],
+    loading: false,
     dispatch: action => this.setState(state => reducer(state, action))
   }
 

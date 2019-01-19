@@ -13,8 +13,7 @@ exports.seed = function(knex, Promise) {
         { id: 6, role_id: 1, name: 'edit_module' },
         { id: 7, role_id: 1, name: 'delete_module' },
         { id: 8, role_id: 2, name: 'add_session' },
-        { id: 9, role_id: 3, name: 'send_mail' },
-        
+        { id: 9, role_id: 3, name: 'send_mail' }
       ])
     })
 }
