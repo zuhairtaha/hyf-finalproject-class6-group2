@@ -53,6 +53,12 @@ const reducer = (state, action) => {
         ...state,
         classes: [...state.classes, action.payload.item]
       }
+    case 'EDIT_CLASS':
+      action.payload.history.push('/classes')
+      return {
+        ...state,
+        classes: [...state.classes, action.payload.item]
+      }
     default:
       return state
   }

@@ -4,8 +4,26 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { withRouter } from 'react-router-dom'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import AddIcon from '@material-ui/icons/Add'
+import EditIcon from '@material-ui/icons/Edit'
+import DeleteIcon from '@material-ui/icons/Delete'
+import { withStyles } from '@material-ui/core/styles'
 
 const ITEM_HEIGHT = 48
+const styles = theme => ({
+  menuItem: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white
+      }
+    }
+  },
+  primary: {},
+  icon: {}
+})
 
 class ClassDropDownMenu extends React.Component {
   state = {
@@ -34,6 +52,8 @@ class ClassDropDownMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state
+    const { classes } = this.props
+
     const open = Boolean(anchorEl)
     const id = this.props
     return (
@@ -60,17 +80,38 @@ class ClassDropDownMenu extends React.Component {
         >
           {/*Edit class*/}
           <MenuItem onClick={() => this.handleOptionClick('edit_class', id)}>
-            Edit class
+            <ListItemIcon className={classes.icon}>
+              <EditIcon />
+            </ListItemIcon>
+            <ListItemText
+              classes={{ primary: classes.primary }}
+              inset
+              primary='Edit class'
+            />
           </MenuItem>
           {/*Add module*/}
           <MenuItem
             onClick={() => this.handleOptionClick('add_module_to_class', id)}
           >
-            Add module
+            <ListItemIcon className={classes.icon}>
+              <AddIcon />
+            </ListItemIcon>
+            <ListItemText
+              classes={{ primary: classes.primary }}
+              inset
+              primary='Add module'
+            />
           </MenuItem>
           {/*Delete Class*/}
           <MenuItem onClick={() => this.handleOptionClick('delete_class', id)}>
-            Delete Class
+            <ListItemIcon className={classes.icon}>
+              <DeleteIcon />
+            </ListItemIcon>
+            <ListItemText
+              classes={{ primary: classes.primary }}
+              inset
+              primary='Delete Class'
+            />
           </MenuItem>
         </Menu>
       </Fragment>
@@ -78,4 +119,4 @@ class ClassDropDownMenu extends React.Component {
   }
 }
 
-export default withRouter(ClassDropDownMenu)
+export default withRouter(withStyles(styles)(ClassDropDownMenu))

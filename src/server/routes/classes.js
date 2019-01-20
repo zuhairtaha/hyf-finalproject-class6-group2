@@ -58,21 +58,21 @@ function updateClass(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({ message: 'classe not find' })
-    res.send('class updated')
+    if (!result.affectedRows)
+      return next({ message: 'class not found', updated: false })
+    res.send({ updated: true })
   })
 }
 
 // --------------------------
 // GET one class by ID
 function getClassById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM classes WHERE id = ? AND status = ?',
-    [req.params.id, 'Active']
-  )
+  const sql = sqlString.format('SELECT * FROM classes WHERE id = ?', [
+    req.params.id
+  ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({ message: 'classe not find' })
+    if (rows.length === 0) return next({ message: 'class not find' })
     res.send(rows[0])
   })
 }

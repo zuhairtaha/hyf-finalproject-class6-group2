@@ -59,6 +59,7 @@ class AddClass extends Component {
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked })
   }
+
   componentDidMount() {
     document.title = 'Add class'
     // .dispatch({ type: 'RESET_REDIRECT' })
