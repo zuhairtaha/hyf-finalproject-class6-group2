@@ -7,9 +7,9 @@ import CardActions from '@material-ui/core/CardActions'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
 import red from '@material-ui/core/colors/red'
-import FavoriteIcon from '@material-ui/icons/Favorite'
 import EditIcon from '@material-ui/icons/Edit'
-import DeleteIcon from '@material-ui/icons/Delete';
+import DeleteIcon from '@material-ui/icons/Delete'
+import { Consumer } from '../../context'
 
 const styles = theme => ({
   card: {
@@ -38,32 +38,46 @@ const styles = theme => ({
 })
 
 class ModuleItem extends React.Component {
-  state = {expanded: false}
+  state = { expanded: false }
+
+  deleteModule = (id, dispatch) =>
+    dispatch({
+      type: 'DELETE_MODULE',
+      payload: id
+    })
 
   render() {
-    const {classes} = this.props
+    const { classes } = this.props
+    const { id, title, description, length } = this.props.module
 
     return (
-      <Card className={ classes.card }>
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            Lizard
-          </Typography>
-          <Typography component='p'>
-            This impressive paella is a perfect party dish and a fun meal to
-            cook together with your guests. Add 1 cup of frozen peas along with
-            the mussels, if you like.
-          </Typography>
-        </CardContent>
-        <CardActions className={ classes.actions } disableActionSpacing>
-          <IconButton aria-label='Add to favorites'>
-            <DeleteIcon/>
-          </IconButton>
-          <IconButton aria-label='Share'>
-            <EditIcon/>
-          </IconButton>
-        </CardActions>
-      </Card>
+      <Consumer>
+        {({ dispatch }) => (
+          <Card className={classes.card}>
+            <CardContent>
+              <Typography gutterBottom variant='h5' component='h2'>
+                {title}
+              </Typography>
+              <Typography style={{ fontSize: '1rem' }} component='p'>
+                Description: {description}
+              </Typography>
+              <br />
+              <Typography component='p'>Length: {length} weeks</Typography>
+            </CardContent>
+            <CardActions className={classes.actions} disableActionSpacing>
+              <IconButton aria-label='Share'>
+                <EditIcon />
+              </IconButton>
+              <IconButton
+                onClick={() => this.deleteModule(id, dispatch)}
+                aria-label='Add to favorites'
+              >
+                <DeleteIcon />
+              </IconButton>
+            </CardActions>
+          </Card>
+        )}
+      </Consumer>
     )
   }
 }

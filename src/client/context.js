@@ -19,11 +19,12 @@ const reducer = (state, action) => {
         ...state,
         loading: !state.loading
       }
-    // case 'ADD_USEER':
-    // axios.post(`/api/users/${action.payload}`)
-    // .then(users=>({users}))
+    case 'RESET_REDIRECT':
+      return {
+        ...state,
+        redirect: false
+      }
     case 'ADD_MODULE':
-      console.log('adding context')
       axios
         .post(`/api/modules`, action.payload)
         .then(response => {
@@ -36,6 +37,22 @@ const reducer = (state, action) => {
         ...state,
         modules: [...state.modules, action.payload]
       }
+
+    case 'DELETE_MODULE':
+      axios
+        .delete(`/api/modules/${action.payload}`)
+        .then(console.log)
+        .catch(console.error)
+      return {
+        ...state,
+        modules: state.modules.filter(module => module.id !== action.payload)
+      }
+    case 'ADD_CLASS':
+      action.payload.history.push('/classes')
+      return {
+        ...state,
+        classes: [...state.classes, action.payload.item]
+      }
     default:
       return state
   }
@@ -45,6 +62,7 @@ export class Provider extends React.Component {
   state = {
     users: [],
     modules: [],
+    classes: [],
     loading: false,
     dispatch: action => this.setState(state => reducer(state, action))
   }
@@ -59,6 +77,10 @@ export class Provider extends React.Component {
       .get('/api/modules')
       .then(res => this.setState({ modules: res.data }))
       .catch(console.error)
+
+    // this.setState({
+    //   redirect: false
+    // })
   }
 
   render = () => (
