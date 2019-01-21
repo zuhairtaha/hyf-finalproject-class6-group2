@@ -6,6 +6,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
 
+import GithubIcon from 'mdi-material-ui/GithubCircle'
+import LinkedinIcon from 'mdi-material-ui/Linkedin'
+import MailIcon from '@material-ui/icons/Mail'
+
 import './user.scss'
 
 class UserItem extends React.Component {
@@ -19,7 +23,6 @@ class UserItem extends React.Component {
     const {
       id,
       avatar,
-      github,
       name,
       role,
       summary,
@@ -31,24 +34,19 @@ class UserItem extends React.Component {
     } = this.props.user
     return (
       <Consumer>
-        {value => {
-          const { dispatch } = value
-          return (
-            <Paper className='user'>
+        {({ dispatch }) => (
+          <Paper className='user'>
+            <Link to={`/users/${id}`}>
               <div className='image'>
                 {avatar ? (
                   <div className='shine zoomIn1'>
                     <figure>
-                      <a href={github}>
-                        <img
-                          alt={name}
-                          src={
-                            type === 'alumni'
-                              ? '/images/users/' + avatar
-                              : avatar
-                          }
-                        />
-                      </a>
+                      <img
+                        alt={name}
+                        src={
+                          type === 'alumni' ? '/images/users/' + avatar : avatar
+                        }
+                      />
                     </figure>
                   </div>
                 ) : (
@@ -59,66 +57,52 @@ class UserItem extends React.Component {
                   />
                 )}
               </div>
-              <Link className='userName' to={`/users/${id}`}>
-                <h3>{name}</h3>
-              </Link>
-              <span className='userName'>{type}</span>
-              {role && <p className='memberRole'>{role}</p>}
-              {summary && <p>{summary}</p>}
-              {tags && (
-                <p>
-                  {tags.map(tag => (
-                    <span className='tag'>{tag}</span>
-                  ))}
-                </p>
+            </Link>
+
+            <Link to={`/users/${id}`}>
+              <h3 className='userName'>{name}</h3>
+            </Link>
+            <span>{type}</span>
+            {role && <p className='memberRole'>{role}</p>}
+            {summary && <p>{summary}</p>}
+            {tags && (
+              <p>
+                {tags.map(tag => (
+                  <span className='tag'>{tag}</span>
+                ))}
+              </p>
+            )}
+
+            <div className='socialIcons'>
+              {slack_nickname && (
+                <IconButton href={slack_nickname}>
+                  <GithubIcon />{' '}
+                </IconButton>
+              )}
+              {linkedin && (
+                <IconButton href={linkedin}>
+                  <LinkedinIcon />{' '}
+                </IconButton>
+              )}
+              {email && (
+                <IconButton href={email}>
+                  <MailIcon />{' '}
+                </IconButton>
               )}
 
-              <div className='socialIcons'>
-                {slack_nickname && (
-                  <IconButton
-                    className='btn btn-outline-info mb-2'
-                    href={slack_nickname}
-                  >
-                    <i className='fa fa-github' aria-hidden='true'>
-                      {' '}
-                    </i>
-                  </IconButton>
-                )}
-                {linkedin && (
-                  <IconButton
-                    className='btn btn-outline-info mb-2'
-                    href={linkedin}
-                  >
-                    <i className='fa fa-linkedin' aria-hidden='true'>
-                      {' '}
-                    </i>
-                  </IconButton>
-                )}
-                {email && (
-                  <IconButton
-                    className='btn btn-outline-info mb-2'
-                    href={email}
-                  >
-                    <i className='fa fa-envelope-o' aria-hidden='true'>
-                      {' '}
-                    </i>
-                  </IconButton>
-                )}
+              <IconButton component={Link} to={`/users/edit/${id}`}>
+                <EditIcon />
+              </IconButton>
 
-                <IconButton component={Link} to={`/users/edit/${id}`}>
-                  <EditIcon />
-                </IconButton>
-
-                <IconButton
-                  onClick={() => this.deleteUser(id, dispatch)}
-                  aria-label='Delete'
-                >
-                  <DeleteIcon />
-                </IconButton>
-              </div>
-            </Paper>
-          )
-        }}
+              <IconButton
+                onClick={() => this.deleteUser(id, dispatch)}
+                aria-label='Delete'
+              >
+                <DeleteIcon />
+              </IconButton>
+            </div>
+          </Paper>
+        )}
       </Consumer>
     )
   }

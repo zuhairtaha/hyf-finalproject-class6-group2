@@ -1,16 +1,25 @@
 import React from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from '@material-ui/core/styles'
+import LinearProgress from '@material-ui/core/LinearProgress'
 
-const Progress = () =>
-  <div className="progress mt-3 mb-3">
-    <div
-      className="progress-bar progress-bar-striped progress-bar-animated"
-      role="progressbar"
-      aria-valuenow="100"
-      aria-valuemin="0"
-      aria-valuemax="100"
-      style={{width: '100%'}}>
+const styles = {
+  root: {
+    flexGrow: 1
+  }
+}
+
+function Progress(props) {
+  const { classes } = props
+  return (
+    <div className={classes.root}>
+      <LinearProgress color='secondary' />
     </div>
-  </div>
+  )
+}
 
-export default Progress
+Progress.propTypes = {
+  classes: PropTypes.object.isRequired
+}
 
+export default withStyles(styles)(Progress)

@@ -16,7 +16,7 @@ class UserForm extends Component {
           name: '',
           birth_date: '',
           type: 'User',
-          slack_nickname: 'ttps://github.com/',
+          slack_nickname: 'https://github.com/',
           active: false
         }
       }
@@ -73,7 +73,7 @@ class UserForm extends Component {
         <div className='card shadow-sm p-3 mb-3'>
           <form onSubmit={this.submitForm}>
             <div className='row'>
-              
+
               <div className='col-md-6 mb-2'>
                 <input
                   type='text'
@@ -116,7 +116,7 @@ class UserForm extends Component {
                   onChange={this.updateField}
                 />
               </div>
-             
+
 
              <div className='form-group row'>
                <div className='col-sm-2 col-lg-1'>Status</div>

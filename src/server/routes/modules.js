@@ -34,14 +34,15 @@ function createModule(req, res, next) {
 // --------------------------
 // DELETE a module by ID (soft delete)
 function deleteModule(req, res, next) {
-  const sql = sqlString.format(`UPDATE modules SET ? WHERE id = ?`, [
-    {active: 0},
+
+  const sql = sqlString.format(`DELETE FROM modules WHERE id = ?`, [
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'module not find'})
+
+    if (!result.affectedRows) return next({ message: 'module not find' })
     res.send('Module Deleted')
   })
 }
@@ -56,7 +57,8 @@ function updateModule(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'module not find'})
+
+    if (!result.affectedRows) return next({ message: 'module not find' })
     res.send('module updated')
   })
 }
@@ -64,13 +66,13 @@ function updateModule(req, res, next) {
 // --------------------------
 // GET one module by ID
 function getModuleById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM modules WHERE id = ?',
-    [req.params.id]
-  )
+
+  const sql = sqlString.format('SELECT * FROM modules WHERE id = ?', [
+    req.params.id
+  ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'module not find'})
+    if (rows.length === 0) return next({ message: 'module not find' })
     res.send(rows[0])
   })
 }

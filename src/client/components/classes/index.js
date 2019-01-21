@@ -5,58 +5,56 @@ import 'react-calendar-timeline/lib/Timeline.css'
 import './css/style.css'
 import classItem from './class-item'
 import SundaysMarker from './Sundays-marker'
-import IconButton from '@material-ui/core/IconButton'
-import EditIcon from '@material-ui/icons/Edit'
-import AddIcon from '@material-ui/icons/Add'
-// import groups from './groups'
-// import items from './items'
 import keys from './keys'
-// import AddItemsForm from './AddItemsForm'
 import axios from 'axios'
 import Progress from '../layouts/Progress'
-import Button from '@material-ui/core/es/Button/Button'
+
+import ClassDropDownMenu from './ClassDropDownMenu'
+import Fab from '@material-ui/core/Fab'
+import { Link } from 'react-router-dom'
+import AddIcon from '@material-ui/icons/Add'
 
 export default class Index extends Component {
   state = {
     keys,
     groups: [],
     items: [],
-    y19: new Date('2019/1/1')
+    y19: new Date('2019/1/1'),
+    defaultTimeStart: null,
+    defaultTimeEnd: null
   }
-  classTitle = title => (
+
+  getGroups = _class => ({
+    id: _class.id,
+    title: this.classTitle(_class.name, _class.id)
+  })
+
+  classTitle = (title, id) => (
     <div>
       {title}
-      <IconButton aria-label='Delete'>
-        <EditIcon fontSize='small' />
-      </IconButton>
+      <ClassDropDownMenu id={id} />
     </div>
   )
-  classRightTitle = () => (
-    <Button variant='contained' size='small'>
-      <AddIcon /> Add module
-    </Button>
-  )
+
+  getItems = (item, index) => ({
+    ...item,
+    id: index + 1,
+    start: moment(new Date(item.start)),
+    end: moment(new Date(item.end)),
+    className: item.title.replace(/ /g, '_'),
+    canMove: true,
+    canResize: false,
+    canChangeGroup: false
+  })
+
   componentDidMount() {
     axios.get('/api/classes').then(classes => {
       axios.get(`/api/classesmodules`).then(modules => {
         const endDates = modules.data.map(item => new Date(item.end))
         const startDates = modules.data.map(item => new Date(item.start))
         this.setState({
-          groups: classes.data.map(item => ({
-            id: item.id,
-            title: this.classTitle(item.classname),
-            rightTitle: this.classRightTitle()
-          })),
-          items: modules.data.map((item, index) => ({
-            ...item,
-            id: index + 1,
-            start: moment(new Date(item.start)),
-            end: moment(new Date(item.end)),
-            className: item.title.replace(/ /g, '_'),
-            canMove: true,
-            canResize: false,
-            canChangeGroup: false
-          })),
+          groups: classes.data.map(this.getGroups),
+          items: modules.data.map(this.getItems),
 
           defaultTimeStart: moment(new Date(Math.min(...startDates))).add(
             -1,
@@ -136,7 +134,7 @@ export default class Index extends Component {
   render() {
     const { keys, groups, items, defaultTimeStart, defaultTimeEnd } = this.state
     return (
-      <>
+      <React.Fragment>
         {groups.length > 0 ? (
           <Timeline
             keys={keys}
@@ -144,8 +142,6 @@ export default class Index extends Component {
             // onItemClick={() => alert(1)}
             items={items}
             sidebarContent='Classes'
-            rightSidebarWidth={130}
-            rightSidebarContent='Skills'
             lineHeight={75}
             itemRenderer={classItem}
             defaultTimeStart={defaultTimeStart}
@@ -180,8 +176,19 @@ export default class Index extends Component {
         ) : (
           <Progress />
         )}
-        {/*<AddItemsForm onAddItem={this.addItemHandler} />*/}
-      </>
+
+        {/*add class button*/}
+        <div className='floating-btn'>
+          <Fab
+            component={Link}
+            to='/classes/add'
+            color='secondary'
+            aria-label='Add'
+          >
+            <AddIcon />
+          </Fab>
+        </div>
+      </React.Fragment>
     )
   }
 }

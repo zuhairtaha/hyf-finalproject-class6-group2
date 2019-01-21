@@ -5,15 +5,15 @@ const db = require('../config/db')
 // --------------------------
 
 router
-  .get('/', listAllclasses)
-  .get('/:id', getclasseById)
-  .post('/', createclasse)
-  .delete('/:id', deleteclasse)
-  .put('/:id', updateclasse)
+  .get('/', listAllClasses)
+  .get('/:id', getClassById)
+  .post('/', createClass)
+  .delete('/:id', deleteClass)
+  .put('/:id', updateClass)
 
 // --------------------------
 // GET all classes
-function listAllclasses(req, res, next) {
+function listAllClasses(req, res, next) {
   const sql = sqlString.format('SELECT * FROM classes')
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
@@ -22,34 +22,35 @@ function listAllclasses(req, res, next) {
 }
 
 // --------------------------
-// CREATE a new classe
-function createclasse(req, res, next) {
+// CREATE a new class
+function createClass(req, res, next) {
   const sql = sqlString.format(`INSERT INTO classes SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New classe added successfully')
+    res.send({ added: true, item: req.body })
   })
 }
 
 // --------------------------
-// DELETE a classe by ID (soft delete)
-function deleteclasse(req, res, next) {
-  const sql = sqlString.format(`UPDATE classes SET ? WHERE classid = ?`, [
-    {active: 0},
+// DELETE a class by ID (soft delete)
+function deleteClass(req, res, next) {
+  console.log(req.params.id)
+  const sql = sqlString.format(`DELETE FROM classes WHERE id = ?`, [
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'classe not find'})
-    res.send('classe Deleted')
+    if (!result.affectedRows)
+      return next({ message: 'class not found', deleted: false })
+    res.send({ deleted: true })
   })
 }
 
 // --------------------------
-// UPDATE a classe by ID
-function updateclasse(req, res, next) {
+// UPDATE a class by ID
+function updateClass(req, res, next) {
   const sql = sqlString.format(`UPDATE classes SET ? WHERE id = ?`, [
     req.body,
     req.params.id
@@ -57,21 +58,21 @@ function updateclasse(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'classe not find'})
-    res.send('classe updated')
+    if (!result.affectedRows)
+      return next({ message: 'class not found', updated: false })
+    res.send({ updated: true })
   })
 }
 
 // --------------------------
-// GET one classe by ID
-function getclasseById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM classes WHERE id = ? AND status = ?',
-    [req.params.id, "Active"]
-  )
+// GET one class by ID
+function getClassById(req, res, next) {
+  const sql = sqlString.format('SELECT * FROM classes WHERE id = ?', [
+    req.params.id
+  ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'classe not find'})
+    if (rows.length === 0) return next({ message: 'class not find' })
     res.send(rows[0])
   })
 }
