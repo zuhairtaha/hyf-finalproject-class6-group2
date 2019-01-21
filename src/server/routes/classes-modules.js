@@ -16,24 +16,32 @@ router
 // --------------------------
 // GET all users
 function getAllModulesWithClasses(req, res, next) {
-  const sql = sqlString.format(`SELECT
-    \`modules\`.\`id\`
-    , \`classes_modules\`.\`classid\` AS \`group\`
-    , \`modules\`.\`title\`
-    , \`classes_modules\`.\`start_date\` AS \`start\`
-    , \`classes_modules\`.\`end_date\` AS \`end\`
-FROM
-    \`classes_modules\`
-    INNER JOIN \`modules\` 
-        ON (\`classes_modules\`.\`moduleid\` = \`modules\`.\`id\`)`)
+  const sql = sqlString.format(`
+          SELECT
+              modules.id
+              , classes_modules.class_id AS \`group\`
+              , modules.title
+              , classes_modules.start_date AS start
+              , classes_modules.end_date AS end
+          FROM
+            classes_modules
+          INNER JOIN modules 
+              ON (classes_modules.module_id = modules.id)
+        `)
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
   })
-}// --------------------------
+} // --------------------------
 // GET all users
 function listclassesmodules(req, res, next) {
-  const sql = sqlString.format('SELECT * FROM modules INNER JOIN classes_modules ON modules.moduleid = classes_modules.moduleid WHERE classes_modules.classid = ?', [req.params.id])
+  const sql = sqlString.format(
+    `SELECT * FROM modules 
+          INNER JOIN classes_modules 
+          ON modules.module_id = classes_modules.module_id 
+          WHERE classes_modules.class_id = ?`,
+    [req.params.id]
+  )
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     res.send(rows)
@@ -66,13 +74,13 @@ function addtoclass(req, res, next) {
 // DELETE a user by ID (soft delete)
 function deleteUser(req, res, next) {
   const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
-    {active: 0},
+    { active: 0 },
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'User not find'})
+    if (!result.affectedRows) return next({ message: 'User not find' })
     res.send('User Deleted')
   })
 }
@@ -87,7 +95,7 @@ function updateModule(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'User not find'})
+    if (!result.affectedRows) return next({ message: 'User not find' })
     res.send('User updated')
   })
 }
@@ -97,11 +105,11 @@ function updateModule(req, res, next) {
 function getUserById(req, res, next) {
   const sql = sqlString.format(
     'SELECT * FROM users WHERE id = ? AND status = ?',
-    [req.params.id, "Active"]
+    [req.params.id, 'Active']
   )
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'User not find'})
+    if (rows.length === 0) return next({ message: 'User not find' })
     res.send(rows[0])
   })
 }
