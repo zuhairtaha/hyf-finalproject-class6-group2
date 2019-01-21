@@ -1,4 +1,5 @@
 import React from 'react'
+
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -45,12 +46,13 @@ class ModuleItem extends React.Component {
       type: 'DELETE_MODULE',
       payload: id
     })
-
+  
   render() {
     const { classes } = this.props
     const { id, title, description, length } = this.props.module
 
     return (
+      
       <Consumer>
         {({ dispatch }) => (
           <Card className={classes.card}>

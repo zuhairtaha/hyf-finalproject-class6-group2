@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import UserMenu from './User-menu'
 import NavigationDrawer from '../NavigationDrawer'
-import Progress from '../progress'
+import Progress from '../Progress'
 import { Consumer } from '../../../context'
 const styles = {
   root: {
@@ -43,6 +43,7 @@ function Navbar(props) {
                   />
                 </Button>
               </Typography>
+
 
               <Button component={Link} to='/users/' color='inherit'>
                 Users

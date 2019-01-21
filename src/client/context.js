@@ -1,5 +1,7 @@
 import React from 'react'
 import axios from 'axios'
+//import qs from 'qs'
+
 
 const Context = React.createContext()
 
@@ -38,6 +40,7 @@ const reducer = (state, action) => {
         modules: [...state.modules, action.payload]
       }
 
+
     case 'DELETE_MODULE':
       axios
         .delete(`/api/modules/${action.payload}`)
@@ -59,6 +62,17 @@ const reducer = (state, action) => {
         ...state,
         classes: [...state.classes, action.payload.item]
       }
+      case 'ADD_ROLE':
+    console.log('adding role context')
+    axios.post(`/api/roles`, action.payload )
+    .then(response => { console.log(response)})
+    .catch(error => {console.log(error.response)
+    });
+    return{
+      ...state,
+      roles:[action.payload,
+      ...state.roles]
+    }
     default:
       return state
   }
@@ -78,16 +92,15 @@ export class Provider extends React.Component {
       .get('/api/users')
       .then(res => this.setState({ users: res.data }))
       .catch(console.error)
-
-    axios
+      axios
       .get('/api/modules')
       .then(res => this.setState({ modules: res.data }))
       .catch(console.error)
-
-    // this.setState({
-    //   redirect: false
-    // })
-  }
+      axios
+      .get('/api/roles')
+      .then(res => this.setState({ roles: res.data }))
+      .catch(console.error)
+}
 
   render = () => (
     <Context.Provider value={this.state}>
