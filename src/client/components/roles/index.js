@@ -1,5 +1,5 @@
 import React from 'react'
-import Progress from '../layouts/progress'
+import Progress from '../layouts/Progress'
 import RoleItem from './Role-item'
 import { Consumer } from '../../context'
 

@@ -13,7 +13,7 @@ import AddIcon from '@material-ui/icons/Add'
 import keys from './keys'
 // import AddItemsForm from './AddItemsForm'
 import axios from 'axios'
-import Progress from '../layouts/progress'
+import Progress from '../layouts/Progress'
 import Button from '@material-ui/core/es/Button/Button'
 
 export default class Index extends Component {
