@@ -81,10 +81,7 @@ class ModuleItem extends React.Component {
           </Card>
         )}
       </Consumer>
-<<<<<<< HEAD
 
-=======
->>>>>>> master
     )
   }
 }
