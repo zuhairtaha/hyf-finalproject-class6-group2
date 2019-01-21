@@ -13,7 +13,7 @@ import EditModule from './modules/edit-module'
 import DeleteClass from './classes/Delete-class'
 import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
-import Profile from "./users/Profile"
+import Profile from './users/Profile'
 
 class Routers extends React.Component {
   render = () => (
@@ -27,7 +27,7 @@ class Routers extends React.Component {
       <Route path='/classes/edit/:id' component={EditClass} />
       <Route path='/classes/add-module/:id' component={AddModuleToClass} />
 
-      <Route path='/modules' component={Modules} exact />
+      <Route path='/modules' render={props => <Modules {...props} />} exact />
       <Route path='/modules/edit/:id' component={EditModule} />
       <Route path='/modules/add' component={AddModule} />
 
