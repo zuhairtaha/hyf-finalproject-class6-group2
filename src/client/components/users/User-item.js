@@ -58,7 +58,7 @@ class UserItem extends React.Component {
             <Link to={`/users/${id}`}>
               <h3 className='userName'>{name}</h3>
             </Link>
-            <span className='userName'>{type}</span>
+            <span>{type}</span>
             {role && <p className='memberRole'>{role}</p>}
             {summary && <p>{summary}</p>}
             {tags && (

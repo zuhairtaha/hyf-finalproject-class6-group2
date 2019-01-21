@@ -8,12 +8,19 @@ class Profile extends React.Component {
     user: {}
   }
 
-  componentDidMount() {
+  fetchUser() {
     const userId = this.props.match.params.id
     axios
       .get(`/api/users/${userId}`)
       .then(res => this.setState({ user: res.data }))
       .catch(console.error)
+  }
+
+  componentDidMount() {
+    this.fetchUser()
+  }
+  componentDidUpdate(prevProps, prevState, snapshot) {
+    prevProps !== this.props && this.fetchUser()
   }
 
   render = () => {
@@ -27,8 +34,12 @@ class Profile extends React.Component {
               src={user.avatar}
               alt={user.name}
             />
-             <p><b>user name:</b> {user.name}</p>
-             <p><b>user email:</b> {user.email}</p>
+            <p>
+              <b>user name:</b> {user.name}
+            </p>
+            <p>
+              <b>user email:</b> {user.email}
+            </p>
           </div>
         )}
       </Container>
