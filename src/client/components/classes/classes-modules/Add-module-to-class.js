@@ -6,9 +6,10 @@ import AddIcon from '@material-ui/icons/Add'
 import TextField from '@material-ui/core/TextField'
 import classNames from 'classnames'
 import MenuItem from '@material-ui/core/MenuItem'
-import Container from '../layouts/container'
+import Container from '../../layouts/container'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import axios from 'axios'
+import { Link, withRouter } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -39,55 +40,78 @@ const styles = theme => ({
     right: '2rem',
     bottom: '2rem',
     zIndex: 9
+  },
+  menu: {
+    width: 200
   }
 })
 
 class AddModuleToClass extends React.Component {
   state = {
-    mentor: '',
     status: '',
+    moduleId: null,
     modules: [],
-    start: '2019-01-01',
-    end: '2019-01-01',
+    start: null,
+    end: null,
     className: '',
     classId: null,
-    error: ''
+    error: '',
+    github: ''
   }
 
   handleChange = prop => event => this.setState({ [prop]: event.target.value })
 
-  formSubmitHandler = e => e.preventDefault()
+  formSubmitHandler = e => {
+    e.preventDefault()
+    const { classId, moduleId, github, start, end } = this.state
+    axios
+      .post(`/api/classes-modules/`, {
+        class_id: classId,
+        module_id: moduleId,
+        github_page: github,
+        start_date: start,
+        end_date: end
+      })
+      .then(res => {
+        if (res.data.added) this.props.history.push('/classes')
+      })
+      .catch(error => this.setState({ error }))
+  }
 
   componentDidMount() {
+    const classId = this.props.match.params.id
     axios
-      .get(`/api/classes/${this.props.match.params.id}`)
+      .get(`/api/classes/${classId}`)
       .then(res => {
         const { id, name } = res.data
-        return this.setState({ className: name, classId: id })
+        this.setState({ className: name, classId: id })
+        document.title = `Add module to ${name}`
       })
       .catch(error => this.setState(state => ({ ...state.error, error })))
 
     axios
-      .get(`/api/modules/`)
+      .get(`/api/modules/rest-modules-for-class/${classId}`)
       .then(res => this.setState({ modules: res.data }))
       .catch(error => this.setState(state => ({ ...state.error, error })))
   }
 
   render = () => {
     const { classes } = this.props
-    const { modules, className } = this.state
-    return (
+    const { modules, className, error } = this.state
+    return error ? (
+      <p>{error}</p>
+    ) : (
       <Container>
         <Typography variant='h5'>Add module to: {className}</Typography>
         <form onSubmit={this.formSubmitHandler}>
-          {/*Mentors list*/}
+          {/*Modules list*/}
           <TextField
             style={{ width: '50%' }}
             select
             label='Chose module'
             className={classNames(classes.margin, classes.textField)}
-            value={this.state.mentor}
-            onChange={this.handleChange('mentor')}
+            value={this.state.moduleId}
+            onChange={this.handleChange('moduleId')}
             fullWidth={true}
           >
             {modules.map(({ id, title }) => (
@@ -97,14 +121,37 @@ class AddModuleToClass extends React.Component {
             ))}
           </TextField>
 
-          {/*status*/}
+          <TextField
+            id='standard-select-currency'
+            select
+            label='Select'
+            className={classes.textField}
+            value={this.state.currency}
+            onChange={this.handleChange('currency')}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+            helperText='Please select your currency'
+            margin='normal'
+          >
+            {currencies.map(option => (
+              <MenuItem key={option.value} value={option.value}>
+                {option.label}
+              </MenuItem>
+            ))}
+          </TextField>
+
+          {/*GitHub*/}
           <TextField
             style={{ width: '50%' }}
             id='standard-name'
             label='GitHub repository'
             className={classes.textField}
+            defaultValue='https://github.com/'
             value={this.state.name}
-            onChange={this.handleChange('status')}
+            onChange={this.handleChange('github')}
             margin='normal'
             fullWidth={true}
           />
@@ -118,9 +165,7 @@ class AddModuleToClass extends React.Component {
                 type='date'
                 defaultValue={this.state.start}
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true
-                }}
+                InputLabelProps={{ shrink: true }}
                 onChange={this.handleChange('start')}
                 fullWidth={true}
               />
@@ -133,9 +178,7 @@ class AddModuleToClass extends React.Component {
                 type='date'
                 defaultValue={this.state.end}
                 className={classes.textField}
-                InputLabelProps={{
-                  shrink: true
-                }}
+                InputLabelProps={{ shrink: true }}
                 onChange={this.handleChange('end')}
                 fullWidth={true}
               />
@@ -144,15 +187,22 @@ class AddModuleToClass extends React.Component {
 
           {/*Submit*/}
           <Button
-            onClick={() => {
-              this.onCloseModal()
-              return this.props.onAddItem(this.state)
-            }}
+            type='submit'
             className={classes.mt1}
             variant='contained'
             color='primary'
           >
             <AddIcon /> add
+          </Button>
+
+          <Button
+            className={classes.mt1}
+            variant='contained'
+            component={Link}
+            to='/classes'
+            style={{ marginLeft: '1rem' }}
+          >
+            cancel
           </Button>
         </form>
       </Container>
@@ -160,4 +210,4 @@ class AddModuleToClass extends React.Component {
   }
 }
 
-export default withStyles(styles)(AddModuleToClass)
+export default withStyles(styles)(withRouter(AddModuleToClass))

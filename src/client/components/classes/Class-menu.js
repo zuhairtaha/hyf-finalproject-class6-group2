@@ -25,7 +25,7 @@ const styles = theme => ({
   icon: {}
 })
 
-class ClassDropDownMenu extends React.Component {
+class ClassMenu extends React.Component {
   state = {
     anchorEl: null
   }
@@ -123,4 +123,4 @@ class ClassDropDownMenu extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(ClassDropDownMenu))
+export default withRouter(withStyles(styles)(ClassMenu))

@@ -4,11 +4,11 @@ import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './css/style.css'
 import classItem from './class-item'
-import SundaysMarker from './Sundays-marker'
-import keys from './keys'
+import SundaysMarker from './calender-stuff/Sundays-marker'
+import keys from './calender-stuff/keys'
 import axios from 'axios'
 import Progress from '../layouts/Progress'
-import ClassDropDownMenu from './ClassDropDownMenu'
+import ClassDropDownMenu from './Class-menu'
 import Fab from '@material-ui/core/Fab'
 import { Link } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
@@ -48,7 +48,7 @@ export default class Index extends Component {
 
   componentDidMount() {
     axios.get('/api/classes').then(classes => {
-      axios.get(`/api/classesmodules`).then(modules => {
+      axios.get(`/api/classes-modules`).then(modules => {
         const endDates = modules.data.map(item => new Date(item.end))
         const startDates = modules.data.map(item => new Date(item.start))
         this.setState({

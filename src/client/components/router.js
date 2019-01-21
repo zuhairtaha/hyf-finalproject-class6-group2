@@ -10,9 +10,9 @@ import Home from './pages/home/home'
 import Form from './_form/Form'
 import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
-import DeleteClass from './classes/DeleteClass'
+import DeleteClass from './classes/Delete-class'
 import EditClass from './classes/Edit-class'
-import AddModuleToClass from './classes/Add-module-to-class'
+import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
 import Profile from "./users/Profile"
 
 class Routers extends React.Component {

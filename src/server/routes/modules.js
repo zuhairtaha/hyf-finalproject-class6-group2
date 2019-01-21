@@ -7,6 +7,7 @@ const db = require('../config/db')
 router
   .get('/', listAllModules)
   .get('/:id', getModuleById)
+  .get('/rest-modules-for-class/:id', getRestModulesForClass)
   .post('/', createModule)
   .delete('/:id', deleteModule)
   .put('/:id', updateModule)
@@ -31,10 +32,10 @@ function createModule(req, res, next) {
     res.send('New module added successfully')
   })
 }
+
 // --------------------------
 // DELETE a module by ID (soft delete)
 function deleteModule(req, res, next) {
-
   const sql = sqlString.format(`DELETE FROM modules WHERE id = ?`, [
     req.params.id
   ])
@@ -66,7 +67,6 @@ function updateModule(req, res, next) {
 // --------------------------
 // GET one module by ID
 function getModuleById(req, res, next) {
-
   const sql = sqlString.format('SELECT * FROM modules WHERE id = ?', [
     req.params.id
   ])
@@ -74,6 +74,23 @@ function getModuleById(req, res, next) {
     if (err) return next(err)
     if (rows.length === 0) return next({ message: 'module not find' })
     res.send(rows[0])
+  })
+}
+
+// --------------------------
+// Get rest modules for a class by class id
+function getRestModulesForClass(req, res, next) {
+  const sql = sqlString.format(
+    ` SELECT id,title FROM modules WHERE id NOT IN (
+SELECT module_id FROM classes_modules WHERE class_id <=> ?
+)`,
+    [req.params.id]
+  )
+  db.execute(sql, (err, rows) => {
+    if (err) return next(err)
+    if (rows.length === 0)
+      return next({ message: 'all modules has been already added' })
+    res.send(rows)
   })
 }
 

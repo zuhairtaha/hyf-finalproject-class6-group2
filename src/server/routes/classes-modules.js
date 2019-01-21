@@ -6,7 +6,7 @@ const db = require('../config/db')
 
 router
   .get('/', getAllModulesWithClasses)
-  .get('/:id', listclassesmodules)
+  .get('/:id', listClassesModules)
   .get('/:id', getUserById)
   .post('/', createModule)
   .delete('/:id', deleteUser)
@@ -34,7 +34,7 @@ function getAllModulesWithClasses(req, res, next) {
   })
 } // --------------------------
 // GET all users
-function listclassesmodules(req, res, next) {
+function listClassesModules(req, res, next) {
   const sql = sqlString.format(
     `SELECT * FROM modules 
           INNER JOIN classes_modules 
@@ -51,11 +51,11 @@ function listclassesmodules(req, res, next) {
 // --------------------------
 // CREATE a new user
 function createModule(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
+  const sql = sqlString.format(`INSERT INTO classes_modules SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New user added successfully')
+    res.send({ added: true })
   })
 }
 

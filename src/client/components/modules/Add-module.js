@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react'
 import TextField from '@material-ui/core/TextField'
 import { Consumer } from '../../context'
@@ -61,72 +60,64 @@ class AddModule extends Component {
     const { classes } = this.props
     return (
       <Consumer>
-        {value => {
-          const { dispatch } = value
-          return (
-            <Container>
-              <form onSubmit={this.submitForm.bind(this, dispatch)}>
-                {/*title*/}
-                <TextField
-                  label='Title'
-                  name='title'
-                  defaultValue={title}
-                  onChange={this.updateField}
-                  margin='normal'
-                  className={classes.textField}
-                  style={{ marginRight: '1rem' }}
-                />
+        {({ dispatch }) => (
+          <Container>
+            <form onSubmit={this.submitForm.bind(this, dispatch)}>
+              {/*title*/}
+              <TextField
+                label='Title'
+                name='title'
+                defaultValue={title}
+                onChange={this.updateField}
+                margin='normal'
+                className={classes.textField}
+                style={{ marginRight: '1rem' }}
+              />
 
-                {/*length*/}
-                <TextField
-                  label='length (weeks)'
-                  name='length'
-                  value={length}
-                  onChange={this.updateField}
-                  margin='normal'
-                  className={classes.textField}
-                />
+              {/*length*/}
+              <TextField
+                label='length (weeks)'
+                name='length'
+                value={length}
+                onChange={this.updateField}
+                margin='normal'
+                className={classes.textField}
+              />
 
-                <br />
-                {/*description*/}
-                <TextField
-                  label='Description'
-                  multiline
-                  rowsMax='4'
-                  rows='3'
-                  name='description'
-                  value={description}
-                  onChange={this.updateField}
-                  margin='normal'
-                  fullWidth
-                />
+              <br />
+              {/*description*/}
+              <TextField
+                label='Description'
+                multiline
+                rowsMax='4'
+                rows='3'
+                name='description'
+                value={description}
+                onChange={this.updateField}
+                margin='normal'
+                fullWidth
+              />
 
-                <br />
+              <br />
 
-                <Button
-                  variant='contained'
-                  color='primary'
-                  type='submit'
-                >
-                  <AddIcon /> Add Module
-                </Button>
+              <Button variant='contained' color='primary' type='submit'>
+                <AddIcon /> Add Module
+              </Button>
 
-                <Button
-                  variant='contained'
-                  component={Link}
-                  to='/modules'
-                  style={{ marginLeft: '1rem' }}
-                >
-                  cancel
-                </Button>
-              </form>
-            </Container>
-          )
-        }}
+              <Button
+                variant='contained'
+                component={Link}
+                to='/modules'
+                style={{ marginLeft: '1rem' }}
+              >
+                cancel
+              </Button>
+            </form>
+          </Container>
+        )}
       </Consumer>
     )
   }
 }
-
 
 export default withStyles(styles)(AddModule)

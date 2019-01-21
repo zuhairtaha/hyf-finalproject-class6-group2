@@ -22,7 +22,7 @@ class Class extends React.Component {
   componentDidMount() {
     const id = this.props.classdata.classid
     console.log(id)
-    fetch(`/api/classesmodules/${id}`)
+    fetch(`/api/classes-modules/${id}`)
       .then(res => res.json())
       .then(modulesarr => this.setState({ modulesarr }))
       .catch(console.log)
