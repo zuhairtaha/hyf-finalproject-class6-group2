@@ -12,7 +12,10 @@ class Profile extends React.Component {
     const userId = this.props.match.params.id
     axios
       .get(`/api/users/${userId}`)
-      .then(res => this.setState({ user: res.data }))
+      .then(res => {
+        document.title = res.data.name
+        return this.setState({ user: res.data })
+      })
       .catch(console.error)
   }
 
@@ -34,12 +37,14 @@ class Profile extends React.Component {
               src={user.avatar}
               alt={user.name}
             />
-            <p>
-              <b>user name:</b> {user.name}
-            </p>
-            <p>
-              <b>user email:</b> {user.email}
-            </p>
+            {Object.keys(user).map(
+              key =>
+                user[key] !== null && (
+                  <div key={key}>
+                    <b>{key}</b> <span>{user[key]}</span>
+                  </div>
+                )
+            )}
           </div>
         )}
       </Container>

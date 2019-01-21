@@ -14,7 +14,7 @@ import { Consumer } from '../../context'
 
 const styles = theme => ({
   card: {
-    maxWidth: 400
+    width:'100%'
   },
   media: {
     height: 0,
@@ -46,13 +46,13 @@ class ModuleItem extends React.Component {
       type: 'DELETE_MODULE',
       payload: id
     })
-  
+
   render() {
     const { classes } = this.props
     const { id, title, description, length } = this.props.module
 
     return (
-      
+
       <Consumer>
         {({ dispatch }) => (
           <Card className={classes.card}>

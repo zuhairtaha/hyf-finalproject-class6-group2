@@ -6,6 +6,10 @@ import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
 
+import GithubIcon from 'mdi-material-ui/GithubCircle'
+import LinkedinIcon from 'mdi-material-ui/Linkedin'
+import MailIcon from '@material-ui/icons/Mail'
+
 import './user.scss'
 
 class UserItem extends React.Component {
@@ -19,7 +23,6 @@ class UserItem extends React.Component {
     const {
       id,
       avatar,
-      github,
       name,
       role,
       summary,
@@ -33,28 +36,29 @@ class UserItem extends React.Component {
       <Consumer>
         {({ dispatch }) => (
           <Paper className='user'>
-            <div className='image'>
-              {avatar ? (
-                <div className='shine zoomIn1'>
-                  <figure>
-                    <a href={github}>
+            <Link to={`/users/${id}`}>
+              <div className='image'>
+                {avatar ? (
+                  <div className='shine zoomIn1'>
+                    <figure>
                       <img
                         alt={name}
                         src={
                           type === 'alumni' ? '/images/users/' + avatar : avatar
                         }
                       />
-                    </a>
-                  </figure>
-                </div>
-              ) : (
-                <img
-                  alt={name}
-                  className='defaultPhoto'
-                  src={'/images/avatar.png'}
-                />
-              )}
-            </div>
+                    </figure>
+                  </div>
+                ) : (
+                  <img
+                    alt={name}
+                    className='defaultPhoto'
+                    src={'/images/avatar.png'}
+                  />
+                )}
+              </div>
+            </Link>
+
             <Link to={`/users/${id}`}>
               <h3 className='userName'>{name}</h3>
             </Link>
@@ -71,30 +75,18 @@ class UserItem extends React.Component {
 
             <div className='socialIcons'>
               {slack_nickname && (
-                <IconButton
-                  className='btn btn-outline-info mb-2'
-                  href={slack_nickname}
-                >
-                  <i className='fa fa-github' aria-hidden='true'>
-                    {' '}
-                  </i>
+                <IconButton href={slack_nickname}>
+                  <GithubIcon />{' '}
                 </IconButton>
               )}
               {linkedin && (
-                <IconButton
-                  className='btn btn-outline-info mb-2'
-                  href={linkedin}
-                >
-                  <i className='fa fa-linkedin' aria-hidden='true'>
-                    {' '}
-                  </i>
+                <IconButton href={linkedin}>
+                  <LinkedinIcon />{' '}
                 </IconButton>
               )}
               {email && (
-                <IconButton className='btn btn-outline-info mb-2' href={email}>
-                  <i className='fa fa-envelope-o' aria-hidden='true'>
-                    {' '}
-                  </i>
+                <IconButton href={email}>
+                  <MailIcon />{' '}
                 </IconButton>
               )}
 
