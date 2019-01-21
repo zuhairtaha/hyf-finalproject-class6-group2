@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button'
 import { Link } from 'react-router-dom'
 import UserMenu from './User-menu'
 import NavigationDrawer from '../NavigationDrawer'
-import Progress from '../progress'
+import Progress from '../Progress'
 import { Consumer } from '../../../context'
 const styles = {
   root: {
@@ -44,24 +44,7 @@ function Navbar(props) {
                 </Button>
               </Typography>
 
-<<<<<<< HEAD:src/client/components/layouts/navbar/Navbar.js
-          <Button component={Link} to='/users/' color='inherit'>
-            Users
-          </Button>
-          <Button component={Link} to='/classes/' color='inherit'>
-            Classes
-          </Button>
-          <Button component={Link} to='/modules/' color='inherit'>
-            Modules
-          </Button>
-          <Button component={Link} to='/roles/' color='inherit'>
-            Roles
-          </Button>
-          <UserMenu />
-        </Toolbar>
-      </AppBar>
-    </div>
-=======
+
               <Button component={Link} to='/users/' color='inherit'>
                 Users
               </Button>
@@ -74,7 +57,6 @@ function Navbar(props) {
         </div>
       )}
     </Consumer>
->>>>>>> c615c6b42c8965381ff5e707618c3a82ee8f889c:src/client/components/layouts/navbar/navbar.js
   )
 }
 

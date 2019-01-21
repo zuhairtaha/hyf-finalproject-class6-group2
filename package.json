@@ -61,12 +61,8 @@
     "postcss-preset-env": "6.0.6",
     "postcss-safe-parser": "4.0.1",
     "prop-types": "latest",
-<<<<<<< HEAD
-    "qs": "^6.6.0",
-    "react": "^16.6.3",
-=======
+
     "react": "^16.7.0",
->>>>>>> c615c6b42c8965381ff5e707618c3a82ee8f889c
     "react-app-polyfill": "^0.1.3",
     "react-calendar-timeline": "^0.22.0",
     "react-dev-utils": "^6.1.1",
