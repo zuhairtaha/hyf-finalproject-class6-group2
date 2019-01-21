@@ -7,13 +7,13 @@ import ClassesCalender from './classes'
 import AddClass from './classes/Add-class'
 import Modules from './modules'
 import Home from './pages/home'
-import Profile from './users/Profile'
 import Form from './_form/Form'
 import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
 import DeleteClass from './classes/DeleteClass'
 import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/Add-module-to-class'
+import Profile from "./users/Profile"
 
 class Routers extends React.Component {
   render = () => (

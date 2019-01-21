@@ -42,21 +42,6 @@ const styles = theme => ({
   }
 })
 
-const mentorsList = [
-  {
-    value: '1',
-    label: 'Mia Michelle'
-  },
-  {
-    value: '2',
-    label: 'Joe Johnson'
-  },
-  {
-    value: '3',
-    label: 'Kim Karlsen'
-  }
-]
-
 class AddModuleToClass extends React.Component {
   state = {
     mentor: '',
@@ -90,7 +75,7 @@ class AddModuleToClass extends React.Component {
 
   render = () => {
     const { classes } = this.props
-    const { modules, classId, className } = this.state
+    const { modules, className } = this.state
     return (
       <Container>
         <Typography variant='h5'>Add module to: {className}</Typography>
