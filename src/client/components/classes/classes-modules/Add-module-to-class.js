@@ -1,10 +1,8 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
-import Grid from '@material-ui/core/Grid'
 import Button from '@material-ui/core/Button'
 import AddIcon from '@material-ui/icons/Add'
 import TextField from '@material-ui/core/TextField'
-import classNames from 'classnames'
 import MenuItem from '@material-ui/core/MenuItem'
 import Container from '../../layouts/container'
 import Typography from '@material-ui/core/es/Typography/Typography'
@@ -30,7 +28,14 @@ const styles = theme => ({
     marginTop: theme.spacing.unit * 3
   },
   textField: {
-    flexBasis: 200
+    boxSizing: 'border-box',
+    width: '50%',
+    paddingRight: '1rem',
+    marginTop: '1rem',
+    [theme.breakpoints.down('sm')]: {
+      paddingRight: 0,
+      width: '100%'
+    }
   },
   mt1: {
     marginTop: '1rem'
@@ -49,7 +54,7 @@ const styles = theme => ({
 class AddModuleToClass extends React.Component {
   state = {
     status: '',
-    moduleId: null,
+    moduleId: 0,
     modules: [],
     start: null,
     end: null,
@@ -59,7 +64,7 @@ class AddModuleToClass extends React.Component {
     github: ''
   }
 
-  handleChange = prop => event => this.setState({ [prop]: event.target.value })
+  handleChange = name => event => this.setState({ [name]: event.target.value })
 
   formSubmitHandler = e => {
     e.preventDefault()
@@ -97,7 +102,15 @@ class AddModuleToClass extends React.Component {
 
   render = () => {
     const { classes } = this.props
-    const { modules, className, error } = this.state
+    const {
+      modules,
+      className,
+      error,
+      moduleId,
+      start,
+      end,
+      github
+    } = this.state
     return error ? (
       <p>{error}</p>
     ) : (
@@ -105,14 +118,20 @@ class AddModuleToClass extends React.Component {
         <Typography variant='h5'>Add module to: {className}</Typography>
         <form onSubmit={this.formSubmitHandler}>
           {/*Modules list*/}
+
           <TextField
-            style={{ width: '50%' }}
             select
             label='Chose module'
-            className={classNames(classes.margin, classes.textField)}
-            value={this.state.moduleId}
+            value={moduleId}
             onChange={this.handleChange('moduleId')}
-            fullWidth={true}
+            className={classes.textField}
+            SelectProps={{
+              MenuProps: {
+                className: classes.menu
+              }
+            }}
+            helperText='Please select your currency'
+            margin='normal'
           >
             {modules.map(({ id, title }) => (
               <MenuItem key={id} value={id}>
@@ -120,51 +139,42 @@ class AddModuleToClass extends React.Component {
               </MenuItem>
             ))}
           </TextField>
-
-
+          <br />
 
           {/*GitHub*/}
           <TextField
-            style={{ width: '50%' }}
             id='standard-name'
             label='GitHub repository'
             className={classes.textField}
             defaultValue='https://github.com/'
-            value={this.state.name}
+            value={github}
             onChange={this.handleChange('github')}
             margin='normal'
-            fullWidth={true}
           />
-          {/*Date*/}
-          <Grid container spacing={24}>
-            {/*start*/}
-            <Grid item md={6}>
-              <TextField
-                id='date'
-                label='Start'
-                type='date'
-                defaultValue={this.state.start}
-                className={classes.textField}
-                InputLabelProps={{ shrink: true }}
-                onChange={this.handleChange('start')}
-                fullWidth={true}
-              />
-            </Grid>
-            {/*end*/}
-            <Grid item md={6}>
-              <TextField
-                id='date'
-                label='End'
-                type='date'
-                defaultValue={this.state.end}
-                className={classes.textField}
-                InputLabelProps={{ shrink: true }}
-                onChange={this.handleChange('end')}
-                fullWidth={true}
-              />
-            </Grid>
-          </Grid>
+          <br />
 
+          {/*start*/}
+          <TextField
+            id='date'
+            label='Start'
+            type='date'
+            defaultValue={start}
+            className={classes.textField}
+            InputLabelProps={{ shrink: true }}
+            onChange={this.handleChange('start')}
+          />
+          <br />
+          {/*end*/}
+          <TextField
+            id='date'
+            label='End'
+            type='date'
+            defaultValue={end}
+            className={classes.textField}
+            InputLabelProps={{ shrink: true }}
+            onChange={this.handleChange('end')}
+          />
+          <br />
           {/*Submit*/}
           <Button
             type='submit'
