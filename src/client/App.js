@@ -6,8 +6,8 @@ import { Provider } from './context'
 class App extends Component {
   render = () => (
     <Provider>
-        <Navbar />
-        <Routers />
+      <Navbar />
+      <Routers />
     </Provider>
   )
 }

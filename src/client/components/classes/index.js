@@ -6,7 +6,6 @@ import './css/style.css'
 import classItem from './class-item'
 import SundaysMarker from './Sundays-marker'
 import keys from './keys'
-// import AddItemsForm from './AddItemsForm'
 import axios from 'axios'
 import Progress from '../layouts/progress'
 import ClassDropDownMenu from './ClassDropDownMenu'
@@ -176,7 +175,6 @@ export default class Index extends Component {
         ) : (
           <Progress />
         )}
-        {/*<AddItemsForm onAddItem={this.addItemHandler} />*/}
 
         {/*add class button*/}
         <div className='floating-btn'>

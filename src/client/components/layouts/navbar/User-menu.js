@@ -6,13 +6,33 @@ import withState from 'recompose/withState'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import IconButton from '@material-ui/core/IconButton'
 import { getProfileInfo, isLoggedIn } from '../../users/login/OAuth-api-calls'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import LogoutIcon from '@material-ui/icons/OpenInBrowser'
+import ProfileIcon from '@material-ui/icons/PersonOutline'
+import { withStyles } from '@material-ui/core/styles'
+import GithubIcon from 'mdi-material-ui/GithubCircle'
 
 require('dotenv').config()
 
 const WithState = toRenderProps(withState('anchorEl', 'updateAnchorEl', null))
 let URLPrefix =
   process.env.NODE_ENV === 'development' ? 'http://localhost:4000' : ''
+
+const styles = theme => ({
+  menuItem: {
+    '&:focus': {
+      backgroundColor: theme.palette.primary.main,
+      '& $primary, & $icon': {
+        color: theme.palette.common.white
+      }
+    }
+  },
+  primary: {},
+  icon: {}
+})
+
 class UserMenu extends Component {
   state = {
     auth: false,
@@ -30,6 +50,8 @@ class UserMenu extends Component {
 
   render = () => {
     const { auth, user } = this.state
+    const { classes } = this.props
+
     return (
       <WithState>
         {({ anchorEl, updateAnchorEl }) => {
@@ -70,16 +92,23 @@ class UserMenu extends Component {
                     href={URLPrefix + '/auth/github'}
                     onClick={handleClose}
                   >
-                    Sign in with GitHub
+                    <GithubIcon /> Sign in with GitHub
                   </MenuItem>
                 )}
                 {auth && (
                   <MenuItem
-                    component={Link}
-                    to='/profile'
+                    component={NavLink}
+                    to={`/users/${user.id}`}
                     onClick={handleClose}
                   >
-                    Profile
+                    <ListItemIcon className={classes.icon}>
+                      <ProfileIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      classes={{ primary: classes.primary }}
+                      inset
+                      primary='Profile'
+                    />
                   </MenuItem>
                 )}
                 {auth && (
@@ -88,7 +117,14 @@ class UserMenu extends Component {
                     href={URLPrefix + '/auth/github/logout'}
                     onClick={handleClose}
                   >
-                    Logout
+                    <ListItemIcon className={classes.icon}>
+                      <LogoutIcon />
+                    </ListItemIcon>
+                    <ListItemText
+                      classes={{ primary: classes.primary }}
+                      inset
+                      primary='Logout'
+                    />
                   </MenuItem>
                 )}
               </Menu>
@@ -100,4 +136,4 @@ class UserMenu extends Component {
   }
 }
 
-export default UserMenu
+export default withStyles(styles)(UserMenu)

@@ -13,6 +13,8 @@ import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
 import DeleteClass from './classes/DeleteClass'
 import EditClass from './classes/Edit-class'
+import AddModuleToClass from './classes/Add-module-to-class'
+
 class Routers extends React.Component {
   render = () => (
     <Switch>
@@ -23,6 +25,7 @@ class Routers extends React.Component {
       <Route path='/classes/add' component={AddClass} />
       <Route path='/classes/delete/:id' component={DeleteClass} />
       <Route path='/classes/edit/:id' component={EditClass} />
+      <Route path='/classes/add-module/:id' component={AddModuleToClass} />
 
       <Route path='/modules' component={Modules} exact />
       <Route path='/modules/edit/:id' component={EditModule} />
@@ -31,8 +34,7 @@ class Routers extends React.Component {
       <Route path='/users' component={Users} exact />
       <Route path='/users/add' component={UserForm.AddUser} />
       <Route path='/users/edit/:id' component={UserForm.EditUser} />
-      <Route path='/users/:id' render={() => <Profile />} />
-      <Route path='/profile' render={() => <Profile />} />
+      <Route path='/users/:id' component={Profile} />
 
       <Route path='/form' component={Form} exact />
 

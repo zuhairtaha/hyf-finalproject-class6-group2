@@ -1,6 +1,5 @@
 import React from 'react'
 import Container from '../layouts/container'
-
 const home = () => {
   return (
     <Container>
@@ -10,6 +9,7 @@ const home = () => {
         asylum seekers to become web-developers and empower them by opening the
         doors to a very in-demand job market.
       </p>
+
       <p>
         In our free 6-month program we train refugees, asylum seekers and people
         with limited access to further education in modern JavaScript software

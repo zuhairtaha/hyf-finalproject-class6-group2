@@ -40,11 +40,15 @@ class ClassDropDownMenu extends React.Component {
       case 'edit_class':
         this.props.history.push(`/classes/edit/${_class.id}`)
         break
+
       case 'add_module_to_class':
+        this.props.history.push(`/classes/add-module/${_class.id}`)
         break
+
       case 'delete_class':
         this.props.history.push(`/classes/delete/${_class.id}`)
         break
+
       default:
         break
     }

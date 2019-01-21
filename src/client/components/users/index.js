@@ -9,25 +9,13 @@ class Index extends React.Component {
   }
 
   render = () => {
-    return (
-      <Consumer>
-        {({ users }) => (
-          <div className='container'>
-            {/*<h2>*/}
-            {/*Users{' '}*/}
-            {/*<NavLink to='/users/add' className='btn btn-sm btn-success'>*/}
-            {/*<i className='fa fa-plus text-white' />*/}
-            {/*</NavLink>*/}
-            {/*</h2>*/}
+    return <Consumer>
+        {({ users }) => <div className='container'>
             <div className='members mb-3'>
-              {users.map(user => (
-                <UserItem key={user.id} user={user} />
-              ))}
+              {users.map(user => <UserItem key={user.id} user={user} />)}
             </div>
-          </div>
-        )}
+          </div>}
       </Consumer>
-    )
   }
 }
 
