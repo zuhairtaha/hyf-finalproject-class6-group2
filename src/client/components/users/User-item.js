@@ -5,19 +5,25 @@ import IconButton from '@material-ui/core/IconButton'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
-
 import GithubIcon from 'mdi-material-ui/GithubCircle'
 import LinkedinIcon from 'mdi-material-ui/Linkedin'
 import MailIcon from '@material-ui/icons/Mail'
-
+import axios from 'axios'
 import './user.scss'
 
 class UserItem extends React.Component {
-  deleteUser = (id, dispatch) =>
-    dispatch({
-      type: 'DELETE_USER',
-      payload: id
-    })
+  deleteUser = (id, dispatch) => {
+    axios
+      .delete(`/api/users/${id}`)
+      .then(res => {
+        if (res.data.deleted)
+          return dispatch({
+            type: 'DELETE_USER',
+            payload: id
+          })
+      })
+      .catch(console.error)
+  }
 
   render() {
     const {

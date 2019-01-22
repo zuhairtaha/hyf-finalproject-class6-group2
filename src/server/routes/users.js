@@ -35,15 +35,13 @@ function createUser(req, res, next) {
 // --------------------------
 // DELETE a user by ID (soft delete)
 function deleteUser(req, res, next) {
-  const sql = sqlString.format(`UPDATE users SET active = ? WHERE id = ?`, [
-    false,
+  const sql = sqlString.format(`DELETE FROM users WHERE id = ?`, [
     req.params.id
   ])
-
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     if (!result.affectedRows) return next({ message: 'User not find' })
-    res.send('User Deleted')
+    res.send({ deleted: true })
   })
 }
 

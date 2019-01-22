@@ -29,7 +29,7 @@ function createModule(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send({added: true})
+    res.send({ added: true })
   })
 }
 
@@ -39,12 +39,10 @@ function deleteModule(req, res, next) {
   const sql = sqlString.format(`DELETE FROM modules WHERE id = ?`, [
     req.params.id
   ])
-
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-
-    if (!result.affectedRows) return next({message: 'module not find'})
-    res.send('Module Deleted')
+    if (!result.affectedRows) return next({ message: 'module not find' })
+    res.send({ deleted: true })
   })
 }
 
@@ -52,7 +50,7 @@ function deleteModule(req, res, next) {
 // UPDATE a module by ID
 function updateModule(req, res, next) {
   const sql = sqlString.format(
-      `UPDATE modules SET ? , updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
+    `UPDATE modules SET ? , updated_at = CURRENT_TIMESTAMP WHERE id = ?`,
     [req.body, req.params.id]
   )
 
@@ -60,8 +58,8 @@ function updateModule(req, res, next) {
     if (err) return next(err)
 
     if (!result.affectedRows)
-      return next({updated: false, message: 'module not find'})
-    res.send({updated: true})
+      return next({ updated: false, message: 'module not find' })
+    res.send({ updated: true })
   })
 }
 
@@ -73,7 +71,7 @@ function getModuleById(req, res, next) {
   ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'module not find'})
+    if (rows.length === 0) return next({ message: 'module not find' })
     res.send(rows[0])
   })
 }
@@ -82,7 +80,7 @@ function getModuleById(req, res, next) {
 // Get rest modules for a class by class id
 function getRestModulesForClass(req, res, next) {
   const sql = sqlString.format(
-      ` SELECT id,title FROM modules WHERE id NOT IN (
+    ` SELECT id,title FROM modules WHERE id NOT IN (
 SELECT module_id FROM classes_modules WHERE class_id <=> ?
 )`,
     [req.params.id]
@@ -90,7 +88,7 @@ SELECT module_id FROM classes_modules WHERE class_id <=> ?
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
     if (rows.length === 0)
-      return next({message: 'all modules has been already added'})
+      return next({ message: 'all modules has been already added' })
     res.send(rows)
   })
 }

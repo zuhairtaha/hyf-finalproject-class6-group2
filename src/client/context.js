@@ -6,28 +6,15 @@ const Context = React.createContext()
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DELETE_USER':
-      axios
-        .delete(`/api/users/${action.payload}`)
-        .then(console.log)
-        .catch(console.error)
       return {
         ...state,
         users: state.users.filter(user => user.id !== action.payload)
       }
     case 'TOGGLE_LOADING':
-      return {
-        ...state,
-        loading: !state.loading
-      }
-    case 'RESET_REDIRECT':
-      return { ...state, redirect: false }
+      return { ...state, loading: !state.loading }
     case 'ADD_MODULE':
       return { ...state, modules: [...state.modules, action.payload] }
     case 'DELETE_MODULE':
-      axios
-        .delete(`/api/modules/${action.payload}`)
-        .then(console.log)
-        .catch(console.error)
       return {
         ...state,
         modules: state.modules.filter(module => module.id !== action.payload)
@@ -59,7 +46,8 @@ const reducer = (state, action) => {
         ...state,
         modules: state.modules.map(module =>
           module.id === action.payload.id ? action.payload : module
-        )}
+        )
+      }
     default:
       return state
   }
