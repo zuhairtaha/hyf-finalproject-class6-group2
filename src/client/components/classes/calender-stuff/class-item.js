@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/ripple.css'
+import '../css/ripple.css'
 
 const classItem = ({item, itemContext, getItemProps, getResizeProps}) => {
   const {left: leftResizeProps, right: rightResizeProps} = getResizeProps()

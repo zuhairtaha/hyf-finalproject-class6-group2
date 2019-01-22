@@ -3,75 +3,38 @@ import moment from 'moment'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './css/style.css'
-import classItem from './class-item'
+import classItem from './calender-stuff/class-item'
 import SundaysMarker from './calender-stuff/Sundays-marker'
 import keys from './calender-stuff/keys'
-import axios from 'axios'
 import Progress from '../layouts/Progress'
-import ClassDropDownMenu from './Class-menu'
 import Fab from '@material-ui/core/Fab'
 import { Link } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
+import { defaultTimeEnd, defaultTimeStart, getGroups, getItems } from './GroupsItems'
+import axios from 'axios'
 
 export default class Index extends Component {
   state = {
     keys,
     groups: [],
     items: [],
-    y19: new Date('2019/1/1'),
     defaultTimeStart: null,
     defaultTimeEnd: null
   }
 
-  getGroups = _class => ({
-    id: _class.id,
-    title: this.classTitle(_class.name, _class.id)
-  })
-
-  classTitle = (title, id) => (
-    <div>
-      {title}
-      <ClassDropDownMenu id={id} />
-    </div>
-  )
-
-  getItems = (item, index) => ({
-    ...item,
-    id: index + 1,
-    start: moment(new Date(item.start).toISOString()),
-    end: moment(new Date(item.end).toISOString()),
-    className: item.title.replace(/\W+/g, '_'),
-    canMove: true,
-    canResize: false,
-    canChangeGroup: false
-  })
-
   componentDidMount() {
-    axios.get('/api/classes').then(classes => {
-      axios.get(`/api/classes-modules`).then(modules => {
-        const endDates = modules.data.map(item => new Date(item.end))
-        const startDates = modules.data.map(item => new Date(item.start))
+    document.title = 'Classes'
+    axios
+      .get('/api/classes-modules')
+      .then(({ data }) => {
         this.setState({
-          groups: classes.data.map(this.getGroups),
-          items: modules.data.map(this.getItems),
-
-          defaultTimeStart: moment(new Date(Math.min(...startDates)).toISOString()).add(
-            -1,
-            'week'
-          ),
-          defaultTimeEnd: moment(new Date(Math.max(...endDates)).toISOString()).add(1, 'week')
+          groups: getGroups(data),
+          items: getItems(data),
+          defaultTimeStart: defaultTimeStart(data),
+          defaultTimeEnd: defaultTimeEnd(data)
         })
       })
-    })
-  }
-
-  componentWillMount() {
-    document.title = 'Classes'
-  }
-
-  toTimestamp = strDate => {
-    const d = new Date(strDate)
-    return Date.parse(d.toString()) / 1000
+      .catch(console.error)
   }
 
   addItemHandler = item => {
@@ -93,6 +56,7 @@ export default class Index extends Component {
       items: [...state.items, newItem]
     }))
   }
+
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     const { items, groups } = this.state
 

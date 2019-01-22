@@ -5,7 +5,7 @@ const db = require('../config/db')
 // --------------------------
 
 router
-  .get('/', getAllModulesWithClasses)
+  .get('/', getAll)
   .get('/:id', listClassesModules)
   .get('/:id', getUserById)
   .post('/', createModule)
@@ -15,18 +15,21 @@ router
 
 // --------------------------
 // GET all users
-function getAllModulesWithClasses(req, res, next) {
+function getAll(req, res, next) {
   const sql = sqlString.format(`
-          SELECT
-              modules.id
-              , classes_modules.class_id AS \`group\`
-              , modules.title
-              , classes_modules.start_date AS start
-              , classes_modules.end_date AS end
-          FROM
-            classes_modules
-          INNER JOIN modules 
-              ON (classes_modules.module_id = modules.id)
+SELECT
+  classes.id AS group_id,
+  classes.name AS group_title,
+  classes_modules.id AS item_id,
+  modules.title AS item_title,
+  classes_modules.start_date,
+  classes_modules.end_date
+FROM
+  classes
+  LEFT JOIN classes_modules
+    ON classes_modules.class_id = classes.id
+  LEFT JOIN modules
+    ON classes_modules.module_id = modules.id
         `)
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
