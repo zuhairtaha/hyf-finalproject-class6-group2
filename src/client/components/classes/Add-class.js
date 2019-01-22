@@ -46,15 +46,15 @@ class AddClass extends Component {
       active
     }
 
-    axios.post(`/api/classes`, newClass).then(res => {
-      if (res.data.added) {
-        const payload = {
-          item: res.data.item,
-          history: this.props.history
+    axios
+      .post(`/api/classes`, newClass)
+      .then(res => {
+        if (res.data.added) {
+          dispatch({ type: 'ADD_CLASS', payload: newClass })
+          this.props.history.push('/classes')
         }
-        dispatch({ type: 'ADD_CLASS', payload })
-      }
-    })
+      })
+      .catch(console.error)
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked })

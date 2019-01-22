@@ -1,6 +1,5 @@
 import React from 'react'
 import axios from 'axios'
-//import qs from 'qs'
 
 const Context = React.createContext()
 
@@ -21,24 +20,9 @@ const reducer = (state, action) => {
         loading: !state.loading
       }
     case 'RESET_REDIRECT':
-      return {
-        ...state,
-        redirect: false
-      }
+      return { ...state, redirect: false }
     case 'ADD_MODULE':
-      axios
-        .post(`/api/modules`, action.payload)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-      return {
-        ...state,
-        modules: [...state.modules, action.payload]
-      }
-
+      return { ...state, modules: [...state.modules, action.payload] }
     case 'DELETE_MODULE':
       axios
         .delete(`/api/modules/${action.payload}`)
@@ -49,17 +33,10 @@ const reducer = (state, action) => {
         modules: state.modules.filter(module => module.id !== action.payload)
       }
     case 'ADD_CLASS':
-      action.payload.history.push('/classes')
-      return {
-        ...state,
-        classes: [...state.classes, action.payload.item]
-      }
+      return { ...state, classes: [...state.classes, action.payload.item] }
     case 'EDIT_CLASS':
       action.payload.history.push('/classes')
-      return {
-        ...state,
-        classes: [...state.classes, action.payload.item]
-      }
+      return { ...state, classes: [...state.classes, action.payload.item] }
     case 'ADD_ROLE':
       console.log('adding role context')
       axios
@@ -70,12 +47,19 @@ const reducer = (state, action) => {
         .catch(error => {
           console.log(error.response)
         })
-      return {
-        ...state,
-        roles: [action.payload, ...state.roles]
-      }
+      return { ...state, roles: [...state.roles, action.payload] }
     case 'GET_MODULES':
       return { ...state, modules: action.payload }
+    case 'GET_USERS':
+      return { ...state, users: action.payload }
+    case 'GET_ROLES':
+      return { ...state, roles: action.payload }
+    case 'UPDATE_MODULE':
+      return {
+        ...state,
+        modules: state.modules.map(module =>
+          module.id === action.payload.id ? action.payload : module
+        )}
     default:
       return state
   }
@@ -89,21 +73,11 @@ export class Provider extends React.Component {
     loading: false,
     groups: [],
     items: [],
+    roles: [],
     dispatch: action => this.setState(state => reducer(state, action))
   }
 
-  componentDidMount() {
-    axios
-      .get('/api/users')
-      .then(res => this.setState({ users: res.data }))
-      .catch(console.error)
-
-    axios
-      .get('/api/roles')
-      .then(res => this.setState({ roles: res.data }))
-      .catch(console.error)
-
-  }
+  componentDidMount() {}
 
   render = () => (
     <Context.Provider value={this.state}>

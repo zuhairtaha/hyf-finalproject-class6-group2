@@ -5,7 +5,8 @@ import Container from '../layouts/container'
 import { withStyles } from '@material-ui/core'
 import Button from '@material-ui/core/es/Button/Button'
 import AddIcon from '@material-ui/icons/Add'
-import { Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 const styles = theme => ({
   textField: {
@@ -22,13 +23,10 @@ const styles = theme => ({
 })
 
 class AddModule extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      title: '',
-      description: '',
-      length: ''
-    }
+  state = {
+    title: '',
+    description: '',
+    length: ''
   }
 
   updateField = e => {
@@ -36,7 +34,6 @@ class AddModule extends Component {
     this.setState({
       [name]: value
     })
-    console.log(name, value)
   }
 
   componentWillMount() {
@@ -52,7 +49,16 @@ class AddModule extends Component {
       description,
       length
     }
-    dispatch({ type: 'ADD_MODULE', payload: newModule })
+
+    axios
+      .post(`/api/modules`, newModule)
+      .then(res => {
+        if (res.data.added) {
+          dispatch({ type: 'ADD_MODULE', payload: newModule })
+          this.props.history.push('/modules')
+        }
+      })
+      .catch(console.error)
   }
 
   render() {
@@ -73,7 +79,6 @@ class AddModule extends Component {
                 className={classes.textField}
                 style={{ marginRight: '1rem' }}
               />
-
               {/*length*/}
               <TextField
                 label='length (weeks)'
@@ -120,4 +125,4 @@ class AddModule extends Component {
   }
 }
 
-export default withStyles(styles)(AddModule)
+export default withStyles(styles)(withRouter(AddModule))

@@ -1,153 +1,129 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import TextField from '@material-ui/core/TextField'
-import { NavLink } from 'react-router-dom'
-import Paper from '@material-ui/core/Paper'
+import { Consumer } from '../../context'
+import Container from '../layouts/container'
+import { withStyles } from '@material-ui/core'
+import Button from '@material-ui/core/es/Button/Button'
+import SaveIcon from '@material-ui/icons/Save'
+import { Link, withRouter } from 'react-router-dom'
+import axios from 'axios'
 
-class Editmodule extends Component {
+const styles = theme => ({
+  textField: {
+    width: '50%',
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
+  },
+  submitForm: {
+    [theme.breakpoints.down('sm')]: {
+      width: '100%'
+    }
+  }
+})
+
+class AddModule extends Component {
   state = {
-    message: 'Hang in there...',
-    moduleData: null
+    id: null,
+    title: '',
+    description: '',
+    length: ''
   }
   updateField = e => {
     const { name, value } = e.target
     this.setState({
-      moduleData: {
-        ...this.state.moduleData,
-        [name]: value
-      }
+      [name]: value
     })
   }
-  componentDidMount() {
-    document.title ='Edit module'
-    const url = '/api/modules'
-    const id = this.props.match.params.id
-    // TODO handle failure (404)
-    console.log(id)
 
+  componentWillMount() {
+    const moduleId = this.props.match.params.id
     axios
-      .get(`${url}/${id}`)
-      .then(res =>
-        this.setState({
-          moduleData: res.data
-        })
-      )
-      .catch(error =>
-        this.setState({
-          message: error
-        })
-      )
+      .get(`/api/modules/${moduleId}`)
+      .then(res => this.setState(res.data))
+      .catch(console.error)
+
+    document.title = 'Edit Module'
   }
 
-  submitForm = e => {
+  submitForm = (dispatch, e) => {
     e.preventDefault()
-    const url = `/api/modules/${this.props.match.params.id}`
-    const method = 'PUT'
-    fetch(url, {
-      method,
-      body: JSON.stringify(this.state.moduleData),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    })
-      .then(res => res.text())
-      .then(response => {
-        console.log('editing module Success:', response)
-        // TODO redirect to the modules list page (/modules)
-        console.log('updated....')
-        this.props.history.goBack()
+    const { id, title, description, length } = this.state
+    const newModule = { title, description, length }
+    axios
+      .put(`/api/modules/${id}`, newModule)
+      .then(res => {
+        if (res.data.updated) {
+          dispatch({ type: 'UPDATE_MODULE', payload: newModule })
+          this.props.history.push('/modules')
+        }
       })
-      .catch(error => console.error('Error:', error))
+      .catch(console.error)
   }
 
   render() {
-    const id = this.props.match.params.id
-    console.log(id)
+    const { title, description, length } = this.state
+    const { classes } = this.props
+    return (
+      <Consumer>
+        {({ dispatch }) => (
+          <Container>
+            <form onSubmit={this.submitForm.bind(this, dispatch)}>
+              {/*title*/}
+              <TextField
+                label='Title'
+                name='title'
+                value={title}
+                onChange={this.updateField}
+                margin='normal'
+                className={classes.textField}
+                style={{ marginRight: '1rem' }}
+              />
 
-    const moduleData = this.state.moduleData
-    console.log(moduleData)
-    //
+              {/*length*/}
+              <TextField
+                label='length (weeks)'
+                name='length'
+                value={length}
+                onChange={this.updateField}
+                margin='normal'
+                className={classes.textField}
+              />
 
-    return this.state.moduleData ? (
-      <Paper className='module'>
-      <div className='container'>
-          <h3>{'Edit Module'}</h3>
-          <div className='card shadow-sm p-3 mb-3'>
-            <form onSubmit={this.submitForm}>
-              <div className='row'>
-                <div className='col-md-6 mb-2'>
-                  {/*title*/}
-                  <TextField
-                    label='Title'
-                    name='title'
-                    value={moduleData.title}
-                    onChange={this.updateField}
-                    margin='normal'
-                  />
-                  <br />
+              <br />
+              {/*description*/}
+              <TextField
+                label='Description'
+                multiline
+                rowsMax='4'
+                rows='3'
+                name='description'
+                value={description}
+                onChange={this.updateField}
+                margin='normal'
+                fullWidth
+              />
 
-                  {/*description*/}
-                  <TextField
-                    label='Description'
-                    multiline
-                    rowsMax='4'
-                    name='description'
-                    value={moduleData.description}
-                    onChange={this.updateField}
-                    margin='normal'
-                    // fullWidth
-                  />
-                  <br />
+              <br />
 
-                  <br />
-                  {/*length*/}
-                  <TextField
-                    label='length'
-                    name='length'
-                    value={moduleData.length}
-                    onChange={this.updateField}
-                    margin='normal'
-                  />
-                  <br />
-                  {/*created_at*/}
+              <Button variant='contained' color='primary' type='submit'>
+                <SaveIcon /> Update Module
+              </Button>
 
-                  <TextField
-                    label='Created_at'
-                    name='created_at'
-                    value={moduleData.created_at}
-                    onChange={this.updateField}
-                    margin='normal'
-                  />
-                  <br />
-                  {/*updated_at*/}
-
-                  <TextField
-                    type='date'
-                    label='Updated_at'
-                    name='updated_at'
-                    value={moduleData.updated_at}
-                    onChange={this.updateField}
-                    margin='normal'
-                  />
-                  <br />
-                </div>
-
-                <button type='submit' className='btn btn-primary'>
-                  <i className='fa fa-floppy-o' aria-hidden='true' />{' '}
-                  {'Update Module'}
-                </button>
-                <NavLink className='btn btn-light ml-3' to='/modules'>
-                  <i className='fa fa-caret-left' /> back
-                </NavLink>
-              </div>
+              <Button
+                variant='contained'
+                component={Link}
+                to='/modules'
+                style={{ marginLeft: '1rem' }}
+              >
+                cancel
+              </Button>
             </form>
-          </div>
-        </div>
-      </Paper>
-    ) : (
-        <div />
+          </Container>
+        )}
+      </Consumer>
     )
   }
 }
 
-export default Editmodule
+export default withStyles(styles)(withRouter(AddModule))
