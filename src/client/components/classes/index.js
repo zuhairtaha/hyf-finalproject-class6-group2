@@ -38,8 +38,8 @@ export default class Index extends Component {
   getItems = (item, index) => ({
     ...item,
     id: index + 1,
-    start: moment(new Date(item.start)),
-    end: moment(new Date(item.end)),
+    start: moment(new Date(item.start).toISOString()),
+    end: moment(new Date(item.end).toISOString()),
     className: item.title.replace(/\W+/g, '_'),
     canMove: true,
     canResize: false,
@@ -55,11 +55,11 @@ export default class Index extends Component {
           groups: classes.data.map(this.getGroups),
           items: modules.data.map(this.getItems),
 
-          defaultTimeStart: moment(new Date(Math.min(...startDates))).add(
+          defaultTimeStart: moment(new Date(Math.min(...startDates)).toISOString()).add(
             -1,
             'week'
           ),
-          defaultTimeEnd: moment(new Date(Math.max(...endDates))).add(1, 'week')
+          defaultTimeEnd: moment(new Date(Math.max(...endDates)).toISOString()).add(1, 'week')
         })
       })
     })
@@ -85,8 +85,8 @@ export default class Index extends Component {
       group: item.mentor,
       title: item.status,
       className: item.status,
-      start: moment(new Date(item.start)),
-      end: moment(new Date(item.end))
+      start: moment(new Date(item.start).toISOString()),
+      end: moment(new Date(item.end).toISOString())
     }
 
     this.setState(state => ({

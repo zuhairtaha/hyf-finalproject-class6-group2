@@ -146,7 +146,6 @@ class AddModuleToClass extends React.Component {
             id='standard-name'
             label='GitHub repository'
             className={classes.textField}
-            defaultValue='https://github.com/'
             value={github}
             onChange={this.handleChange('github')}
             margin='normal'
