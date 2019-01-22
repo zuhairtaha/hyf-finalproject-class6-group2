@@ -10,37 +10,42 @@ const reducer = (state, action) => {
         ...state,
         users: state.users.filter(user => user.id !== action.payload)
       }
+
     case 'TOGGLE_LOADING':
       return { ...state, loading: !state.loading }
+
     case 'ADD_MODULE':
       return { ...state, modules: [...state.modules, action.payload] }
+
     case 'DELETE_MODULE':
       return {
         ...state,
         modules: state.modules.filter(module => module.id !== action.payload)
       }
+
     case 'ADD_CLASS':
-      return { ...state, classes: [...state.classes, action.payload.item] }
+      return { ...state, classes: [...state.classes, action.payload] }
+
     case 'EDIT_CLASS':
-      action.payload.history.push('/classes')
-      return { ...state, classes: [...state.classes, action.payload.item] }
+      return {
+        ...state,
+        classes: state.classes.map(_class =>
+          _class.id === action.payload.id ? action.payload : _class
+        )
+      }
+
     case 'ADD_ROLE':
-      console.log('adding role context')
-      axios
-        .post(`/api/roles`, action.payload)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
       return { ...state, roles: [...state.roles, action.payload] }
+
     case 'GET_MODULES':
       return { ...state, modules: action.payload }
+
     case 'GET_USERS':
       return { ...state, users: action.payload }
+
     case 'GET_ROLES':
       return { ...state, roles: action.payload }
+
     case 'UPDATE_MODULE':
       return {
         ...state,

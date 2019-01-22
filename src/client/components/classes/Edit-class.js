@@ -50,13 +50,11 @@ class EditClass extends Component {
       .put(`/api/classes/${this.props.match.params.id}`, newClass)
       .then(res => {
         if (res.data.updated) {
-          const payload = {
-            item: res.data.item,
-            history: this.props.history
-          }
-          dispatch({ type: 'EDIT_CLASS', payload })
+          dispatch({ type: 'EDIT_CLASS', newClass })
+          this.props.history.push('/classes')
         }
       })
+      .catch(console.error)
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked })

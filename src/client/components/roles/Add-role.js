@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom'
 import TextField from '@material-ui/core/TextField'
 import { Consumer } from '../../context'
 import Paper from '@material-ui/core/Paper'
+import axios from 'axios'
 
 class AddRole extends Component {
   constructor(props) {
@@ -24,12 +25,14 @@ class AddRole extends Component {
 
   submitForm = (dispatch, e) => {
     e.preventDefault()
-console.log('sub role')
-    const { name } = this.state
-    const newrole = {
-      name
-    }
-    dispatch({ type: 'ADD_ROLE', payload: newrole })
+    const newRole = { name: this.state.name }
+
+    axios
+      .post(`/api/roles`, newRole)
+      .then(res => {
+        if (res.data.added) dispatch({ type: 'ADD_ROLE', payload: newRole })
+      })
+      .catch(console.error)
   }
 
   render() {

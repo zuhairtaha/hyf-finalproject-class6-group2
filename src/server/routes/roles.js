@@ -28,20 +28,20 @@ function createRole(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New Role added successfully')
+    res.send({ added: true })
   })
 }
 // --------------------------
 // DELETE a Role by ID (soft delete)
 function deleteRole(req, res, next) {
   const sql = sqlString.format(`UPDATE roles SET ? WHERE id = ?`, [
-    {active: 0},
+    { active: 0 },
     req.params.id
   ])
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'Role not find'})
+    if (!result.affectedRows) return next({ message: 'Role not find' })
     res.send('Role Deleted')
   })
 }
@@ -56,7 +56,7 @@ function updateRole(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({message: 'Role not find'})
+    if (!result.affectedRows) return next({ message: 'Role not find' })
     res.send('Role updated')
   })
 }
@@ -64,13 +64,12 @@ function updateRole(req, res, next) {
 // --------------------------
 // GET one Role by ID
 function getRoleById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM roles WHERE id = ?',
-    [req.params.id]
-  )
+  const sql = sqlString.format('SELECT * FROM roles WHERE id = ?', [
+    req.params.id
+  ])
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
-    if (rows.length === 0) return next({message: 'Role not find'})
+    if (rows.length === 0) return next({ message: 'Role not find' })
     res.send(rows[0])
   })
 }
