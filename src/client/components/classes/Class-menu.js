@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
@@ -10,6 +10,8 @@ import AddIcon from '@material-ui/icons/Add'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
+import { Consumer } from '../../context'
+import axios from 'axios'
 
 const ITEM_HEIGHT = 48
 const styles = theme => ({
@@ -34,7 +36,7 @@ class ClassMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleOptionClick = (actionType, _class) => {
+  handleOptionClick = (actionType, _class, dispatch = null) => {
     this.setState({ anchorEl: null })
     switch (actionType) {
       case 'edit_class':
@@ -46,7 +48,15 @@ class ClassMenu extends React.Component {
         break
 
       case 'delete_class':
-        this.props.history.push(`/classes/delete/${_class.id}`)
+        dispatch({ type: 'TOGGLE_LOADING', payload: true })
+        axios
+          .delete(`/api/classes/${_class.id}`)
+          .then(res => {
+            if (res.data.deleted)
+              dispatch({ type: 'DELETE_CLASS', payload: _class.id })
+          })
+          .catch(console.error)
+          .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
         break
 
       default:
@@ -61,64 +71,76 @@ class ClassMenu extends React.Component {
     const open = Boolean(anchorEl)
     const id = this.props
     return (
-      <Fragment>
-        <IconButton
-          aria-label='More'
-          aria-owns={open ? 'long-menu' : undefined}
-          aria-haspopup='true'
-          onClick={this.handleClick}
-        >
-          <MoreVertIcon />
-        </IconButton>
-        <Menu
-          id='long-menu'
-          anchorEl={anchorEl}
-          open={open}
-          onClose={this.handleOptionClick}
-          PaperProps={{
-            style: {
-              maxHeight: ITEM_HEIGHT * 4.5,
-              width: 200
-            }
-          }}
-        >
-          {/*Edit class*/}
-          <MenuItem onClick={() => this.handleOptionClick('edit_class', id)}>
-            <ListItemIcon className={classes.icon}>
-              <EditIcon />
-            </ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.primary }}
-              inset
-              primary='Edit class'
-            />
-          </MenuItem>
-          {/*Add module*/}
-          <MenuItem
-            onClick={() => this.handleOptionClick('add_module_to_class', id)}
-          >
-            <ListItemIcon className={classes.icon}>
-              <AddIcon />
-            </ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.primary }}
-              inset
-              primary='Add module'
-            />
-          </MenuItem>
-          {/*Delete Class*/}
-          <MenuItem onClick={() => this.handleOptionClick('delete_class', id)}>
-            <ListItemIcon className={classes.icon}>
-              <DeleteIcon />
-            </ListItemIcon>
-            <ListItemText
-              classes={{ primary: classes.primary }}
-              inset
-              primary='Delete Class'
-            />
-          </MenuItem>
-        </Menu>
-      </Fragment>
+      <Consumer>
+        {({ dispatch }) => (
+          <>
+            <IconButton
+              aria-label='More'
+              aria-owns={open ? 'long-menu' : undefined}
+              aria-haspopup='true'
+              onClick={this.handleClick}
+            >
+              <MoreVertIcon />
+            </IconButton>
+            <Menu
+              id='long-menu'
+              anchorEl={anchorEl}
+              open={open}
+              onClose={this.handleOptionClick}
+              PaperProps={{
+                style: {
+                  maxHeight: ITEM_HEIGHT * 4.5,
+                  width: 200
+                }
+              }}
+            >
+              {/*Edit class*/}
+              <MenuItem
+                onClick={() => this.handleOptionClick('edit_class', id)}
+              >
+                <ListItemIcon className={classes.icon}>
+                  <EditIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary='Edit class'
+                />
+              </MenuItem>
+              {/*Add module*/}
+              <MenuItem
+                onClick={() =>
+                  this.handleOptionClick('add_module_to_class', id)
+                }
+              >
+                <ListItemIcon className={classes.icon}>
+                  <AddIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary='Add module'
+                />
+              </MenuItem>
+              {/*Delete Class*/}
+              <MenuItem
+                onClick={() =>
+                  this.handleOptionClick('delete_class', id, dispatch)
+                }
+              >
+                <ListItemIcon className={classes.icon}>
+                  <DeleteIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary='Delete Class'
+                />
+              </MenuItem>
+            </Menu>
+          </>
+        )}
+      </Consumer>
     )
   }
 }

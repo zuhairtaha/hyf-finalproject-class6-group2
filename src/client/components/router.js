@@ -10,7 +10,6 @@ import Home from './pages/home/home'
 import Form from './_form/Form'
 import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
-import DeleteClass from './classes/Delete-class'
 import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
 import Profile from './users/Profile'
@@ -21,9 +20,8 @@ class Routers extends React.Component {
       <Route path='/' component={Home} exact />
       <Route path='/calender' component={Calender} />
 
-      <Route path='/classes' component={ClassesCalender} exact />
+      <Route path='/classes' render={props => <ClassesCalender {...props} />} exact/>
       <Route path='/classes/add' component={AddClass} />
-      <Route path='/classes/delete/:id' component={DeleteClass} />
       <Route path='/classes/edit/:id' component={EditClass} />
       <Route path='/classes/add-module/:id' component={AddModuleToClass} />
 
@@ -38,7 +36,7 @@ class Routers extends React.Component {
 
       <Route path='/form' component={Form} exact />
 
-      <Route render={() => 'Page not found'} />
+      <Route render={() => 'Page not found!'} />
     </Switch>
   )
 }

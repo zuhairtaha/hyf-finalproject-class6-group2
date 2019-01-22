@@ -1,4 +1,5 @@
 import React from 'react'
+import { classTitle } from './components/classes/GroupsItems'
 
 const Context = React.createContext()
 
@@ -11,7 +12,10 @@ const reducer = (state, action) => {
       }
 
     case 'TOGGLE_LOADING':
-      return { ...state, loading: !state.loading }
+      return {
+        ...state,
+        loading: action.payload ? action.payload : !state.loading
+      }
 
     case 'ADD_MODULE':
       return { ...state, modules: [...state.modules, action.payload] }
@@ -22,16 +26,30 @@ const reducer = (state, action) => {
         modules: state.modules.filter(module => module.id !== action.payload)
       }
 
-    case 'ADD_CLASS':
-      return { ...state, classes: [...state.classes, action.payload] }
-
-    case 'EDIT_CLASS':
+    case 'DELETE_CLASS':
       return {
         ...state,
-        classes: state.classes.map(_class =>
-          _class.id === action.payload.id ? action.payload : _class
+        groups: state.groups.filter(group => group.id !== action.payload),
+        items: state.items.filter(item => item.group !== action.payload)
+      }
+
+    case 'ADD_CLASS': {
+      const { id, name } = action.payload
+      return {
+        ...state,
+        groups: [...state.groups, { id, title: classTitle(name,id) }]
+      }
+    }
+
+    case 'EDIT_CLASS': {
+      const { id, name } = action.payload
+      return {
+        ...state,
+        groups: state.groups.map(group =>
+          group.id === id ? { id, title: classTitle(name,id) } : group
         )
       }
+    }
 
     case 'ADD_ROLE':
       return { ...state, roles: [...state.roles, action.payload] }
@@ -53,7 +71,10 @@ const reducer = (state, action) => {
         )
       }
 
-      default:
+    case 'SET_CLASSES_CALENDER':
+      return { ...state, ...action.payload }
+
+    default:
       return state
   }
 }
@@ -62,11 +83,14 @@ export class Provider extends React.Component {
   state = {
     users: [],
     modules: [],
-    classes: [],
     loading: false,
+    roles: [],
+    // calender props start:
     groups: [],
     items: [],
-    roles: [],
+    defaultTimeStart: null,
+    defaultTimeEnd: null,
+    // calender props end;
     dispatch: action => this.setState(state => reducer(state, action))
   }
 

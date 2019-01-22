@@ -1,5 +1,4 @@
-import React, { Component } from 'react'
-import moment from 'moment'
+import React, { Component, forwardRef } from 'react'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './css/style.css'
@@ -7,56 +6,26 @@ import classItem from './calender-stuff/class-item'
 import SundaysMarker from './calender-stuff/Sundays-marker'
 import keys from './calender-stuff/keys'
 import Progress from '../layouts/Progress'
-import Fab from '@material-ui/core/Fab'
-import { Link } from 'react-router-dom'
-import AddIcon from '@material-ui/icons/Add'
-import { defaultTimeEnd, defaultTimeStart, getGroups, getItems } from './GroupsItems'
-import axios from 'axios'
+import { getClassesCalender } from './GroupsItems'
+import { Consumer } from '../../context'
+import AddClassButton from "./add-class-button"
 
-export default class Index extends Component {
-  state = {
-    keys,
-    groups: [],
-    items: [],
-    defaultTimeStart: null,
-    defaultTimeEnd: null
-  }
-
+class Index extends Component {
+  // ----------------------componentDidMount----------------------------------
   componentDidMount() {
     document.title = 'Classes'
-    axios
-      .get('/api/classes-modules')
-      .then(({ data }) => {
-        this.setState({
-          groups: getGroups(data),
-          items: getItems(data),
-          defaultTimeStart: defaultTimeStart(data),
-          defaultTimeEnd: defaultTimeEnd(data)
+
+    if (this.props.value.groups.length === 0)
+      getClassesCalender()
+        .then(res => {
+          this.props.value.dispatch({
+            type: 'SET_CLASSES_CALENDER',
+            payload: res
+          })
         })
-      })
-      .catch(console.error)
+        .catch(console.error)
   }
-
-  addItemHandler = item => {
-    const newItem = {
-      id:
-        1 +
-        this.state.items.reduce(
-          (max, value) => (value.id > max ? value.id : max),
-          0
-        ),
-      group: item.mentor,
-      title: item.status,
-      className: item.status,
-      start: moment(new Date(item.start).toISOString()),
-      end: moment(new Date(item.end).toISOString())
-    }
-
-    this.setState(state => ({
-      items: [...state.items, newItem]
-    }))
-  }
-
+  // ----------------------handleItemMove----------------------------------
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     const { items, groups } = this.state
 
@@ -76,7 +45,7 @@ export default class Index extends Component {
 
     console.log('Moved', itemId, dragTime, newGroupOrder)
   }
-
+  // --------------------------handleItemResize------------------------------
   handleItemResize = (itemId, time, edge) => {
     const { items } = this.state
 
@@ -93,9 +62,9 @@ export default class Index extends Component {
 
     console.log('Resized', itemId, time, edge)
   }
-
+// -----------------------------render---------------------------
   render() {
-    const { keys, groups, items, defaultTimeStart, defaultTimeEnd } = this.state
+    const { groups, items, defaultTimeStart, defaultTimeEnd } = this.props.value
     return (
       <React.Fragment>
         {groups.length > 0 ? (
@@ -140,18 +109,15 @@ export default class Index extends Component {
           <Progress />
         )}
 
-        {/*add class button*/}
-        <div className='floating-btn'>
-          <Fab
-            component={Link}
-            to='/classes/add'
-            color='secondary'
-            aria-label='Add'
-          >
-            <AddIcon />
-          </Fab>
-        </div>
+        {/*add class button --------*/}
+        <AddClassButton/>
       </React.Fragment>
     )
   }
 }
+
+const handler = (props, ref) => (
+  <Consumer>{value => <Index {...props} value={value} ref={ref} />}</Consumer>
+)
+
+export default forwardRef(handler)

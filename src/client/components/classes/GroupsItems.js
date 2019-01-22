@@ -1,64 +1,71 @@
 import axios from 'axios'
 import moment from 'moment'
-import ClassDropDownMenu from './Class-menu'
+import ClassMenu from './Class-menu'
 import React from 'react'
 
-export function getGroupsAndItems() {
-  axios
-    .get('/api/classes-modules')
-    .then(({ data }) => ({
-      groups: getGroups(data),
-      items: getItems(data),
-      start_date: defaultTimeStart(data),
-      end_date: defaultTimeEnd(data)
-    }))
-    .catch(error => ({ error }))
+export function getClassesCalender() {
+  return new Promise((resolve, reject) => {
+    axios
+      .get('/api/classes-modules')
+      .then(({ data }) =>
+        resolve({
+          groups: getGroups(data),
+          items: getItems(data),
+          defaultTimeStart: defaultTimeStart(data),
+          defaultTimeEnd: defaultTimeEnd(data)
+        })
+      )
+      .catch(error => reject(error))
+  })
 }
 
-function classTitle(title, id) {
+export function classTitle(title, id) {
   return (
     <div>
       {title}
-      <ClassDropDownMenu id={id} />
+      <ClassMenu id={id} />
     </div>
   )
 }
 
-export function getGroups(classes_modules) {
+function getGroups(classes_modules) {
   let groups = []
-  classes_modules.forEach(item => {
-    groups[item.group_id] = {
-      id: item.group_id,
-      title: classTitle(item.group_title, item.group_id)
+  classes_modules.forEach(({ group_id, group_title }) => {
+    groups[group_id] = {
+      id: group_id,
+      title: classTitle(group_title, group_id)
     }
   })
   return groups.filter(group => group !== null)
 }
 
-export function getItems(classes_modules) {
+function getItems(classes_modules) {
   return classes_modules
     .filter(item => item.item_id !== null)
-    .map(item => ({
-      id: item.item_id,
-      title: item.item_title,
-      group: item.group_id,
-      start: moment(new Date(item.start_date).toISOString()),
-      end: moment(new Date(item.end_date).toISOString()),
-      className: item.item_title.replace(/\W+/g, '_'),
-      canMove: true,
-      canResize: true,
-      canChangeGroup: true
-    }))
+    .map(item => {
+      const { item_id, item_title, group_id, start_date, end_date } = item
+      return {
+        id: item_id,
+        title: item_title,
+        group: group_id,
+        start: moment(new Date(start_date).toISOString()),
+        end: moment(new Date(end_date).toISOString()),
+        className: item_title.replace(/\W+/g, '_'),
+        canMove: true,
+        canResize: true,
+        canChangeGroup: true
+      }
+    })
 }
 
-export function defaultTimeStart(classes_modules) {
+function defaultTimeStart(classes_modules) {
   const startDates = classes_modules
     .filter(item => item.start_date !== null)
     .map(item => new Date(item.start_date))
   return moment(new Date(Math.min(...startDates)).toISOString()).add(-1, 'week')
 }
 
-export function defaultTimeEnd(classes_modules) {
+function defaultTimeEnd(classes_modules) {
   const endDates = classes_modules
     .filter(item => item.start_date !== null)
     .map(item => new Date(item.end_date))
