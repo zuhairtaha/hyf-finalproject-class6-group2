@@ -6,7 +6,8 @@ import Container from '../layouts/container'
 import { withStyles } from '@material-ui/core'
 import Button from '@material-ui/core/es/Button/Button'
 import AddIcon from '@material-ui/icons/Add'
-import { Link } from 'react-router-dom'
+import { Link, Redirect, withRouter } from 'react-router-dom'
+import axios from 'axios'
 
 const styles = theme => ({
   textField: {
@@ -54,17 +55,25 @@ class AddModule extends Component {
       length
     }
 
-    dispatch({ type: 'ADD_MODULE', payload: newModule })
-  }
+    axios.post(`/api/classes`, newModule).then(res => {
+      if (res.data.added) {
+        const payload = {
+          item: res.data.item,
+          history: this.props.history
+        }
+        dispatch({ type: 'ADD_MODULE', payload })
+      }
+    })  }
 
   render() {
     const { title, description, length } = this.state
     const { classes } = this.props
     return (
       <Consumer>
-        {value => {
-          const { dispatch } = value
-          return (
+        {({ dispatch, redirect })=>{
+          return (redirect ? (
+            <Redirect to='/modules' />
+          ) : (
             <Container>
               <form onSubmit={this.submitForm.bind(this, dispatch)}>
                 {/*title*/}
@@ -123,6 +132,7 @@ class AddModule extends Component {
               </form>
             </Container>
           )
+          )
         }}
       </Consumer>
     )
@@ -130,4 +140,4 @@ class AddModule extends Component {
 }
 
 
-export default withStyles(styles)(AddModule)
+export default withStyles(styles)(withRouter(AddModule))

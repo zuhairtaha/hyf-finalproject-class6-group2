@@ -74,51 +74,51 @@ class AddClass extends Component {
           return redirect ? (
             <Redirect to='/classes' />
           ) : (
-            <Container>
-              <Typography component='h5' variant='h5'>
-                Add class
+              <Container>
+                <Typography component='h5' variant='h5'>
+                  Add class
               </Typography>
-              <form onSubmit={this.submitForm.bind(this, dispatch)}>
-                {/*name*/}
-                <TextField
-                  label='Name'
-                  name='name'
-                  defaultValue={name}
-                  onChange={this.updateField}
-                  margin='normal'
-                  className={classes.textField}
-                  style={{ marginRight: '1rem' }}
-                />
+                <form onSubmit={this.submitForm.bind(this, dispatch)}>
+                  {/*name*/}
+                  <TextField
+                    label='Name'
+                    name='name'
+                    defaultValue={name}
+                    onChange={this.updateField}
+                    margin='normal'
+                    className={classes.textField}
+                    style={{ marginRight: '1rem' }}
+                  />
 
-                <br />
+                  <br />
 
-                <FormControlLabel
-                  control={
-                    <Switch
-                      color='primary'
-                      checked={this.state.active}
-                      onChange={this.handleChange('active')}
-                      value='active'
-                    />
-                  }
-                  label='Active'
-                />
-                <br />
-                <Button variant='contained' color='primary' type='submit'>
-                  <AddIcon /> Add Class
+                  <FormControlLabel
+                    control={
+                      <Switch
+                        color='primary'
+                        checked={this.state.active}
+                        onChange={this.handleChange('active')}
+                        value='active'
+                      />
+                    }
+                    label='Active'
+                  />
+                  <br />
+                  <Button variant='contained' color='primary' type='submit'>
+                    <AddIcon /> Add Class
                 </Button>
 
-                <Button
-                  variant='contained'
-                  component={Link}
-                  to='/classes'
-                  style={{ marginLeft: '1rem' }}
-                >
-                  cancel
+                  <Button
+                    variant='contained'
+                    component={Link}
+                    to='/classes'
+                    style={{ marginLeft: '1rem' }}
+                  >
+                    cancel
                 </Button>
-              </form>
-            </Container>
-          )
+                </form>
+              </Container>
+            )
         }}
       </Consumer>
     )

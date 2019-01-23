@@ -27,20 +27,11 @@ const reducer = (state, action) => {
         redirect: false
       }
     case 'ADD_MODULE':
-      axios
-        .post(`/api/modules`, action.payload)
-        .then(response => {
-          console.log(response)
-        })
-        .catch(error => {
-          console.log(error.response)
-        })
-      return {
-        ...state,
-        modules: [...state.modules, action.payload]
-      }
-
-
+    action.payload.history.push('/modules')
+    return {
+      ...state,
+      modules: [...state.modules, action.payload.item]
+    }
     case 'DELETE_MODULE':
       axios
         .delete(`/api/modules/${action.payload}`)
