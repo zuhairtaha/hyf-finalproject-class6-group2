@@ -37,15 +37,15 @@ class ClassMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleOptionClick = (actionType, _class, dispatch = null, title = null) => {
+  handleOptionClick = (actionType, id, dispatch = null, title = null) => {
     this.setState({ anchorEl: null })
     switch (actionType) {
       case 'edit_class':
-        this.props.history.push(`/classes/edit/${_class.id}`)
+        this.props.history.push(`/classes/edit/${id}`)
         break
 
       case 'add_module_to_class':
-        this.props.history.push(`/classes/add-module/${_class.id}`)
+        this.props.history.push(`/classes/add-module/${id}`)
         break
 
       case 'delete_class':
@@ -59,10 +59,10 @@ class ClassMenu extends React.Component {
           if (willDelete) {
             dispatch({ type: 'TOGGLE_LOADING', payload: true })
             axios
-              .delete(`/api/classes/${_class.id}`)
+              .delete(`/api/classes/${id}`)
               .then(res => {
                 if (res.data.deleted)
-                  dispatch({ type: 'DELETE_CLASS', payload: _class.id })
+                  dispatch({ type: 'DELETE_CLASS', payload: id })
               })
               .catch(console.error)
               .finally(() =>
