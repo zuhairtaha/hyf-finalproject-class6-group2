@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { withRouter } from 'react-router-dom'
+import { withRouter, Link } from 'react-router-dom'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AddMentorIcon from '@material-ui/icons/PersonAdd'
@@ -38,22 +38,6 @@ class ClassModuleMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleOptionClick = (actionType, id, dispatch = null) => {
-    console.log('handlerOptionClick')
-    this.setState({ anchorEl: null })
-    switch (actionType) {
-      case 'edit_class':
-        this.props.history.push(`/classes/edit/${id}`)
-        break
-
-      case 'add_mentor_to_class_module':
-        this.props.history.push(`/classes/add-module/${id}`)
-        break
-
-      default:
-        break
-    }
-  }
   deleteClassModule = (id, title, dispatch) => {
     swal({
       title: `Delete ${title}?`,
@@ -75,6 +59,7 @@ class ClassModuleMenu extends React.Component {
       }
     })
   }
+
   render() {
     const { anchorEl } = this.state
     const { classes, id, title } = this.props
@@ -106,9 +91,7 @@ class ClassModuleMenu extends React.Component {
               }}
             >
               {/*Edit ----------------------------------- */}
-              <MenuItem
-                onClick={() => this.handleOptionClick('edit_class', id)}
-              >
+              <MenuItem component={Link} to={`/classes-modules/edit/${id}`}>
                 <ListItemIcon className={classes.icon}>
                   <EditIcon />
                 </ListItemIcon>
