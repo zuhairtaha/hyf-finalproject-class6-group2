@@ -1,12 +1,15 @@
 .confirm,
 .assign,
 .pending,
-.htmlCss,
-.js2,
-.js3,
-.nodejs,
-.mySql,
-.react {
+.CSS,
+.HTML,
+.Javascript_1,
+.javascript_2,
+.javascript_3,
+.Node_js,
+.MySQL,
+.React,
+.Final_Project {
   color: #fff;
 }
 
@@ -20,13 +23,11 @@
 
 .CSS {
   background-color: #4897d8 !important;
-
-  color: #fff;
 }
 
 .HTML {
   background-color: #429970 !important;
-  color: #fff;
+
 }
 
 .Javascript_1 {
@@ -36,22 +37,25 @@
 
 .javascript_2 {
   background-color: #fa6e59 !important;
-  color: #fff;
 }
 
 .javascript_3 {
   background-color: #be59fa !important;
-  color: #fff;
 }
 
-.nodejs {
+.Node_js {
   background-color: #4897d8 !important;
 }
 
-.mySql {
+.MySQL {
   background-color: #6d6d6d !important;
 }
 
-.react {
+.React {
   background-color: #59e5fa !important;
+    color:#000;
+}
+
+.Final_Project {
+  background-color: deeppink;
 }

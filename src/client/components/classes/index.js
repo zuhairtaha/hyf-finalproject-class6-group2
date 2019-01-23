@@ -1,99 +1,32 @@
-import React, { Component } from 'react'
-import moment from 'moment'
+import React, { Component, forwardRef } from 'react'
 import Timeline, { TimelineMarkers, TodayMarker } from 'react-calendar-timeline'
 import 'react-calendar-timeline/lib/Timeline.css'
 import './css/style.css'
-import classItem from './class-item'
-import SundaysMarker from './Sundays-marker'
-import keys from './keys'
-import axios from 'axios'
+import classItem from './calender-stuff/class-item'
+import SundaysMarker from './calender-stuff/Sundays-marker'
+import keys from './calender-stuff/keys'
 import Progress from '../layouts/Progress'
 
-import ClassDropDownMenu from './ClassDropDownMenu'
-import Fab from '@material-ui/core/Fab'
-import { Link } from 'react-router-dom'
-import AddIcon from '@material-ui/icons/Add'
+import { getClassesCalender } from './GroupsItems'
+import { Consumer } from '../../context'
+import AddClassButton from "./add-class-button"
 
-export default class Index extends Component {
-  state = {
-    keys,
-    groups: [],
-    items: [],
-    y19: new Date('2019/1/1'),
-    defaultTimeStart: null,
-    defaultTimeEnd: null
-  }
-
-  getGroups = _class => ({
-    id: _class.id,
-    title: this.classTitle(_class.name, _class.id)
-  })
-
-  classTitle = (title, id) => (
-    <div>
-      {title}
-      <ClassDropDownMenu id={id} />
-    </div>
-  )
-
-  getItems = (item, index) => ({
-    ...item,
-    id: index + 1,
-    start: moment(new Date(item.start)),
-    end: moment(new Date(item.end)),
-    className: item.title.replace(/ /g, '_'),
-    canMove: true,
-    canResize: false,
-    canChangeGroup: false
-  })
-
+class Index extends Component {
+  // ----------------------componentDidMount----------------------------------
   componentDidMount() {
-    axios.get('/api/classes').then(classes => {
-      axios.get(`/api/classesmodules`).then(modules => {
-        const endDates = modules.data.map(item => new Date(item.end))
-        const startDates = modules.data.map(item => new Date(item.start))
-        this.setState({
-          groups: classes.data.map(this.getGroups),
-          items: modules.data.map(this.getItems),
-
-          defaultTimeStart: moment(new Date(Math.min(...startDates))).add(
-            -1,
-            'week'
-          ),
-          defaultTimeEnd: moment(new Date(Math.max(...endDates))).add(1, 'week')
-        })
-      })
-    })
-  }
-
-  componentWillMount() {
     document.title = 'Classes'
-  }
 
-  toTimestamp = strDate => {
-    const d = new Date(strDate)
-    return Date.parse(d.toString()) / 1000
+    if (this.props.value.groups.length === 0)
+      getClassesCalender()
+        .then(res => {
+          this.props.value.dispatch({
+            type: 'SET_CLASSES_CALENDER',
+            payload: res
+          })
+        })
+        .catch(console.error)
   }
-
-  addItemHandler = item => {
-    const newItem = {
-      id:
-        1 +
-        this.state.items.reduce(
-          (max, value) => (value.id > max ? value.id : max),
-          0
-        ),
-      group: item.mentor,
-      title: item.status,
-      className: item.status,
-      start: moment(new Date(item.start)),
-      end: moment(new Date(item.end))
-    }
-
-    this.setState(state => ({
-      items: [...state.items, newItem]
-    }))
-  }
+  // ----------------------handleItemMove----------------------------------
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
     const { items, groups } = this.state
 
@@ -113,7 +46,7 @@ export default class Index extends Component {
 
     console.log('Moved', itemId, dragTime, newGroupOrder)
   }
-
+  // --------------------------handleItemResize------------------------------
   handleItemResize = (itemId, time, edge) => {
     const { items } = this.state
 
@@ -130,9 +63,9 @@ export default class Index extends Component {
 
     console.log('Resized', itemId, time, edge)
   }
-
+// -----------------------------render---------------------------
   render() {
-    const { keys, groups, items, defaultTimeStart, defaultTimeEnd } = this.state
+    const { groups, items, defaultTimeStart, defaultTimeEnd } = this.props.value
     return (
       <React.Fragment>
         {groups.length > 0 ? (
@@ -177,18 +110,15 @@ export default class Index extends Component {
           <Progress />
         )}
 
-        {/*add class button*/}
-        <div className='floating-btn'>
-          <Fab
-            component={Link}
-            to='/classes/add'
-            color='secondary'
-            aria-label='Add'
-          >
-            <AddIcon />
-          </Fab>
-        </div>
+        {/*add class button --------*/}
+        <AddClassButton/>
       </React.Fragment>
     )
   }
 }
+
+const handler = (props, ref) => (
+  <Consumer>{value => <Index {...props} value={value} ref={ref} />}</Consumer>
+)
+
+export default forwardRef(handler)

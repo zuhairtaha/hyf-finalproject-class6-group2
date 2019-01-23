@@ -1,10 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Work+Sans');
-@import 'items.css';
-body {
-  font-family: 'Work Sans', sans-serif;
-  font-size: 18px;
-  background: #fafafa;
-}
+@import 'modules-colors.css';
 
 .rct-item-content {
   border: dotted 1px deepskyblue;

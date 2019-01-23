@@ -41,20 +41,19 @@ class AddClass extends Component {
   submitForm = (dispatch, e) => {
     e.preventDefault()
     const { name, active } = this.state
-    const newClass = {
-      name,
-      active
-    }
-
-    axios.post(`/api/classes`, newClass).then(res => {
-      if (res.data.added) {
-        const payload = {
-          item: res.data.item,
-          history: this.props.history
+    const newClass = {name, active}
+    axios
+      .post(`/api/classes`, newClass)
+      .then(res => {
+        if (res.data.added) {
+          dispatch({
+            type: 'ADD_CLASS',
+            payload: { id: res.data.id, ...newClass }
+          })
+          this.props.history.push('/classes')
         }
-        dispatch({ type: 'ADD_CLASS', payload })
-      }
-    })
+      })
+      .catch(console.error)
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked })

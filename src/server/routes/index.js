@@ -18,7 +18,7 @@ router.use("/roles", rolesRoute)
 
 router.use("/users", usersRoute)
 router.use("/classes", classesRoute)
-router.use("/classesmodules", classesmodulesRoute)
+router.use("/classes-modules", classesmodulesRoute)
 router.use("/profile", profileRouter)
 
 module.exports = router

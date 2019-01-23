@@ -1,6 +1,5 @@
 import React from 'react'
 
-
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
@@ -12,10 +11,11 @@ import red from '@material-ui/core/colors/red'
 import EditIcon from '@material-ui/icons/Edit'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { Consumer } from '../../context'
+import Link from 'react-router-dom/Link'
 
 const styles = theme => ({
   card: {
-    width:'100%'
+    width: '100%'
   },
   media: {
     height: 0,
@@ -53,7 +53,6 @@ class ModuleItem extends React.Component {
     const { id, title, description, length } = this.props.module
 
     return (
-
       <Consumer>
         {({ dispatch }) => (
           <Card className={classes.card}>
@@ -68,7 +67,11 @@ class ModuleItem extends React.Component {
               <Typography component='p'>Length: {length} weeks</Typography>
             </CardContent>
             <CardActions className={classes.actions} disableActionSpacing>
-              <IconButton aria-label='Share'>
+              <IconButton
+                component={Link}
+                to={`/modules/edit/${id}`}
+                aria-label='Share'
+              >
                 <EditIcon />
               </IconButton>
               <IconButton

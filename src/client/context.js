@@ -1,69 +1,80 @@
 import React from 'react'
-import axios from 'axios'
-//import qs from 'qs'
-
+import { classTitle } from './components/classes/GroupsItems'
 
 const Context = React.createContext()
 
 const reducer = (state, action) => {
   switch (action.type) {
     case 'DELETE_USER':
-      axios
-        .delete(`/api/users/${action.payload}`)
-        .then(console.log)
-        .catch(console.error)
       return {
         ...state,
         users: state.users.filter(user => user.id !== action.payload)
       }
+
     case 'TOGGLE_LOADING':
       return {
         ...state,
-        loading: !state.loading
+        loading: action.payload ? action.payload : !state.loading
       }
-    case 'RESET_REDIRECT':
-      return {
-        ...state,
-        redirect: false
-      }
+
     case 'ADD_MODULE':
-    action.payload.history.push('/modules')
-    return {
-      ...state,
-      modules: [...state.modules, action.payload.item]
-    }
+      return { ...state, modules: [...state.modules, action.payload] }
+
     case 'DELETE_MODULE':
-      axios
-        .delete(`/api/modules/${action.payload}`)
-        .then(console.log)
-        .catch(console.error)
       return {
         ...state,
         modules: state.modules.filter(module => module.id !== action.payload)
       }
-    case 'ADD_CLASS':
-      action.payload.history.push('/classes')
+
+
+    case 'DELETE_CLASS':
       return {
         ...state,
-        classes: [...state.classes, action.payload.item]
+        groups: state.groups.filter(group => group.id !== action.payload),
+        items: state.items.filter(item => item.group !== action.payload)
       }
-    case 'EDIT_CLASS':
-      action.payload.history.push('/classes')
+
+    case 'ADD_CLASS': {
+      const { id, name } = action.payload
       return {
         ...state,
-        classes: [...state.classes, action.payload.item]
+        groups: [...state.groups, { id, title: classTitle(name,id) }]
       }
-      case 'ADD_ROLE':
-    console.log('adding role context')
-    axios.post(`/api/roles`, action.payload )
-    .then(response => { console.log(response)})
-    .catch(error => {console.log(error.response)
-    });
-    return{
-      ...state,
-      roles:[action.payload,
-      ...state.roles]
     }
+
+    case 'EDIT_CLASS': {
+      const { id, name } = action.payload
+      return {
+        ...state,
+        groups: state.groups.map(group =>
+          group.id === id ? { id, title: classTitle(name,id) } : group
+        )
+      }
+    }
+
+    case 'ADD_ROLE':
+      return { ...state, roles: [...state.roles, action.payload] }
+
+    case 'GET_MODULES':
+      return { ...state, modules: action.payload }
+
+    case 'GET_USERS':
+      return { ...state, users: action.payload }
+
+    case 'GET_ROLES':
+      return { ...state, roles: action.payload }
+
+    case 'UPDATE_MODULE':
+      return {
+        ...state,
+        modules: state.modules.map(module =>
+          module.id === action.payload.id ? action.payload : module
+        )
+      }
+
+    case 'SET_CLASSES_CALENDER':
+      return { ...state, ...action.payload }
+
     default:
       return state
   }
@@ -73,25 +84,18 @@ export class Provider extends React.Component {
   state = {
     users: [],
     modules: [],
-    classes: [],
     loading: false,
+    roles: [],
+    // calender props start:
+    groups: [],
+    items: [],
+    defaultTimeStart: null,
+    defaultTimeEnd: null,
+    // calender props end;
     dispatch: action => this.setState(state => reducer(state, action))
   }
 
-  componentDidMount() {
-    axios
-      .get('/api/users')
-      .then(res => this.setState({ users: res.data }))
-      .catch(console.error)
-      axios
-      .get('/api/modules')
-      .then(res => this.setState({ modules: res.data }))
-      .catch(console.error)
-      axios
-      .get('/api/roles')
-      .then(res => this.setState({ roles: res.data }))
-      .catch(console.error)
-}
+  componentDidMount() {}
 
   render = () => (
     <Context.Provider value={this.state}>

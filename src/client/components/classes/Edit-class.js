@@ -27,6 +27,7 @@ const styles = theme => ({
 
 class EditClass extends Component {
   state = {
+    id: null,
     name: '',
     active: true
   }
@@ -40,31 +41,27 @@ class EditClass extends Component {
 
   submitForm = (dispatch, e) => {
     e.preventDefault()
-    const { name, active } = this.state
-    const newClass = {
-      name,
-      active
-    }
-
+    const { name, active, id } = this.state
+    const newClass = { name, active }
     axios
-      .put(`/api/classes/${this.props.match.params.id}`, newClass)
+      .put(`/api/classes/${id}`, newClass)
       .then(res => {
         if (res.data.updated) {
-          const payload = {
-            item: res.data.item,
-            history: this.props.history
-          }
-          dispatch({ type: 'EDIT_CLASS', payload })
+          dispatch({ type: 'EDIT_CLASS', payload: { id, name } })
+          this.props.history.push('/classes')
         }
       })
+      .catch(console.error)
   }
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.checked })
   }
 
   componentDidMount() {
     document.title = 'Edit class'
-    const id = this.props.match.params.id
+    const id = parseInt(this.props.match.params.id)
+    this.setState({ id })
     axios.get(`/api/classes/${id}`).then(res => {
       const { name, active } = res.data
       this.setState({ name, active: active === 1 })

@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 import './users.css'
 import UserItem from './User-item'
 import { Consumer } from '../../context'
-
 import { withStyles } from '@material-ui/core/styles'
+import axios from 'axios'
+
 const styles = {
   members: {
     display: 'grid',
@@ -16,26 +17,37 @@ const styles = {
 }
 
 class Index extends React.Component {
-  componentWillMount() {
+  componentDidMount() {
+    getUsers(this.props.value.dispatch)
     document.title = 'Users'
   }
 
   render = () => {
-    const { classes } = this.props
+    const { classes, value } = this.props
+    const users = value.users
     return (
-      <Consumer>
-        {({ users }) => (
-          <div>
-            <div className={classes.members}>
-              {users.map(user => (
-                <UserItem key={user.id} user={user} />
-              ))}
-            </div>
-          </div>
-        )}
-      </Consumer>
+      <div>
+        <div className={classes.members}>
+          {users.map(user => (
+            <UserItem key={user.id} user={user} />
+          ))}
+        </div>
+      </div>
     )
   }
 }
 
-export default withStyles(styles)(Index)
+export function getUsers(dispatch) {
+  axios
+    .get('/api/users')
+    .then(res => {
+      dispatch({ type: 'GET_USERS', payload: res.data })
+    })
+    .catch(console.error)
+}
+
+const handler = (props, ref) => (
+  <Consumer>{value => <Index {...props} value={value} ref={ref} />}</Consumer>
+)
+
+export default withStyles(styles)(forwardRef(handler))

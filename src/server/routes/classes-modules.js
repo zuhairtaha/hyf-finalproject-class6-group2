@@ -2,31 +2,46 @@ const express = require('express')
 const router = express.Router()
 const sqlString = require('sqlstring')
 const db = require('../config/db')
+const Joi = require('joi')
+// --------------------------
+// @link: https://github.com/hapijs/joi/blob/v14.3.1/API.md
+const schema = Joi.object().keys({
+  class_id: Joi.number().required(),
+  module_id: Joi.number()
+    .required()
+    .not(0),
+  github_page: Joi.optional(),
+  start_date: Joi.date().required(),
+  end_date: Joi.date().required()
+})
 // --------------------------
 
 router
-  .get('/', getAllModulesWithClasses)
-  .get('/:id', listclassesmodules)
+  .get('/', getAll)
+  .get('/:id', listClassesModules)
   .get('/:id', getUserById)
   .post('/', createModule)
   .delete('/:id', deleteUser)
   .put('/:id', updateModule)
-  .put('/:id', addtoclass)
+  .put('/:id', addToClass)
 
 // --------------------------
 // GET all users
-function getAllModulesWithClasses(req, res, next) {
+function getAll(req, res, next) {
   const sql = sqlString.format(`
-          SELECT
-              modules.id
-              , classes_modules.class_id AS \`group\`
-              , modules.title
-              , classes_modules.start_date AS start
-              , classes_modules.end_date AS end
-          FROM
-            classes_modules
-          INNER JOIN modules 
-              ON (classes_modules.module_id = modules.id)
+SELECT
+  classes.id AS group_id,
+  classes.name AS group_title,
+  classes_modules.id AS item_id,
+  modules.title AS item_title,
+  classes_modules.start_date,
+  classes_modules.end_date
+FROM
+  classes
+  LEFT JOIN classes_modules
+    ON classes_modules.class_id = classes.id
+  LEFT JOIN modules
+    ON classes_modules.module_id = modules.id
         `)
   db.execute(sql, (err, rows) => {
     if (err) return next(err)
@@ -34,7 +49,7 @@ function getAllModulesWithClasses(req, res, next) {
   })
 } // --------------------------
 // GET all users
-function listclassesmodules(req, res, next) {
+function listClassesModules(req, res, next) {
   const sql = sqlString.format(
     `SELECT * FROM modules 
           INNER JOIN classes_modules 
@@ -49,19 +64,22 @@ function listclassesmodules(req, res, next) {
 }
 
 // --------------------------
+
 // CREATE a new user
 function createModule(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
+  const { error } = Joi.validate(req.body, schema)
+  if (error) return next(error)
 
+  const sql = sqlString.format(`INSERT INTO classes_modules SET ?`, req.body)
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send('New user added successfully')
+    res.send({ added: true })
   })
 }
 
 // --------------------------
 // ADD a new module to class
-function addtoclass(req, res, next) {
+function addToClass(req, res, next) {
   const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
   db.execute(sql, (err, result) => {

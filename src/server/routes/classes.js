@@ -28,7 +28,7 @@ function createClass(req, res, next) {
 
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send({ added: true, item: req.body })
+    res.send({ added: true, id: result.insertId })
   })
 }
 
