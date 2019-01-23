@@ -24,7 +24,7 @@ export function classTitle(title, id) {
   return (
     <div>
       {title}
-      <ClassMenu id={id} />
+      <ClassMenu id={id} title={title} />
     </div>
   )
 }
@@ -40,10 +40,10 @@ function getGroups(classes_modules) {
   return groups.filter(group => group !== null)
 }
 
-function itemTitle(id,title) {
+function itemTitle(id, title) {
   return (
     <div>
-      <ClassModuleMenu id={id} />
+      <ClassModuleMenu id={id} title={title} />
       {title}
     </div>
   )
@@ -56,7 +56,7 @@ function getItems(classes_modules) {
       const { item_id, item_title, group_id, start_date, end_date } = item
       return {
         id: item_id,
-        title: itemTitle(item_id,item_title),
+        title: itemTitle(item_id, item_title),
         group: group_id,
         start: moment(new Date(start_date).toISOString()),
         end: moment(new Date(end_date).toISOString()),
