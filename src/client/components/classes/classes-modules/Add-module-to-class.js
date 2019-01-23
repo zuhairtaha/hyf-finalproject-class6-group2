@@ -8,6 +8,10 @@ import Container from '../../layouts/container'
 import Typography from '@material-ui/core/es/Typography/Typography'
 import axios from 'axios'
 import { Link, withRouter } from 'react-router-dom'
+import moment from 'moment'
+import DateFnsUtils from '@date-io/date-fns'
+import swal from 'sweetalert'
+import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
 
 const styles = theme => ({
   root: {
@@ -56,15 +60,43 @@ class AddModuleToClass extends React.Component {
     status: '',
     moduleId: 0,
     modules: [],
-    start: null,
-    end: null,
+    start: moment(new Date().toISOString()).format('YYYY-MM-DD'),
+    end: moment(new Date().toISOString()).format('YYYY-MM-DD'),
     className: '',
     classId: null,
     error: '',
-    github: ''
+    github: 'https://github.com/',
+    selectedModuleLength: 3 //initial module length
   }
 
-  handleChange = name => event => this.setState({ [name]: event.target.value })
+  handleChange = name => event => {
+    const { value } = event.target
+    this.setState({ [name]: value })
+
+    // when module selected from drop-down list set the its id and length at state
+    if (name === 'moduleId') {
+      this.setState({
+        selectedModuleLength: this.state.modules.filter(
+          module => module.id === value
+        )[0]['length']
+      })
+    }
+  }
+
+  // when start date selected, set :
+  // (end date) = (start date) + (selected module length)
+  handleStartDateChange = date => {
+    this.setState({ start: date })
+
+    const end = moment(new Date(date).toISOString())
+      .add(this.state.selectedModuleLength, 'week')
+      .format('YYYY-MM-DD')
+    this.setState({ end })
+  }
+
+  handleEndDateChange = date => {
+    this.setState({ end: date })
+  }
 
   formSubmitHandler = e => {
     e.preventDefault()
@@ -80,7 +112,7 @@ class AddModuleToClass extends React.Component {
       .then(res => {
         if (res.data.added) this.props.history.push('/classes')
       })
-      .catch(error => this.setState({ error }))
+      .catch(err => swal('Oops!', err.response.data, 'error'))
   }
 
   componentDidMount() {
@@ -88,8 +120,12 @@ class AddModuleToClass extends React.Component {
     axios
       .get(`/api/classes/${classId}`)
       .then(res => {
-        const { id, name } = res.data
-        this.setState({ className: name, classId: id })
+        const { id, name, length } = res.data
+        this.setState({
+          className: name,
+          classId: id,
+          length
+        })
         document.title = `Add module to ${name}`
       })
       .catch(error => this.setState(state => ({ ...state.error, error })))
@@ -153,26 +189,30 @@ class AddModuleToClass extends React.Component {
           <br />
 
           {/*start*/}
-          <TextField
-            id='date'
-            label='Start'
-            type='date'
-            defaultValue={start}
-            className={classes.textField}
-            InputLabelProps={{ shrink: true }}
-            onChange={this.handleChange('start')}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              margin='normal'
+              label='Start date'
+              format='dd-MM-yyyy'
+              value={start}
+              className={classes.textField}
+              onChange={this.handleStartDateChange}
+            />
+          </MuiPickersUtilsProvider>
           <br />
+
           {/*end*/}
-          <TextField
-            id='date'
-            label='End'
-            type='date'
-            defaultValue={end}
-            className={classes.textField}
-            InputLabelProps={{ shrink: true }}
-            onChange={this.handleChange('end')}
-          />
+          <MuiPickersUtilsProvider utils={DateFnsUtils}>
+            <DatePicker
+              margin='normal'
+              label='End date'
+              format='dd-MM-yyyy'
+              value={end}
+              className={classes.textField}
+              onChange={this.handleEndDateChange}
+            />
+          </MuiPickersUtilsProvider>
+
           <br />
           {/*Submit*/}
           <Button

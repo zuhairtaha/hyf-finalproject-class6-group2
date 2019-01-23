@@ -80,7 +80,7 @@ function getModuleById(req, res, next) {
 // Get rest modules for a class by class id
 function getRestModulesForClass(req, res, next) {
   const sql = sqlString.format(
-    ` SELECT id,title FROM modules WHERE id NOT IN (
+    ` SELECT id,title,length FROM modules WHERE id NOT IN (
 SELECT module_id FROM classes_modules WHERE class_id <=> ?
 )`,
     [req.params.id]

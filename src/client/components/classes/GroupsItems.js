@@ -1,6 +1,7 @@
 import axios from 'axios'
 import moment from 'moment'
 import ClassMenu from './Class-menu'
+import ClassModuleMenu from './Class-module-menu'
 import React from 'react'
 
 export function getClassesCalender() {
@@ -39,6 +40,15 @@ function getGroups(classes_modules) {
   return groups.filter(group => group !== null)
 }
 
+function itemTitle(id,title) {
+  return (
+    <div>
+      <ClassModuleMenu id={id} />
+      {title}
+    </div>
+  )
+}
+
 function getItems(classes_modules) {
   return classes_modules
     .filter(item => item.item_id !== null)
@@ -46,7 +56,7 @@ function getItems(classes_modules) {
       const { item_id, item_title, group_id, start_date, end_date } = item
       return {
         id: item_id,
-        title: item_title,
+        title: itemTitle(item_id,item_title),
         group: group_id,
         start: moment(new Date(start_date).toISOString()),
         end: moment(new Date(end_date).toISOString()),

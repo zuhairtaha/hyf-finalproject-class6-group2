@@ -2,6 +2,18 @@ const express = require('express')
 const router = express.Router()
 const sqlString = require('sqlstring')
 const db = require('../config/db')
+const Joi = require('joi')
+// --------------------------
+// @link: https://github.com/hapijs/joi/blob/v14.3.1/API.md
+const schema = Joi.object().keys({
+  class_id: Joi.number().required(),
+  module_id: Joi.number()
+    .required()
+    .not(0),
+  github_page: Joi.optional(),
+  start_date: Joi.date().required(),
+  end_date: Joi.date().required()
+})
 // --------------------------
 
 router
@@ -11,7 +23,7 @@ router
   .post('/', createModule)
   .delete('/:id', deleteUser)
   .put('/:id', updateModule)
-  .put('/:id', addtoclass)
+  .put('/:id', addToClass)
 
 // --------------------------
 // GET all users
@@ -52,10 +64,13 @@ function listClassesModules(req, res, next) {
 }
 
 // --------------------------
+
 // CREATE a new user
 function createModule(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO classes_modules SET ?`, req.body)
+  const { error } = Joi.validate(req.body, schema)
+  if (error) return next(error)
 
+  const sql = sqlString.format(`INSERT INTO classes_modules SET ?`, req.body)
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     res.send({ added: true })
@@ -64,7 +79,7 @@ function createModule(req, res, next) {
 
 // --------------------------
 // ADD a new module to class
-function addtoclass(req, res, next) {
+function addToClass(req, res, next) {
   const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
 
   db.execute(sql, (err, result) => {
