@@ -12,21 +12,19 @@ const schema = Joi.object().keys({
     .not(0),
   github_page: Joi.optional(),
   start_date: Joi.date().required(),
-  end_date: Joi.date().required()
+  end_date: Joi.date()
+    .disallow(Joi.ref('start_date'))
+    .required() // todo: this should be > start_date
 })
 // --------------------------
 
 router
   .get('/', getAll)
-  .get('/:id', listClassesModules)
-  .get('/:id', getUserById)
-  .post('/', createModule)
-  .delete('/:id', deleteUser)
-  .put('/:id', updateModule)
-  .put('/:id', addToClass)
+  .post('/', AddClassModule)
+  .delete('/:id', deleteClassModule)
 
 // --------------------------
-// GET all users
+// GET all classes-modules (groups and items for calender)
 function getAll(req, res, next) {
   const sql = sqlString.format(`
 SELECT
@@ -48,25 +46,9 @@ FROM
     res.send(rows)
   })
 } // --------------------------
-// GET all users
-function listClassesModules(req, res, next) {
-  const sql = sqlString.format(
-    `SELECT * FROM modules 
-          INNER JOIN classes_modules 
-          ON modules.module_id = classes_modules.module_id 
-          WHERE classes_modules.class_id = ?`,
-    [req.params.id]
-  )
-  db.execute(sql, (err, rows) => {
-    if (err) return next(err)
-    res.send(rows)
-  })
-}
-
-// --------------------------
 
 // CREATE a new user
-function createModule(req, res, next) {
+function AddClassModule(req, res, next) {
   const { error } = Joi.validate(req.body, schema)
   if (error) return next(error)
 
@@ -76,59 +58,16 @@ function createModule(req, res, next) {
     res.send({ added: true })
   })
 }
-
 // --------------------------
-// ADD a new module to class
-function addToClass(req, res, next) {
-  const sql = sqlString.format(`INSERT INTO modules SET ?`, req.body)
-
-  db.execute(sql, (err, result) => {
-    if (err) return next(err)
-    res.send('New user added successfully')
-  })
-}
-
-// --------------------------
-// DELETE a user by ID (soft delete)
-function deleteUser(req, res, next) {
-  const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
-    { active: 0 },
+// DELETE a class_module by ID
+function deleteClassModule(req, res, next) {
+  const sql = sqlString.format(`DELETE FROM classes_modules WHERE id = ?`, [
     req.params.id
   ])
-
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    if (!result.affectedRows) return next({ message: 'User not find' })
-    res.send('User Deleted')
-  })
-}
-
-// --------------------------
-// UPDATE a user by ID
-function updateModule(req, res, next) {
-  const sql = sqlString.format(`UPDATE users SET ? WHERE id = ?`, [
-    req.body,
-    req.params.id
-  ])
-
-  db.execute(sql, (err, result) => {
-    if (err) return next(err)
-    if (!result.affectedRows) return next({ message: 'User not find' })
-    res.send('User updated')
-  })
-}
-
-// --------------------------
-// GET one user by ID
-function getUserById(req, res, next) {
-  const sql = sqlString.format(
-    'SELECT * FROM users WHERE id = ? AND status = ?',
-    [req.params.id, 'Active']
-  )
-  db.execute(sql, (err, rows) => {
-    if (err) return next(err)
-    if (rows.length === 0) return next({ message: 'User not find' })
-    res.send(rows[0])
+    if (!result.affectedRows) return next({ message: 'row not found!' })
+    res.send({ deleted: true })
   })
 }
 

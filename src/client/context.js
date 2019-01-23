@@ -33,11 +33,17 @@ const reducer = (state, action) => {
         items: state.items.filter(item => item.group !== action.payload)
       }
 
+    case 'DELETE_CLASS_MODULE':
+      return {
+        ...state,
+        items: state.items.filter(item => item.id !== action.payload)
+      }
+
     case 'ADD_CLASS': {
       const { id, name } = action.payload
       return {
         ...state,
-        groups: [...state.groups, { id, title: classTitle(name,id) }]
+        groups: [...state.groups, { id, title: classTitle(name, id) }]
       }
     }
 
@@ -46,7 +52,7 @@ const reducer = (state, action) => {
       return {
         ...state,
         groups: state.groups.map(group =>
-          group.id === id ? { id, title: classTitle(name,id) } : group
+          group.id === id ? { id, title: classTitle(name, id) } : group
         )
       }
     }

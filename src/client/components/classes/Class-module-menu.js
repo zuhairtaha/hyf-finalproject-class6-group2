@@ -6,12 +6,14 @@ import MoreVertIcon from '@material-ui/icons/MoreVert'
 import { withRouter } from 'react-router-dom'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
-import AddIcon from '@material-ui/icons/Add'
+import AddMentorIcon from '@material-ui/icons/PersonAdd'
 import EditIcon from '@material-ui/icons/Edit'
+import EyeIcon from '@material-ui/icons/Visibility'
 import DeleteIcon from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
 import { Consumer } from '../../context'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 const ITEM_HEIGHT = 48
 const styles = theme => ({
@@ -36,40 +38,39 @@ class ClassModuleMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleOptionClick = (actionType, _class, dispatch = null) => {
+  handleOptionClick = (actionType, id, dispatch = null) => {
+    console.log('handlerOptionClick')
     this.setState({ anchorEl: null })
     switch (actionType) {
       case 'edit_class':
-        this.props.history.push(`/classes/edit/${_class.id}`)
+        this.props.history.push(`/classes/edit/${id}`)
         break
 
-      case 'add_module_to_class':
-        this.props.history.push(`/classes/add-module/${_class.id}`)
-        break
-
-      case 'delete_class':
-        dispatch({ type: 'TOGGLE_LOADING', payload: true })
-        axios
-          .delete(`/api/classes/${_class.id}`)
-          .then(res => {
-            if (res.data.deleted)
-              dispatch({ type: 'DELETE_CLASS', payload: _class.id })
-          })
-          .catch(console.error)
-          .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
+      case 'add_mentor_to_class_module':
+        this.props.history.push(`/classes/add-module/${id}`)
         break
 
       default:
         break
     }
   }
+  deleteClassModule = (id, dispatch) => {
+    dispatch({ type: 'TOGGLE_LOADING', payload: true })
+    axios
+      .delete(`/api/classes-modules/${id}`)
+      .then(res => {
+        if (res.data.deleted)
+          dispatch({ type: 'DELETE_CLASS_MODULE', payload: id })
+      })
+      .catch(error => swal('OOPS!', error, 'error'))
+      .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
+  }
 
   render() {
     const { anchorEl } = this.state
-    const { classes } = this.props
+    const { classes, id, title } = this.props
 
     const open = Boolean(anchorEl)
-    const id = this.props
     return (
       <Consumer>
         {({ dispatch }) => (
@@ -95,7 +96,7 @@ class ClassModuleMenu extends React.Component {
                 }
               }}
             >
-              {/*Edit*/}
+              {/*Edit ----------------------------------- */}
               <MenuItem
                 onClick={() => this.handleOptionClick('edit_class', id)}
               >
@@ -108,26 +109,10 @@ class ClassModuleMenu extends React.Component {
                   primary='Edit'
                 />
               </MenuItem>
-              {/*Add module*/}
+
+              {/*Delete ----------------------------------- */}
               <MenuItem
-                onClick={() =>
-                  this.handleOptionClick('add_module_to_class', id)
-                }
-              >
-                <ListItemIcon className={classes.icon}>
-                  <AddIcon />
-                </ListItemIcon>
-                <ListItemText
-                  classes={{ primary: classes.primary }}
-                  inset
-                  primary='Add module'
-                />
-              </MenuItem>
-              {/*Delete*/}
-              <MenuItem
-                onClick={() =>
-                  this.handleOptionClick('delete_class', id, dispatch)
-                }
+                onClick={this.deleteClassModule.bind(this, id, dispatch)}
               >
                 <ListItemIcon className={classes.icon}>
                   <DeleteIcon />
@@ -136,6 +121,38 @@ class ClassModuleMenu extends React.Component {
                   classes={{ primary: classes.primary }}
                   inset
                   primary='Delete'
+                />
+              </MenuItem>
+
+              {/*Assign mentors ----------------------------------- */}
+              <MenuItem
+                onClick={() =>
+                  this.handleOptionClick('add_mentor_to_class_module', id)
+                }
+              >
+                <ListItemIcon className={classes.icon}>
+                  <AddMentorIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary='Assign mentors'
+                />
+              </MenuItem>
+
+              {/*view details ----------------------------------- */}
+              <MenuItem
+                onClick={() =>
+                  this.handleOptionClick('delete_class_module', id, dispatch)
+                }
+              >
+                <ListItemIcon className={classes.icon}>
+                  <EyeIcon />
+                </ListItemIcon>
+                <ListItemText
+                  classes={{ primary: classes.primary }}
+                  inset
+                  primary='Details...'
                 />
               </MenuItem>
             </Menu>
