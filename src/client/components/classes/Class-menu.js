@@ -12,6 +12,7 @@ import DeleteIcon from '@material-ui/icons/Delete'
 import { withStyles } from '@material-ui/core/styles'
 import { Consumer } from '../../context'
 import axios from 'axios'
+import swal from 'sweetalert'
 
 const ITEM_HEIGHT = 48
 const styles = theme => ({
@@ -36,7 +37,7 @@ class ClassMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
-  handleOptionClick = (actionType, _class, dispatch = null) => {
+  handleOptionClick = (actionType, _class, dispatch = null, title = null) => {
     this.setState({ anchorEl: null })
     switch (actionType) {
       case 'edit_class':
@@ -48,15 +49,28 @@ class ClassMenu extends React.Component {
         break
 
       case 'delete_class':
-        dispatch({ type: 'TOGGLE_LOADING', payload: true })
-        axios
-          .delete(`/api/classes/${_class.id}`)
-          .then(res => {
-            if (res.data.deleted)
-              dispatch({ type: 'DELETE_CLASS', payload: _class.id })
-          })
-          .catch(console.error)
-          .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
+        swal({
+          title: 'Are you sure?',
+          text: `this will delete ${title} wih all modules, sessions,...etc that belong to it`,
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true
+        }).then(willDelete => {
+          if (willDelete) {
+            dispatch({ type: 'TOGGLE_LOADING', payload: true })
+            axios
+              .delete(`/api/classes/${_class.id}`)
+              .then(res => {
+                if (res.data.deleted)
+                  dispatch({ type: 'DELETE_CLASS', payload: _class.id })
+              })
+              .catch(console.error)
+              .finally(() =>
+                dispatch({ type: 'TOGGLE_LOADING', payload: false })
+              )
+          }
+        })
+
         break
 
       default:
@@ -66,10 +80,8 @@ class ClassMenu extends React.Component {
 
   render() {
     const { anchorEl } = this.state
-    const { classes } = this.props
-
+    const { classes, id, title } = this.props
     const open = Boolean(anchorEl)
-    const id = this.props
     return (
       <Consumer>
         {({ dispatch }) => (
@@ -125,7 +137,7 @@ class ClassMenu extends React.Component {
               {/*Delete Class*/}
               <MenuItem
                 onClick={() =>
-                  this.handleOptionClick('delete_class', id, dispatch)
+                  this.handleOptionClick('delete_class', id, dispatch, title)
                 }
               >
                 <ListItemIcon className={classes.icon}>

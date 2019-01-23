@@ -54,18 +54,27 @@ class ClassModuleMenu extends React.Component {
         break
     }
   }
-  deleteClassModule = (id, dispatch) => {
-    dispatch({ type: 'TOGGLE_LOADING', payload: true })
-    axios
-      .delete(`/api/classes-modules/${id}`)
-      .then(res => {
-        if (res.data.deleted)
-          dispatch({ type: 'DELETE_CLASS_MODULE', payload: id })
-      })
-      .catch(error => swal('OOPS!', error, 'error'))
-      .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
+  deleteClassModule = (id, title, dispatch) => {
+    swal({
+      title: `Delete ${title}?`,
+      text: `Once ${title} deleted, you will not be able to recover`,
+      icon: 'warning',
+      buttons: true,
+      dangerMode: true
+    }).then(willDelete => {
+      if (willDelete) {
+        dispatch({ type: 'TOGGLE_LOADING', payload: true })
+        axios
+          .delete(`/api/classes-modules/${id}`)
+          .then(res => {
+            if (res.data.deleted)
+              dispatch({ type: 'DELETE_CLASS_MODULE', payload: id })
+          })
+          .catch(error => swal('OOPS!', error, 'error'))
+          .finally(() => dispatch({ type: 'TOGGLE_LOADING', payload: false }))
+      }
+    })
   }
-
   render() {
     const { anchorEl } = this.state
     const { classes, id, title } = this.props
@@ -112,7 +121,7 @@ class ClassModuleMenu extends React.Component {
 
               {/*Delete ----------------------------------- */}
               <MenuItem
-                onClick={this.deleteClassModule.bind(this, id, dispatch)}
+                onClick={this.deleteClassModule.bind(this, id, title, dispatch)}
               >
                 <ListItemIcon className={classes.icon}>
                   <DeleteIcon />

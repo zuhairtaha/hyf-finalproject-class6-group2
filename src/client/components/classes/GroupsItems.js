@@ -24,7 +24,7 @@ export function classTitle(title, id) {
   return (
     <div>
       {title}
-      <ClassMenu id={id} />
+      <ClassMenu id={id} title={title} />
     </div>
   )
 }
