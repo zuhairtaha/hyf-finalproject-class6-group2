@@ -12,12 +12,7 @@ class Home extends React.Component {
   render = () => (
     <React.Fragment>
       <Container homePage={true}>
-        <h3>HackYourFuture</h3>
         <p>
-          HackYourFuture is an educational program that aims to train refugees
-          and asylum seekers to become web-developers and empower them by
-          opening the doors to a very in-demand job market.
-          <br />
           In our free 6-month program we train refugees, asylum seekers and
           people with limited access to further education in modern JavaScript
           software development. Our aim is to have our students land their first
