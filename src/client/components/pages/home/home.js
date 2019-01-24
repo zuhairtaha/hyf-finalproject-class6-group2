@@ -3,6 +3,7 @@ import Container from '../../layouts/container'
 import './shape.css'
 import Parallax from './parallax'
 class Home extends React.Component {
+
   componentDidMount() {
     document.title = 'HackYourFuture Copenhagen'
   }
@@ -11,9 +12,6 @@ class Home extends React.Component {
     <React.Fragment>
 
       <Container>
-
-
-
 
         <h3>HackYourFuture</h3>
         <p style={{width:'50%'}}>

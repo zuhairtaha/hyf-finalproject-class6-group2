@@ -15,6 +15,7 @@ const styles = theme => ({
   card: {
     minWidth: 275,
     maxWidth: 1200,
+    width:'100%',
     margin: '1rem auto',
     padding: '1rem 2rem',
     textAlign: 'justify',
