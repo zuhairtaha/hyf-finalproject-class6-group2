@@ -1,7 +1,7 @@
 import React from 'react'
 import logBackground from './logo-bg.svg'
-import Button from '@material-ui/core/es/Button/Button'
 import TouchIcon from '@material-ui/icons/TouchApp'
+import Fab from '@material-ui/core/es/Fab/Fab'
 
 const root = {
   textAlign: 'right',
@@ -20,11 +20,11 @@ const container = {
 const left = {
   flex: 1,
   textAlign: 'left',
-  display:'flex'
+  display: 'flex'
 }
 const leftContent = {
-  margin:'auto',
-  padding:'0 2rem'
+  margin: 'auto',
+  padding: '0 2rem',
 }
 
 const right = {
@@ -55,10 +55,10 @@ const HomePageHeader = () => {
             <h1 style={{ color: '#1d5896', fontWeight: 'bold' }}>
               HackYourFuture
             </h1>
-            <p style={{ lineHeight: '2rem', color: '#555', fontWeight: '100'}}>
-              HackYourFuture is an educational program that aims to train refugees
-              and asylum seekers to become web-developers and empower them by
-              opening the doors to a very in-demand job market.
+            <p style={{ lineHeight: '2rem', color: '#555', fontWeight: '100',mixBlendMode: 'color-dodge' }}>
+              HackYourFuture is an educational program that aims to train
+              refugees and asylum seekers to become web-developers and empower
+              them by opening the doors to a very in-demand job market.
             </p>
           </div>
         </div>
@@ -67,15 +67,15 @@ const HomePageHeader = () => {
             REFUGEE CODE SCHOOL IN <br />
             <span style={copenhagen}>COPENHAGEN</span>
             <br />
-            <Button
+            <Fab
               style={{ marginTop: '1.5rem' }}
               size='large'
-              variant='extendedFab'
+              variant='extended'
               color='primary'
             >
               <TouchIcon />
               apply now
-            </Button>
+            </Fab>
           </h3>
         </div>
       </div>

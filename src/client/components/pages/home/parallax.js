@@ -1,13 +1,13 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import SchoolIcon from '@material-ui/icons/School'
 
 const styles = {
   container: {
     display: 'flex',
     flexDirection: 'column',
-    height: '60vh',
-    background:
-      'fixed url("/images/parallax.jpg") no-repeat center center/cover',
+    height: '380px',
+    background: 'fixed url("/images/p2.jpg") no-repeat center center/cover',
     alignItems: 'center',
     justifyContent: 'center',
     textAlign: 'center',
@@ -19,12 +19,17 @@ const styles = {
   },
 
   logo: {
-    maxHeight: '50vh',
-    maxWidth: '50vh',
+    maxWidth: '1200px',
     display: 'block',
     margin: 'auto',
     opacity: 0.85
-  }
+  },
+  content: {
+    color: '#fff',
+    fontWeight: '100',
+    lineHeight: '2rem',
+  },
+  icon: { color: '#fff', fontSize: '7rem' }
 }
 
 const Parallax = props => {
@@ -34,7 +39,13 @@ const Parallax = props => {
     <div className={classes.container}>
       {/*<img className="logo" src="/static/HYF_LOGO.png"/>*/}
       <div className={classes.logo}>
-        <img src='/images/logo-white.svg' alt='HackYourFuture Copenhagen' />
+        <SchoolIcon className={classes.icon} />
+        <h3 className={classes.content}>
+          After completion of our program we guide students towards work via our
+          network. With our team of experienced professional developers we have
+          created a curriculum around the needs of non-western students. Our
+          teachers are all volunteers and extremely passionate about coding.
+        </h3>
       </div>
     </div>
   )
