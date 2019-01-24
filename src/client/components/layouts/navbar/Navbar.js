@@ -45,12 +45,12 @@ function Navbar(props) {
               </Typography>
 
 
-              <Button component={Link} to='/users/' color='inherit'>
-                Users
-              </Button>
-              <Button component={Link} to='/classes/' color='inherit'>
-                Classes
-              </Button>
+              {/*<Button component={Link} to='/users/' color='inherit'>*/}
+                {/*Users*/}
+              {/*</Button>*/}
+              {/*<Button component={Link} to='/classes/' color='inherit'>*/}
+                {/*Classes*/}
+              {/*</Button>*/}
               <UserMenu />
             </Toolbar>
           </AppBar>

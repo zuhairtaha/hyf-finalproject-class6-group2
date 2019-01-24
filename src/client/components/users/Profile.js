@@ -29,22 +29,36 @@ class Profile extends React.Component {
   render = () => {
     const { user } = this.state
     return (
-      <Container>
+      <Container withLayout={true}>
         {Object.entries(user).length !== 0 && (
-          <div>
-            <img
-              style={{ maxWidth: '30%' }}
-              src={user.avatar}
-              alt={user.name}
-            />
-            {Object.keys(user).map(
-              key =>
-                user[key] !== null && (
-                  <div key={key}>
-                    <b>{key}</b> <span>{user[key]}</span>
-                  </div>
-                )
-            )}
+          <div style={{display:'flex'}}>
+             <div style={{flex:1,display:'flex'}}>
+               <div style={{margin:'auto' }}>
+               <img
+                 style={{ maxWidth: '500px',borderRadius:'50%'}}
+                 src={user.avatar}
+                 alt={user.name}
+               />
+               <h2>{user.name}</h2>
+             </div>
+             </div>
+             <div style={{flex:1}}>
+
+               {Object.keys(user).map(
+                 key =>
+                   user[key] !== null && (
+                     <div key={key}>
+                       <b>{key}</b> {
+                       key==='linkedin'
+                         ? <a target='_blank' rel="noopener noreferrer" href={user[key]}>{user[key]}</a>
+                         : key==='email'
+                         ? <a target='_top' rel="noopener noreferrer" href={'mailto:'+user[key]}>{user[key]}</a>
+                         :<span>{user[key]}</span>}
+                     </div>
+                   )
+               )}
+             </div>
+
           </div>
         )}
       </Container>

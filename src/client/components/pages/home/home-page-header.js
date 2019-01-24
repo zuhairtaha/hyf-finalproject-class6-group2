@@ -5,7 +5,7 @@ import TouchIcon from '@material-ui/icons/TouchApp'
 
 const root = {
   textAlign: 'right',
-  marginBottom: '-5rem'
+  marginBottom: '-3rem'
 }
 
 const container = {
@@ -23,7 +23,8 @@ const left = {
   display:'flex'
 }
 const leftContent = {
-  margin:'auto'
+  margin:'auto',
+  padding:'0 2rem'
 }
 
 const right = {

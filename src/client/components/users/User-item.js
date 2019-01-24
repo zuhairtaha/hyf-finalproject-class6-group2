@@ -65,7 +65,7 @@ class UserItem extends React.Component {
               </div>
             </Link>
 
-            <Link to={`/users/${id}`}>
+            <Link to={`/users/${id}`} className='userAnchor'>
               <h3 className='userName'>{name}</h3>
             </Link>
             <span>{type}</span>

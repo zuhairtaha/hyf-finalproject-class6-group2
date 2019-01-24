@@ -67,7 +67,8 @@ class AddModule extends Component {
     return (
       <Consumer>
         {({ dispatch }) => (
-          <Container>
+          <Container withLayout={true}>
+            <h2>Add module</h2>
             <form onSubmit={this.submitForm.bind(this, dispatch)}>
               {/*title*/}
               <TextField
