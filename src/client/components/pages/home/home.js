@@ -1,24 +1,23 @@
 import React from 'react'
 import Container from '../../layouts/container'
 import './shape.css'
-import Parallax from './parallax'
-class Home extends React.Component {
 
+// import Parallax from './parallax'
+
+class Home extends React.Component {
   componentDidMount() {
     document.title = 'HackYourFuture Copenhagen'
   }
 
   render = () => (
     <React.Fragment>
-
-      <Container>
-
+      <Container homePage={true}>
         <h3>HackYourFuture</h3>
-        <p style={{width:'50%'}}>
+        <p>
           HackYourFuture is an educational program that aims to train refugees
           and asylum seekers to become web-developers and empower them by
           opening the doors to a very in-demand job market.
-          <br/>
+          <br />
           In our free 6-month program we train refugees, asylum seekers and
           people with limited access to further education in modern JavaScript
           software development. Our aim is to have our students land their first
@@ -36,30 +35,7 @@ class Home extends React.Component {
           we are here to give them a helping hand to make use of their
           potential.
         </p>
-
-        <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omniiis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omnis pariatur quisquam similique tenetur.
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum labore nostrum quae quo voluptas? Accusamus, dicta doloremque expedita facilis, fuga fugiat id, iste laborum nihil omnis pariatur quisquam similique tenetur.
-        </p>
       </Container>
-
     </React.Fragment>
   )
 }

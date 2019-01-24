@@ -1,0 +1,28 @@
+<svg
+        xmlns="http://www.w3.org/2000/svg"
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        viewBox="0 0 581 592"
+        version="1.1"><!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <title>ZuhairTaha</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <path d="M115,118 C159.3,57.417 163.64,13.966 246,2 C286.73,-3.873 309.17,7.781 340,29 C390.77,69.9 406.72,66.009 444.94,87.266 C496.75,109.954 510.29,170 508,208 C501.48,273.651 485.25,286.764 392.97,369.192 C340.34,416.228 352.43,489.139 283.42,515.503 C212.32,529.752 198.11,481.775 136.05,427.303 C51.07,352.663 0.5,360.295 0.22,293.842 C13.2,224.093 64.96,193.711 115,118 Z"
+              id="path-1"/>
+        <filter x="-11.3%" y="-9.3%" width="126.0%" height="125.5%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="8.452" dy="18.126" in="SourceAlpha" result="shadowOffsetOuter1"/>
+            <feGaussianBlur stdDeviation="19" in="shadowOffsetOuter1" result="shadowBlurOuter1"/>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.15 0" type="matrix"
+                           in="shadowBlurOuter1"/>
+        </filter>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="abcd" transform="translate(28.000000, 19.000000)" fill-rule="nonzero">
+            <path d="M209.72,46.619 C163.16,70.986 37.78,136.27 34.74,229.948 C34.28,245.529 37.49,248.76 36.22,271.504 C32.21,343.953 -3.67,369.211 0.71,408.674 C5.39,450.301 51.85,482.053 84.75,492.897 C158.04,517.042 172.63,525.758 339,461.997 C374.2,448.497 411.8,405.84 427,384.997 C460.44,339.124 451.26,236.186 438.21,176.47 C420.03,93.439 395.31,29.749 355.92,8.324 C320.38,-10.957 283.55,7.961 209.72,46.619 Z"
+                  id="Shape" fill-opacity="0.479999989" fill="#54CED8"/>
+            <g id="Shape">
+                <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"/>
+                <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"/>
+            </g>
+        </g>
+    </g>
+</svg>
