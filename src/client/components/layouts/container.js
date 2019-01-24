@@ -5,17 +5,19 @@ import Card from '@material-ui/core/Card'
 import shape from '../pages/home/shape.svg'
 
 const styles = theme => ({
-  root:{
-    width:'100%',
-    height:'100%',
-    overflow:'hidden',
-    display:'flex',
-    position:'relative'
+  root: {
+    width: '100%',
+    height: 'calc(~"100vh - 52px")',
+    overflow: 'hidden',
+    display: 'flex',
+    position: 'relative'
   },
   card: {
     minWidth: 275,
     maxWidth: 1200,
-    width:'100%',
+    width: '100%',
+    height: 'auto',
+    display: 'table',
     margin: '1rem auto',
     padding: '1rem 2rem',
     textAlign: 'justify',
