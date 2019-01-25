@@ -2,7 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Card from '@material-ui/core/Card'
-import Layout from './index'
+import shape from './background-shapes/shape.svg'
+import HomePageHeader from '../pages/home/home-page-header'
 
 const styles = theme => ({
   root: {
@@ -19,11 +20,11 @@ const styles = theme => ({
     width: '100%',
     height: 'auto',
     display: 'table',
-    margin: '2rem auto 1rem',
+    margin: '1rem auto',
     padding: '1rem 2rem',
     textAlign: 'justify',
     lineHeight: '1.9rem',
-
+    marginTop: '5rem',
     boxSizing: 'border-box',
     [theme.breakpoints.down('sm')]: {
       borderRadius: '0'
@@ -32,26 +33,22 @@ const styles = theme => ({
 })
 
 function Container(props) {
-  const { classes, children, withLayout, style } = props
+  const { classes, children, homePage } = props
 
   return (
-    <>
-      {withLayout ? (
-        <Layout>
-          <Card className={classes.card}>{children}</Card>
-        </Layout>
-      ) : (
-        <Card className={classes.card} style={style}>
-          {children}
-        </Card>
-      )}
-    </>
+    <div className={classes.root}>
+      {homePage && <HomePageHeader />}
+      <Card className={classes.card}>
+        <img src={shape} alt='' className='shape_1' />
+        <img src={shape} alt='' className='shape_2' />
+        {children}
+      </Card>
+    </div>
   )
 }
 
 Container.propTypes = {
-  classes: PropTypes.object.isRequired,
-  withLayout: PropTypes.bool
+  classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styles)(Container)

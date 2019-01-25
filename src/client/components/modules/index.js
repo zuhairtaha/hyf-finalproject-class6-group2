@@ -7,6 +7,7 @@ import Fab from '@material-ui/core/Fab'
 import { Link } from 'react-router-dom'
 import AddIcon from '@material-ui/icons/Add'
 import axios from 'axios'
+import Layout from "../layouts"
 
 const styles = {
   root: {
@@ -29,7 +30,7 @@ class Modules extends React.Component {
     const {classes, value} = this.props
     const modules = value.modules
     return (
-      <React.Fragment>
+      <Layout>
         { modules.length === 0 ? (
           <Progress/>
         ) : (
@@ -50,7 +51,7 @@ class Modules extends React.Component {
             <AddIcon/>
           </Fab>
         </div>
-      </React.Fragment>
+      </Layout>
     )
   }
 }

@@ -9,7 +9,10 @@ import ListItemText from '@material-ui/core/ListItemText'
 import BallotIcon from '@material-ui/icons/Ballot'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
+import UsersIcon from '@material-ui/icons/People'
+import ClassesIcon from '@material-ui/icons/LocalLibrary'
 import { Link } from 'react-router-dom'
+import Divider from '@material-ui/core/es/Divider/Divider'
 
 const styles = {
   list: {
@@ -41,12 +44,33 @@ class NavigationDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-          <ListItem component={Link} to='/modules' button key={1}>
+
+          <ListItem component={Link} to='/users' button>
+            <ListItemIcon>
+              <UsersIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Users'} />
+          </ListItem>
+
+          <Divider />
+
+          <ListItem component={Link} to='/classes' button>
+            <ListItemIcon>
+              <ClassesIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Classes'} />
+          </ListItem>
+          <Divider />
+
+          <ListItem component={Link} to='/modules' button>
             <ListItemIcon>
               <BallotIcon />
             </ListItemIcon>
             <ListItemText primary={'Modules'} />
           </ListItem>
+
+          <Divider />
+
         </List>
       </div>
     )

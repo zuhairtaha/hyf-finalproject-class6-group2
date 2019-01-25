@@ -4,6 +4,7 @@ import UserItem from './User-item'
 import { Consumer } from '../../context'
 import { withStyles } from '@material-ui/core/styles'
 import axios from 'axios'
+import Layout from "../layouts"
 
 const styles = {
   members: {
@@ -26,13 +27,15 @@ class Index extends React.Component {
     const { classes, value } = this.props
     const users = value.users
     return (
-      <div>
-        <div className={classes.members}>
-          {users.map(user => (
-            <UserItem key={user.id} user={user} />
-          ))}
+      <Layout>
+        <div>
+          <div className={classes.members}>
+            {users.map(user => (
+              <UserItem key={user.id} user={user} />
+            ))}
+          </div>
         </div>
-      </div>
+      </Layout>
     )
   }
 }

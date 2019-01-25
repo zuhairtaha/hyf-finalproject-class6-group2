@@ -13,6 +13,7 @@ import EditModule from './modules/edit-module'
 import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
 import Profile from './users/Profile'
+import EditClassModule from './classes/classes-modules/Edit-classe-module'
 
 class Routers extends React.Component {
   render = () => (
@@ -24,6 +25,7 @@ class Routers extends React.Component {
       <Route path='/classes/add' component={AddClass} />
       <Route path='/classes/edit/:id' component={EditClass} />
       <Route path='/classes/add-module/:id' component={AddModuleToClass} />
+      <Route path='/classes-modules/edit/:id' component={EditClassModule} />
 
       <Route path='/modules' render={props => <Modules {...props} />} exact />
       <Route path='/modules/edit/:id' component={EditModule} />

@@ -172,12 +172,9 @@
 .shape_2 {
     position: absolute;
     left: -550px;
-    top: 600px;
+    top: 400px;
     width: 700px;
     height: 700px;
     z-index: -1;
     transform: scale(.9);
-}
-#ttt{
-    /*mask-image: url(./shape.svg);*/
 }

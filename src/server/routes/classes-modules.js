@@ -20,6 +20,7 @@ const schema = Joi.object().keys({
 
 router
   .get('/', getAll)
+  .get('/:id', getClassModule)
   .post('/', AddClassModule)
   .delete('/:id', deleteClassModule)
 
@@ -59,6 +60,7 @@ function AddClassModule(req, res, next) {
   })
 }
 // --------------------------
+
 // DELETE a class_module by ID
 function deleteClassModule(req, res, next) {
   const sql = sqlString.format(`DELETE FROM classes_modules WHERE id = ?`, [
@@ -70,5 +72,29 @@ function deleteClassModule(req, res, next) {
     res.send({ deleted: true })
   })
 }
-
+// --------------------------
+function getClassModule(req, res, next) {
+  const sql = sqlString.format(
+    `
+      SELECT
+        classes_modules.*
+        , modules.title AS module_title
+        , modules.length 
+        , classes.name AS class_name
+    FROM
+        classes_modules
+        INNER JOIN modules 
+            ON classes_modules.module_id = modules.id
+        INNER JOIN classes 
+            ON classes_modules.class_id = classes.id
+    WHERE classes_modules.id =?
+      `,
+    [req.params.id]
+  )
+  db.execute(sql, (err, rows) => {
+    if (err) return next(err)
+    if (rows.length === 0) return next({ message: 'row not find' })
+    res.send(rows[0])
+  })
+}
 module.exports = router

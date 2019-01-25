@@ -138,102 +138,101 @@ class AddModuleToClass extends React.Component {
 
   render = () => {
     const { classes } = this.props
-    const {
-      modules,
-      className,
-      error,
-      moduleId,
-      start,
-      end,
-      github
-    } = this.state
-    return error ? (
-      <p>{error}</p>
-    ) : (
+    const { modules, className, moduleId, start, end, github } = this.state
+    return (
       <Container>
         <Typography variant='h5'>Add module to: {className}</Typography>
-        <form onSubmit={this.formSubmitHandler}>
-          {/*Modules list*/}
+        {modules.length === 0 ? (
+          <div>
+            <p>All modules has been already added to this class</p>
+            <Button component={Link} variant='contained' to='/classes'>
+              Go back
+            </Button>
+          </div>
+        ) : (
+          <form onSubmit={this.formSubmitHandler}>
+            {/*Modules list*/}
 
-          <TextField
-            select
-            label='Chose module'
-            value={moduleId}
-            onChange={this.handleChange('moduleId')}
-            className={classes.textField}
-            SelectProps={{
-              MenuProps: {
-                className: classes.menu
-              }
-            }}
-            helperText='Please select your currency'
-            margin='normal'
-          >
-            {modules.map(({ id, title }) => (
-              <MenuItem key={id} value={id}>
-                {title}
-              </MenuItem>
-            ))}
-          </TextField>
-          <br />
-
-          {/*GitHub*/}
-          <TextField
-            id='standard-name'
-            label='GitHub repository'
-            className={classes.textField}
-            value={github}
-            onChange={this.handleChange('github')}
-            margin='normal'
-          />
-          <br />
-
-          {/*start*/}
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
-              margin='normal'
-              label='Start date'
-              format='dd-MM-yyyy'
-              value={start}
+            <TextField
+              select
+              label='Chose module'
+              value={moduleId}
+              onChange={this.handleChange('moduleId')}
               className={classes.textField}
-              onChange={this.handleStartDateChange}
-            />
-          </MuiPickersUtilsProvider>
-          <br />
-
-          {/*end*/}
-          <MuiPickersUtilsProvider utils={DateFnsUtils}>
-            <DatePicker
+              SelectProps={{
+                MenuProps: {
+                  className: classes.menu
+                }
+              }}
+              helperText='Please select your currency'
               margin='normal'
-              label='End date'
-              format='dd-MM-yyyy'
-              value={end}
+            >
+              {modules.map(({ id, title }) => (
+                <MenuItem key={id} value={id}>
+                  {title}
+                </MenuItem>
+              ))}
+            </TextField>
+            <br />
+
+            {/*GitHub*/}
+            <TextField
+              id='standard-name'
+              label='GitHub repository'
               className={classes.textField}
-              onChange={this.handleEndDateChange}
+              value={github}
+              onChange={this.handleChange('github')}
+              margin='normal'
             />
-          </MuiPickersUtilsProvider>
+            <br />
 
-          <br />
-          {/*Submit*/}
-          <Button
-            type='submit'
-            className={classes.mt1}
-            variant='contained'
-            color='primary'
-          >
-            <AddIcon /> add
-          </Button>
+            {/*start*/}
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                margin='normal'
+                label='Start date'
+                format='dd-MM-yyyy'
+                value={start}
+                className={classes.textField}
+                onChange={this.handleStartDateChange}
+              />
+            </MuiPickersUtilsProvider>
+            <br />
 
-          <Button
-            className={classes.mt1}
-            variant='contained'
-            component={Link}
-            to='/classes'
-            style={{ marginLeft: '1rem' }}
-          >
-            cancel
-          </Button>
-        </form>
+            {/*end*/}
+            <MuiPickersUtilsProvider utils={DateFnsUtils}>
+              <DatePicker
+                margin='normal'
+                label='End date'
+                format='dd-MM-yyyy'
+                value={end}
+                className={classes.textField}
+                onChange={this.handleEndDateChange}
+              />
+            </MuiPickersUtilsProvider>
+
+            <br />
+            {/*Submit*/}
+            <Button
+              type='submit'
+              className={classes.mt1}
+              variant='contained'
+              color='primary'
+            >
+              <AddIcon /> add
+            </Button>
+
+            <Button
+              className={classes.mt1}
+              variant='contained'
+              component={Link}
+              to='/classes'
+              style={{ marginLeft: '1rem' }}
+            >
+              cancel
+            </Button>
+          </form>
+        )}
       </Container>
     )
   }
