@@ -38,6 +38,7 @@ class ClassModuleMenu extends React.Component {
     this.setState({ anchorEl: event.currentTarget })
   }
 
+  
   deleteClassModule = (id, title, dispatch) => {
     swal({
       title: `Delete ${title}?`,
