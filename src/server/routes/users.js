@@ -56,9 +56,10 @@ function updateUser(req, res, next) {
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     if (!result.affectedRows) return next({ message: 'User not find' })
-    res.send('User updated')
+    res.send({ updated: true })
   })
 }
+
 
 // --------------------------
 // GET one user by ID

@@ -14,7 +14,7 @@ import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
 import Profile from './users/Profile'
 import EditClassModule from './classes/classes-modules/Edit-classe-module'
-
+import editUser from './users/user-form/edit-user'
 class Routers extends React.Component {
   render = () => (
     <Switch>
@@ -33,7 +33,7 @@ class Routers extends React.Component {
 
       <Route path='/users' component={Users} exact />
       <Route path='/users/add' component={UserForm.AddUser} />
-      <Route path='/users/edit/:id' component={UserForm.EditUser} />
+      <Route path='/users/edit/:id' component={editUser} />
       <Route path='/users/:id' component={Profile} />
 
       <Route path='/form' component={Form} exact />
