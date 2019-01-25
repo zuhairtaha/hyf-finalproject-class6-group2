@@ -1,5 +1,5 @@
 import React from 'react'
-import logBackground from './logo-bg.svg'
+import logBackground from './images/logo-bg.svg'
 import TouchIcon from '@material-ui/icons/TouchApp'
 import Fab from '@material-ui/core/es/Fab/Fab'
 

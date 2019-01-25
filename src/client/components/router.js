@@ -6,7 +6,7 @@ import Calender from './_calender/Calender'
 import ClassesCalender from './classes'
 import AddClass from './classes/Add-class'
 import Modules from './modules'
-import Home from './pages/home/home'
+import Index from './pages/home'
 import Form from './_form/Form'
 import AddModule from './modules/Add-module'
 import EditModule from './modules/edit-module'
@@ -18,7 +18,7 @@ import EditClassModule from './classes/classes-modules/Edit-classe-module'
 class Routers extends React.Component {
   render = () => (
     <Switch>
-      <Route path='/' component={Home} exact />
+      <Route path='/' component={Index} exact />
       <Route path='/calender' component={Calender} />
 
       <Route path='/classes' render={props => <ClassesCalender {...props} />} exact/>

@@ -7,11 +7,11 @@ import  './background-shapes/shape.css'
 const styles = () => ({
   root: {
     width: '100%',
-    minHeight: 'calc(100vh - 64px)',
     overflow: 'hidden',
     display: 'block',
     flexDirection: 'column',
     position: 'relative',
+    minHeight: 'calc(100vh - 64px)',
   }
 })
 

@@ -13,7 +13,6 @@ import { Consumer } from '../../../context'
 const styles = {
   root: {
     flexGrow: 1,
-    marginBottom:64
   },
   grow: {
     flexGrow: 1
@@ -30,7 +29,7 @@ function Navbar(props) {
       {({ loading }) => (
         <div className={classes.root}>
           {loading && <Progress />}
-          <AppBar position='fixed'>
+          <AppBar position='relative'>
             <Toolbar>
               <NavigationDrawer />
 
