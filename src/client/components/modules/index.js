@@ -16,7 +16,8 @@ const styles = {
     justifyItems: 'center',
     gridGap: '16px',
     maxWidth: '1248px',
-    margin: '1rem auto'
+    margin: '1rem auto',
+    padding:'1rem'
   }
 }
 

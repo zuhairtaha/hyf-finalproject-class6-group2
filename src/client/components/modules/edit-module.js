@@ -95,7 +95,7 @@ class AddModule extends Component {
               <TextField
                 label='Description'
                 multiline
-                rowsMax='4'
+                rowsMax='20'
                 rows='3'
                 name='description'
                 value={description}

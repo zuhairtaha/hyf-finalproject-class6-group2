@@ -22,7 +22,6 @@ const styles = theme => ({
     display: 'table',
     margin: '1rem auto',
     padding: '1rem 2rem',
-    textAlign: 'justify',
     lineHeight: '1.9rem',
     boxSizing: 'border-box',
     [theme.breakpoints.down('sm')]: {
