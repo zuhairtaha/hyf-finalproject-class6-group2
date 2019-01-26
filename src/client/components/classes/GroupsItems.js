@@ -42,9 +42,9 @@ function getGroups(classes_modules) {
 
 function itemTitle(id, title) {
   return (
-    <div>
+    <div style={{ display: 'inline-flex' }}>
       <ClassModuleMenu id={id} title={title} />
-      {title}
+      <span>{title}</span>
     </div>
   )
 }
@@ -60,7 +60,9 @@ function getItems(classes_modules) {
         group: group_id,
         start: moment(new Date(start_date).toISOString()),
         end: moment(new Date(end_date).toISOString()),
-        className: item_title.replace(/\W+/g, '_'),
+        // className: item_title.replace(/\W+/g, '_'),
+        selectItemClass: item_title.replace(/\W+/g, '_'),
+        className: ``,
         canMove: true,
         canResize: true,
         canChangeGroup: true

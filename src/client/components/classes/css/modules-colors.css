@@ -26,8 +26,20 @@
   color: #ffe1f5;
 }
 
-.HTML {
+.classModuleMenu {
+  display: none !important;
+}
+
+.defaultItemClass {
   background-color: #f7f4e9 !important;
+  color: rgba(0, 0, 0, 0.5);
+}
+.showDropDownMenu .classModuleMenu {
+  display: block !important;
+}
+
+.HTML {
+  background-color: #c5f0f7 !important;
   color: rgba(0, 0, 0, 0.5);
 }
 
@@ -35,20 +47,20 @@
   color: rgba(0, 0, 0, 0.67);
   background: #f4d881 !important;
   background: linear-gradient(
-          to right,
-          #f4d881 1%,
-          #f7e1a5 49%,
-          #f4d881 100%
+    to right,
+    #f4d881 1%,
+    #f7e1a5 49%,
+    #f4d881 100%
   ) !important;
 }
 
 .javascript_2 {
   background: #f7d56f;
   background: linear-gradient(
-          45deg,
-          #f7d56f 1%,
-          #ffe189 48%,
-          #f7d56f 100%
+    45deg,
+    #f7d56f 1%,
+    #ffe189 48%,
+    #f7d56f 100%
   ) !important;
   color: rgba(0, 0, 0, 0.67);
 }
@@ -57,21 +69,21 @@
   color: rgba(0, 0, 0, 0.7);
   background: #f7b900 !important;
   background: linear-gradient(
-          to right,
-          #f7b900 2%,
-          #f7cb54 49%,
-          #f7b900 100%
+    to right,
+    #f7b900 2%,
+    #f7cb54 49%,
+    #f7b900 100%
   ) !important;
 }
 
 .Node_js {
   background: #94b84d;
   background: linear-gradient(
-          45deg,
-          #94b84d 0%,
-          #9dbc54 50%,
-          #94b84d 52%,
-          #94b84d 100%
+    45deg,
+    #94b84d 0%,
+    #9dbc54 50%,
+    #94b84d 52%,
+    #94b84d 100%
   ) !important;
 }
 
@@ -79,11 +91,11 @@
   color: #dde9ff;
   background: #497cbd;
   background: linear-gradient(
-          45deg,
-          #497cbd 1%,
-          #4283ce 47%,
-          #497cbd 50%,
-          #497cbd 100%
+    45deg,
+    #497cbd 1%,
+    #4283ce 47%,
+    #497cbd 50%,
+    #497cbd 100%
   ) !important;
 }
 
@@ -94,10 +106,10 @@
 .Final_Project {
   background: #fa6e59 !important;
   background: linear-gradient(
-          45deg,
-          #fa6e59 1%,
-          #f47c6f 47%,
-          #fe6f5a 49%,
-          #fa6e59 100%
+    45deg,
+    #fa6e59 1%,
+    #f47c6f 47%,
+    #fe6f5a 49%,
+    #fa6e59 100%
   ) !important;
 }

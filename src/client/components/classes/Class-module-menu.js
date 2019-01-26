@@ -70,6 +70,8 @@ class ClassModuleMenu extends React.Component {
         {({ dispatch }) => (
           <>
             <IconButton
+              id={`classModuleMenu-${id}`}
+              className='classModuleMenu'
               color='inherit'
               aria-label='More'
               aria-owns={open ? 'long-menu' : undefined}
