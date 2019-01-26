@@ -14,7 +14,7 @@ const styles = theme => ({
     content: {}
   },
   root: {
-    textAlign: 'right',
+    textAlign: 'right'
   },
 
   container: {
@@ -141,8 +141,9 @@ const HomePageHeader = props => {
           </h3>
         </div>
         <div className={classes.forSmallSize}>
-
-          <p><h2>HackYourFuture</h2>REFUGEE CODE SCHOOL IN COPENHAGEN</p>
+          <p>
+            <h2>HackYourFuture</h2>REFUGEE CODE SCHOOL IN COPENHAGEN
+          </p>
         </div>
       </div>
     </div>
