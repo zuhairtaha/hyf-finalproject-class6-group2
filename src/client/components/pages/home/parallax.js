@@ -23,10 +23,11 @@ const styles = {
     margin: 'auto',
     opacity: 0.85
   },
-  content: {
+  text: {
     color: '#fff',
     fontWeight: '100',
-    lineHeight: '2rem'
+    lineHeight: '2rem',
+    padding:'0 1rem'
   },
   icon: { color: '#fff', fontSize: '7rem' }
 }
@@ -39,7 +40,7 @@ const Parallax = props => {
       {/*<img className="logo" src="/static/HYF_LOGO.png"/>*/}
       <div className={classes.logo}>
         <h2 style={{ color: '#fff' }}>After completion of our program </h2>
-        <h3 className={classes.content}>
+        <h3 className={classes.text}>
           we guide students towards work via our network. With our team of
           experienced professional developers we have created a curriculum
           around the needs of non-western students. Our teachers are all

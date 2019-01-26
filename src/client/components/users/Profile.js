@@ -20,7 +20,7 @@ const styles = theme => ({
     borderRadius: '50%',
     boxShadow:'3px 3px 25px rgba(0,0,0,.05)'
   },
-  flex1: {
+  imgContainer: {
     flex: 1
   }
 })
@@ -67,7 +67,7 @@ class Profile extends React.Component {
                 <h2>{user.name}</h2>
               </div>
             </div>
-            <div className={classes.flex1}>
+            <div className={classes.imgContainer}>
               {Object.keys(user).map(
                 key =>
                   user[key] !== null && (

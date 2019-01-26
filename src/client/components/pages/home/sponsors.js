@@ -11,13 +11,22 @@ const styles = theme => ({
     textAlign: 'center'
   },
   imagesContainer: {
-    display: 'flex'
+    display: 'grid',
+    gridTemplateColumns: 'repeat(4, 1fr)',
+    justifyItems: 'center',
+    gridGap: '16px',
+    maxWidth: '1248px',
+    margin: '1rem auto',
+    [theme.breakpoints.down('sm')]: {
+      gridTemplateColumns: 'repeat(2, 1fr)'
+    }
   },
-  image: {
-    flex: 1
-  },
+  imgWrapper: {},
   img: {
-    maxWidth: '100%'
+    maxWidth: '100%',
+    [theme.breakpoints.down('sm')]: {
+      maxHeight: '10vh'
+    }
   }
 })
 
@@ -28,16 +37,16 @@ const Sponsors = props => {
       <div className={classes.root}>
         <h3 className='home-title'>Official partners & supporters</h3>
         <div className={classes.imagesContainer}>
-          <div className={classes.image}>
+          <div className={classes.imgWrapper}>
             <img className={classes.img} src={APMS} alt='' />
           </div>
-          <div className={classes.image}>
+          <div className={classes.imgWrapper}>
             <img className={classes.img} src={RSV} alt='' />
           </div>
-          <div className={classes.image}>
+          <div className={classes.imgWrapper}>
             <img className={classes.img} src={donationslogo} alt='' />
           </div>
-          <div className={classes.image}>
+          <div className={classes.imgWrapper}>
             <img className={classes.img} src={foreningen} alt='' />
           </div>
         </div>

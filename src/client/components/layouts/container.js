@@ -26,14 +26,19 @@ const styles = theme => ({
     lineHeight: '1.9rem',
     boxSizing: 'border-box',
     [theme.breakpoints.down('sm')]: {
-      borderRadius: '0'
+      borderRadius: '0',
+      margin: '0 0 1px 0',
     }
   },
   shadow: {
     boxShadow: '10.565px 22.658px 50px 0 rgba(0,0,0,.1)',
     color: '#555',
     lineHeight: '2rem',
-    marginBottom: '3.5rem'
+    marginBottom: '3.5rem',
+    [theme.breakpoints.down('sm')]: {
+      borderRadius: '0',
+      margin: '0 0 1px 0',
+    }
   },
   noStyle: {
     background: 'none',

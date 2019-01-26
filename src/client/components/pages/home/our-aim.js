@@ -3,43 +3,57 @@ import { withStyles } from '@material-ui/core/styles'
 import webTech from './images/aim2.jpg'
 import Container from '../../layouts/container'
 
-const styles = {
-  flex1: {
+const styles = theme => ({
+  root: {
+    display: 'flex',
+    flexDirection: 'row',
+    // xs 0,.. | sm 600,.. | md 960,.. | lg 1280,.. | xl 1920,..
+    [theme.breakpoints.down('md')]: {
+      flexDirection: 'column'
+    }
+  },
+  imgContainer: {
     flex: 1,
     display: 'flex'
   },
-  flexText: {
-    flex: 1
+  textContainer: {
+    flex: 1,
+    [theme.breakpoints.down('md')]: {
+      textAlign: 'center'
+    }
   },
-  mAuto: {
+  imgWrapper: {
     margin: 'auto'
   },
-  flexRow: {
-    display: 'flex',
-    flexDirection: 'row'
-  },
-  left2rem: {
+  text: {
     textAlign: 'left',
-    lineHeight: '2rem'
+    lineHeight: '2rem',
+    [theme.breakpoints.down('md')]: {
+      textAlign: 'center'
+    }
   },
-  max100: {
-    maxWidth: '100%'
+  img: {
+    maxWidth: '100%',
+    [theme.breakpoints.down('sm')]: {
+      maxHeight:'30vh'
+    }
   }
-}
+})
 
 const OurAim = props => {
   const { classes } = props
   return (
     <Container withShadow>
-      <div className={classes.flexRow}>
-        <div className={classes.flex1}>
-          <div className={classes.mAuto}>
-            <img className={classes.max100} src={webTech} alt='' />
+      <div className={classes.root}>
+        <div className={classes.imgContainer}>
+          <div className={classes.imgWrapper}>
+            <img className={classes.img} src={webTech} alt='' />
           </div>
         </div>
-        <div className={classes.flexText}>
+
+        <div className={classes.textContainer}>
           <h3 className='home-title'>Our aim</h3>
-          <p className={classes.left2rem}>
+          <p className={classes.text}>
             In our free 6-month program we train refugees, asylum seekers and
             people with limited access to further education in modern JavaScript
             software development. Our aim is to have our students land their
