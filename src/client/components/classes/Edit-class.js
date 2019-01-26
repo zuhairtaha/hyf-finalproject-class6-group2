@@ -74,7 +74,7 @@ class EditClass extends Component {
     return (
       <Consumer>
         {({ dispatch }) => (
-          <Container withLayout>
+          <Container>
             <Typography component='h5' variant='h5'>
               Edit class
             </Typography>

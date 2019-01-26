@@ -3,6 +3,7 @@ import logBackground from './images/logo-bg.svg'
 import TouchIcon from '@material-ui/icons/TouchApp'
 import Fab from '@material-ui/core/es/Fab/Fab'
 import { withStyles } from '@material-ui/core/styles'
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root1: {
@@ -14,7 +15,7 @@ const styles = theme => ({
     content: {}
   },
   root: {
-    textAlign: 'right',
+    textAlign: 'right'
   },
 
   container: {
@@ -101,7 +102,8 @@ const styles = theme => ({
       display: 'inherit',
       color: '#fff',
       textAlign: 'center',
-      margin: 'auto'
+      margin: 'auto',
+      paddingBottom: '1rem'
     }
   }
 })
@@ -134,6 +136,8 @@ const HomePageHeader = props => {
               size='large'
               variant='extended'
               color='primary'
+              component={Link}
+              to='/apply'
             >
               <TouchIcon />
               apply now
@@ -141,8 +145,9 @@ const HomePageHeader = props => {
           </h3>
         </div>
         <div className={classes.forSmallSize}>
-
-          <p><h2>HackYourFuture</h2>REFUGEE CODE SCHOOL IN COPENHAGEN</p>
+          <div>
+            <h2>HackYourFuture</h2>REFUGEE CODE SCHOOL IN COPENHAGEN
+          </div>
         </div>
       </div>
     </div>

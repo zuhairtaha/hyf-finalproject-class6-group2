@@ -10,6 +10,8 @@ import BallotIcon from '@material-ui/icons/Ballot'
 import IconButton from '@material-ui/core/IconButton'
 import MenuIcon from '@material-ui/icons/Menu'
 import UsersIcon from '@material-ui/icons/People'
+import MailIcon from '@material-ui/icons/Mail'
+import InfoIcon from '@material-ui/icons/Info'
 import ClassesIcon from '@material-ui/icons/LocalLibrary'
 import { Link } from 'react-router-dom'
 import Divider from '@material-ui/core/es/Divider/Divider'
@@ -44,7 +46,6 @@ class NavigationDrawer extends React.Component {
     const sideList = (
       <div className={classes.list}>
         <List>
-
           <ListItem component={Link} to='/users' button>
             <ListItemIcon>
               <UsersIcon />
@@ -68,9 +69,24 @@ class NavigationDrawer extends React.Component {
             </ListItemIcon>
             <ListItemText primary={'Modules'} />
           </ListItem>
-
           <Divider />
 
+          <ListItem component={Link} to='/about' button>
+            <ListItemIcon>
+              <InfoIcon />
+            </ListItemIcon>
+            <ListItemText primary={'About'} />
+          </ListItem>
+          <Divider />
+
+          <ListItem component={Link} to='/contact' button>
+            <ListItemIcon>
+              <MailIcon />
+            </ListItemIcon>
+            <ListItemText primary={'Contact'} />
+          </ListItem>
+
+          <Divider />
         </List>
       </div>
     )

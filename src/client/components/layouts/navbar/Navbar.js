@@ -10,17 +10,22 @@ import UserMenu from './User-menu'
 import NavigationDrawer from '../NavigationDrawer'
 import Progress from '../Progress'
 import { Consumer } from '../../../context'
-const styles = {
+const styles = theme => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   grow: {
     flexGrow: 1
   },
   logo: {
     height: '40px'
+  },
+  onLargeScreenOnly: {
+    [theme.breakpoints.down('sm')]: {
+      display: 'none'
+    }
   }
-}
+})
 
 function Navbar(props) {
   const { classes } = props
@@ -43,13 +48,23 @@ function Navbar(props) {
                 </Button>
               </Typography>
 
+              <Button
+                className={classes.onLargeScreenOnly}
+                component={Link}
+                to='/about/'
+                color='inherit'
+              >
+                About
+              </Button>
+              <Button
+                className={classes.onLargeScreenOnly}
+                component={Link}
+                to='/contact/'
+                color='inherit'
+              >
+                Contact
+              </Button>
 
-              {/*<Button component={Link} to='/users/' color='inherit'>*/}
-                {/*Users*/}
-              {/*</Button>*/}
-              {/*<Button component={Link} to='/classes/' color='inherit'>*/}
-                {/*Classes*/}
-              {/*</Button>*/}
               <UserMenu />
             </Toolbar>
           </AppBar>

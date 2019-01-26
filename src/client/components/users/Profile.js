@@ -54,7 +54,7 @@ class Profile extends React.Component {
     const { user } = this.state
     const { classes } = this.props
     return (
-      <Container withLayout>
+      <Container>
         {Object.entries(user).length !== 0 && (
           <div className={classes.root}>
             <div className={classes.left}>
