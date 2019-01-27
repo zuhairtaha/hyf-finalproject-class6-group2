@@ -37,6 +37,7 @@ class Index extends Component {
     const end = dragTime + (movedItem.end - movedItem.start)
     axios
       .put(`/api/classes-modules/${itemId}`, {
+        class_id: group.id,
         start_date: new Date(start),
         end_date: new Date(end)
       })
@@ -55,19 +56,31 @@ class Index extends Component {
   }
   // --------------------------handleItemResize------------------------------
   handleItemResize = (itemId, time, edge) => {
-    const { items } = this.state
+    const { items, dispatch } = this.props.value
+    const residedItem = items.find(item => item.id === itemId)
+    const start = edge === 'left' ? time : residedItem.start
+    const end = edge === 'left' ? residedItem.end : time
 
-    this.setState({
-      items: items.map(item =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: edge === 'left' ? time : item.start,
-              end: edge === 'left' ? item.end : time
-            })
-          : item
-      )
-    })
+    axios
+      .put(`/api/classes-modules/${itemId}`, {
+        start_date: new Date(start),
+        end_date: new Date(end)
+      })
+      .then(res => {
+        if (res.data.updated) console.log('updated')
+      })
+      .catch(console.error)
 
+    const updatedItems = items.map(item =>
+      item.id === itemId
+        ? Object.assign({}, item, {
+            start,
+            end
+          })
+        : item
+    )
+
+    dispatch({ type: 'UPDATE_CLASS_MODULE', payload: updatedItems })
     console.log('Resized', itemId, time, edge)
   }
   // -----------------------------render---------------------------
