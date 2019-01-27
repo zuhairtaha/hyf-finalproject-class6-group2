@@ -3,15 +3,6 @@ import '../css/ripple.css'
 
 const classItem = ({ item, itemContext, getItemProps, getResizeProps }) => {
   const { left: leftResizeProps, right: rightResizeProps } = getResizeProps()
-
-  // const backgroundColor =
-  //         itemContext.selected
-  //           ? itemContext.dragging
-  //           ? 'red'
-  //           : item.selectedBgColor
-  //           : item.bgColor
-  // const backgroundColor = itemContext.selected ? '#eee' : '#eee'
-
   const borderColor = itemContext.resizing ? 'red' : item.color
   return (
     <div
@@ -34,17 +25,16 @@ const classItem = ({ item, itemContext, getItemProps, getResizeProps }) => {
         className: itemContext.selected
           ? `${item.selectItemClass} showDropDownMenu`
           : 'defaultItemClass',
-
         onMouseDown: () => {
           console.log('on item click', item)
         },
-
-
+        // todo: add event on delete key pressed to show delete confirm dialog, then delete
       })}
     >
       {itemContext.useResizeHandle ? <div {...leftResizeProps} /> : null}
 
       <div
+        title=''
         className='ripple'
         style={{
           height: itemContext.dimensions.height,

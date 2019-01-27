@@ -17,6 +17,7 @@ import EditClassModule from './classes/classes-modules/Edit-classe-module'
 import ContactUs from './pages/contact-us'
 import Apply from './pages/apply'
 import About from './pages/about'
+import ClassModule from './classes/classes-modules'
 
 class Routers extends React.Component {
   render = () => (
@@ -32,6 +33,7 @@ class Routers extends React.Component {
       <Route path='/classes/edit/:id' component={EditClass} />
       <Route path='/classes/add-module/:id' component={AddModuleToClass} />
       <Route path='/classes-modules/edit/:id' component={EditClassModule} />
+      <Route path='/class-module/:id' component={ClassModule} />
 
       <Route path='/modules' render={props => <Modules {...props} />} exact />
       <Route path='/modules/edit/:id' component={EditModule} />

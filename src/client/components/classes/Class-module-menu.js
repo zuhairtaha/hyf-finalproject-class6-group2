@@ -3,7 +3,7 @@ import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import MoreVertIcon from '@material-ui/icons/MoreVert'
-import { withRouter, Link } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
 import AddMentorIcon from '@material-ui/icons/PersonAdd'
@@ -14,7 +14,6 @@ import { withStyles } from '@material-ui/core/styles'
 import { Consumer } from '../../context'
 import axios from 'axios'
 import swal from 'sweetalert'
-
 
 const ITEM_HEIGHT = 48
 const styles = theme => ({
@@ -64,10 +63,6 @@ class ClassMenu extends React.Component {
   handleOptionClick = (actionType, id, dispatch = null, title = null) => {
     this.setState({ anchorEl: null })
     switch (actionType) {
-
-
-
-
       case 'delete_class':
         swal({
           title: 'Are you sure?',
@@ -127,7 +122,6 @@ class ClassMenu extends React.Component {
                 }
               }}
             >
-
               {/*Edit ----------------------------------- */}
               <MenuItem component={Link} to={`/classes-modules/edit/${id}`}>
                 <ListItemIcon className={classes.icon}>
@@ -157,7 +151,7 @@ class ClassMenu extends React.Component {
               {/*Assign mentors ----------------------------------- */}
               <MenuItem
                 onClick={() =>
-                  this.handleOptionClick('add_mentor_to_class_module', id)
+                  swal('todo', 'this feature not added yet!', 'warning')
                 }
               >
                 <ListItemIcon className={classes.icon}>
@@ -167,15 +161,12 @@ class ClassMenu extends React.Component {
                   classes={{ primary: classes.primary }}
                   inset
                   primary='Assign mentors'
+                  disable={true}
                 />
               </MenuItem>
 
               {/*view details ----------------------------------- */}
-              <MenuItem
-                onClick={() =>
-                  this.handleOptionClick('delete_class_module', id, dispatch)
-                }
-              >
+              <MenuItem component={Link} to={`/class-module/${id}`}>
                 <ListItemIcon className={classes.icon}>
                   <EyeIcon />
                 </ListItemIcon>
@@ -185,7 +176,6 @@ class ClassMenu extends React.Component {
                   primary='Details...'
                 />
               </MenuItem>
-
             </Menu>
           </>
         )}
