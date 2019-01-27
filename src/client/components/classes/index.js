@@ -80,7 +80,7 @@ class Index extends Component {
         : item
     )
 
-    dispatch({ type: 'UPDATE_CLASS_MODULE', payload: updatedItems })
+    dispatch({ type: 'UPDATE_ITEM', payload: updatedItems })
     console.log('Resized', itemId, time, edge)
   }
   // -----------------------------render---------------------------
