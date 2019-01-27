@@ -8,7 +8,8 @@ import keys from './calender-stuff/keys'
 import Progress from '../layouts/Progress'
 import { getClassesCalender } from './GroupsItems'
 import { Consumer } from '../../context'
-import AddClassButton from "./add-class-button"
+import AddClassButton from './add-class-button'
+import axios from 'axios'
 
 class Index extends Component {
   // ----------------------componentDidMount----------------------------------
@@ -27,22 +28,29 @@ class Index extends Component {
   }
   // ----------------------handleItemMove----------------------------------
   handleItemMove = (itemId, dragTime, newGroupOrder) => {
-    const { items, groups } = this.state
+    const { items, groups, dispatch } = this.props.value
 
     const group = groups[newGroupOrder]
 
-    this.setState({
-      items: items.map(item =>
-        item.id === itemId
-          ? Object.assign({}, item, {
-              start: dragTime,
-              end: dragTime + (item.end - item.start),
-              group: group.id
-            })
-          : item
-      )
-    })
+    const movedItem = items.find(item => item.id === itemId)
+    const start = dragTime
+    const end = dragTime + (movedItem.end - movedItem.start)
+    axios
+      .put(`/api/classes-modules/${itemId}`, {
+        start_date: new Date(start),
+        end_date: new Date(end)
+      })
+      .then(res => {
+        if (res.data.updated) console.log('updated')
+      })
+      .catch(console.error)
 
+    const updatedItems = items.map(item =>
+      item.id === itemId
+        ? Object.assign({}, item, { start, end, group: group.id })
+        : item
+    )
+    dispatch({ type: 'UPDATE_CLASS_MODULE', payload: updatedItems })
     console.log('Moved', itemId, dragTime, newGroupOrder)
   }
   // --------------------------handleItemResize------------------------------
@@ -62,7 +70,7 @@ class Index extends Component {
 
     console.log('Resized', itemId, time, edge)
   }
-// -----------------------------render---------------------------
+  // -----------------------------render---------------------------
   render() {
     const { groups, items, defaultTimeStart, defaultTimeEnd } = this.props.value
     return (
@@ -110,7 +118,7 @@ class Index extends Component {
         )}
 
         {/*add class button --------*/}
-        <AddClassButton/>
+        <AddClassButton />
       </React.Fragment>
     )
   }

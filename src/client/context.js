@@ -32,12 +32,10 @@ const reducer = (state, action) => {
       }
 
     case 'UPDATE_CLASS_MODULE':
-      return {
-        ...state,
-        items: state.items.map(item =>
-          item.id === action.payload.item_id ? getItem(action.payload) : item
-        )
-      }
+      return { ...state, items: action.payload }
+
+    case 'UPDATE_MOVED_ITEM':
+      return {}
 
     case 'DELETE_MODULE':
       return {
@@ -103,8 +101,8 @@ export class Provider extends React.Component {
     loading: false,
     roles: [],
     // calender props start:
-    groups: [],
-    items: [],
+    groups: [], // group is class
+    items: [], // item is class_module
     defaultTimeStart: null,
     defaultTimeEnd: null,
     // calender props end;
