@@ -49,12 +49,12 @@ class AddModule extends Component {
   submitForm = (dispatch, e) => {
     e.preventDefault()
     const { id, title, description, length } = this.state
-    const newModule = { title, description, length }
+    const updatedModule = { title, description, length }
     axios
-      .put(`/api/modules/${id}`, newModule)
+      .put(`/api/modules/${id}`, updatedModule)
       .then(res => {
         if (res.data.updated) {
-          dispatch({ type: 'UPDATE_MODULE', payload: newModule })
+          dispatch({ type: 'UPDATE_MODULE', payload: updatedModule })
           this.props.history.push('/modules')
         }
       })

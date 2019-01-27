@@ -26,13 +26,20 @@ const classItem = ({ item, itemContext, getItemProps, getResizeProps }) => {
                      0 2px 2px 0 rgba(0, 0, 0, 0.14),
                      0 3px 1px -2px rgba(0, 0, 0, 0.12)`
         },
+        /*
+            when we selected the class_module item => add these two classes for it
+            this will show the drop down menu, otherwise it will be hidden
+            see: classes/css/module_colors.css
+        */
         className: itemContext.selected
           ? `${item.selectItemClass} showDropDownMenu`
           : 'defaultItemClass',
 
         onMouseDown: () => {
           console.log('on item click', item)
-        }
+        },
+
+
       })}
     >
       {itemContext.useResizeHandle ? <div {...leftResizeProps} /> : null}

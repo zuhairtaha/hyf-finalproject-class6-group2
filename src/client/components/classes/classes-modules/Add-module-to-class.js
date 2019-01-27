@@ -11,7 +11,8 @@ import { Link, withRouter } from 'react-router-dom'
 import moment from 'moment'
 import DateFnsUtils from '@date-io/date-fns'
 import swal from 'sweetalert'
-import { MuiPickersUtilsProvider, DatePicker } from 'material-ui-pickers'
+import { DatePicker, MuiPickersUtilsProvider } from 'material-ui-pickers'
+import { Consumer } from '../../../context'
 
 const styles = theme => ({
   root: {
@@ -57,14 +58,15 @@ const styles = theme => ({
 
 class AddModuleToClass extends React.Component {
   state = {
-    status: '',
     moduleId: 0,
     modules: [],
+    loading: true,
+    // todo: make start date by default the last date for current class
     start: moment(new Date().toISOString()).format('YYYY-MM-DD'),
+    // todo: end should be larger than start date
     end: moment(new Date().toISOString()).format('YYYY-MM-DD'),
     className: '',
     classId: null,
-    error: '',
     github: 'https://github.com/',
     selectedModuleLength: 3 //initial module length
   }
@@ -98,9 +100,9 @@ class AddModuleToClass extends React.Component {
     this.setState({ end: date })
   }
 
-  formSubmitHandler = e => {
-    e.preventDefault()
-    const { classId, moduleId, github, start, end } = this.state
+  formSubmitHandler = dispatch => event => {
+    event.preventDefault()
+    const { classId, moduleId, github, start, end, modules } = this.state
     axios
       .post(`/api/classes-modules/`, {
         class_id: classId,
@@ -110,7 +112,19 @@ class AddModuleToClass extends React.Component {
         end_date: end
       })
       .then(res => {
-        if (res.data.added) this.props.history.push('/classes')
+        if (res.data.added) {
+          const newItem = {
+            item_id: res.data.id,
+            item_title: modules
+              .filter(module => module.id === moduleId)
+              .map(module => module.title)[0],
+            group_id: classId,
+            start_date: start,
+            end_date: end
+          }
+          dispatch({ type: 'ADD_CLASS_MODULE', payload: newItem })
+          this.props.history.push('/classes')
+        }
       })
       .catch(err => swal('Oops!', err.response.data, 'error'))
   }
@@ -120,11 +134,11 @@ class AddModuleToClass extends React.Component {
     axios
       .get(`/api/classes/${classId}`)
       .then(res => {
-        const { id, name, length } = res.data
+        const { id, name } = res.data
         this.setState({
           className: name,
           classId: id,
-          length
+          loading: false
         })
         document.title = `Add module to ${name}`
       })
@@ -138,102 +152,116 @@ class AddModuleToClass extends React.Component {
 
   render = () => {
     const { classes } = this.props
-    const { modules, className, moduleId, start, end, github } = this.state
+    const {
+      modules,
+      className,
+      moduleId,
+      start,
+      end,
+      github,
+      loading
+    } = this.state
     return (
-      <Container>
-        <Typography variant='h5'>Add module to: {className}</Typography>
-        {modules.length === 0 ? (
-          <div>
-            <p>All modules has been already added to this class</p>
-            <Button component={Link} variant='contained' to='/classes'>
-              Go back
-            </Button>
-          </div>
-        ) : (
-          <form onSubmit={this.formSubmitHandler}>
-            {/*Modules list*/}
+      <Consumer>
+        {({ dispatch }) => {
+          return (
+            <Container>
+              <Typography variant='h5'>Add module to: {className}</Typography>
+              {modules.length === 0 && loading === false ? (
+                <div>
+                  <p>All modules has been already added to this class</p>
+                  <Button component={Link} variant='contained' to='/classes'>
+                    Go back
+                  </Button>
+                </div>
+              ) : (
+                <form onSubmit={this.formSubmitHandler(dispatch)}>
+                  {/*Modules list*/}
 
-            <TextField
-              select
-              label='Chose module'
-              value={moduleId}
-              onChange={this.handleChange('moduleId')}
-              className={classes.textField}
-              SelectProps={{
-                MenuProps: {
-                  className: classes.menu
-                }
-              }}
-              helperText='Please select your currency'
-              margin='normal'
-            >
-              {modules.map(({ id, title }) => (
-                <MenuItem key={id} value={id}>
-                  {title}
-                </MenuItem>
-              ))}
-            </TextField>
-            <br />
+                  <TextField
+                    select
+                    label='Chose module'
+                    value={moduleId}
+                    onChange={this.handleChange('moduleId')}
+                    className={classes.textField}
+                    SelectProps={{
+                      MenuProps: {
+                        className: classes.menu
+                      }
+                    }}
+                    helperText='Please select your currency'
+                    margin='normal'
+                  >
+                    {modules.map(({ id, title }) => (
+                      <MenuItem key={id} value={id}>
+                        {title}
+                      </MenuItem>
+                    ))}
+                  </TextField>
+                  <br />
 
-            {/*GitHub*/}
-            <TextField
-              id='standard-name'
-              label='GitHub repository'
-              className={classes.textField}
-              value={github}
-              onChange={this.handleChange('github')}
-              margin='normal'
-            />
-            <br />
+                  {/*GitHub*/}
+                  <TextField
+                    id='standard-name'
+                    label='GitHub repository'
+                    className={classes.textField}
+                    value={github}
+                    onChange={this.handleChange('github')}
+                    margin='normal'
+                  />
+                  <br />
 
-            {/*start*/}
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                margin='normal'
-                label='Start date'
-                format='dd-MM-yyyy'
-                value={start}
-                className={classes.textField}
-                onChange={this.handleStartDateChange}
-              />
-            </MuiPickersUtilsProvider>
-            <br />
+                  {/*start*/}
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                      margin='normal'
+                      label='Start date'
+                      format='dd-MM-yyyy'
+                      value={start}
+                      className={classes.textField}
+                      onChange={this.handleStartDateChange}
+                    />
+                  </MuiPickersUtilsProvider>
+                  <br />
 
-            {/*end*/}
-            <MuiPickersUtilsProvider utils={DateFnsUtils}>
-              <DatePicker
-                margin='normal'
-                label='End date'
-                format='dd-MM-yyyy'
-                value={end}
-                className={classes.textField}
-                onChange={this.handleEndDateChange}
-              />
-            </MuiPickersUtilsProvider>
+                  {/*end*/}
+                  <MuiPickersUtilsProvider utils={DateFnsUtils}>
+                    <DatePicker
+                      margin='normal'
+                      label='End date'
+                      format='dd-MM-yyyy'
+                      value={end}
+                      className={classes.textField}
+                      onChange={this.handleEndDateChange}
+                    />
+                  </MuiPickersUtilsProvider>
 
-            <br />
-            {/*Submit*/}
-            <Button
-              type='submit'
-              className={classes.mt1}
-              variant='contained'
-              color='primary'
-            >
-              <AddIcon /> add
-            </Button>
+                  <br />
+                  {/*Submit*/}
+                  <Button
+                    type='submit'
+                    className={classes.mt1}
+                    variant='contained'
+                    color='primary'
+                  >
+                    <AddIcon /> add
+                  </Button>
 
-            <Button
-              className={classes.mt1}
-              variant='contained'
-              component={Link}
-              to='/classes'
-              style={{ marginLeft: '1rem' }}
-            >
-              cancel
-            </Button>
-          </form>
-        )}
-      </Container>
+                  <Button
+                    className={classes.mt1}
+                    variant='contained'
+                    component={Link}
+                    to='/classes'
+                    style={{ marginLeft: '1rem' }}
+                  >
+                    cancel
+                  </Button>
+                </form>
+              )}
+            </Container>
+          )
+        }}
+      </Consumer>
     )
   }
 }

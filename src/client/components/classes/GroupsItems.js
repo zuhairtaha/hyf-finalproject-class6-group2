@@ -49,25 +49,27 @@ function itemTitle(id, title) {
   )
 }
 
+export function getItem(item) {
+  const {item_id, item_title, group_id, start_date, end_date} = item
+  return {
+    id: item_id,
+    title: itemTitle(item_id, item_title),
+    group: group_id,
+    start: moment(new Date(start_date).toISOString()),
+    end: moment(new Date(end_date).toISOString()),
+    // className: item_title.replace(/\W+/g, '_'),
+    selectItemClass: item_title.replace(/\W+/g, '_'),
+    className: ``,
+    canMove: true,
+    canResize: true,
+    canChangeGroup: true
+  }
+}
+
 function getItems(classes_modules) {
   return classes_modules
     .filter(item => item.item_id !== null)
-    .map(item => {
-      const { item_id, item_title, group_id, start_date, end_date } = item
-      return {
-        id: item_id,
-        title: itemTitle(item_id, item_title),
-        group: group_id,
-        start: moment(new Date(start_date).toISOString()),
-        end: moment(new Date(end_date).toISOString()),
-        // className: item_title.replace(/\W+/g, '_'),
-        selectItemClass: item_title.replace(/\W+/g, '_'),
-        className: ``,
-        canMove: true,
-        canResize: true,
-        canChangeGroup: true
-      }
-    })
+    .map(getItem)
 }
 
 function defaultTimeStart(classes_modules) {

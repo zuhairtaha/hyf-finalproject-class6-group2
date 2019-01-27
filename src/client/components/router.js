@@ -14,17 +14,20 @@ import EditClass from './classes/Edit-class'
 import AddModuleToClass from './classes/classes-modules/Add-module-to-class'
 import Profile from './users/Profile'
 import EditClassModule from './classes/classes-modules/Edit-classe-module'
-import ContactUs from "./pages/contact-us"
-import Apply from "./pages/apply"
-import About from "./pages/about"
+import ContactUs from './pages/contact-us'
+import Apply from './pages/apply'
+import About from './pages/about'
 
 class Routers extends React.Component {
   render = () => (
     <Switch>
       <Route path='/' component={Index} exact />
-      <Route path='/calender' component={Calender} />
 
-      <Route path='/classes' render={props => <ClassesCalender {...props} />} exact/>
+      <Route
+        path='/classes'
+        render={props => <ClassesCalender {...props} />}
+        exact
+      />
       <Route path='/classes/add' component={AddClass} />
       <Route path='/classes/edit/:id' component={EditClass} />
       <Route path='/classes/add-module/:id' component={AddModuleToClass} />
@@ -42,7 +45,10 @@ class Routers extends React.Component {
       <Route path='/contact' component={ContactUs} exact />
       <Route path='/apply' component={Apply} exact />
       <Route path='/about' component={About} exact />
+
+      {/*Temporary routes*/}
       <Route path='/form' component={Form} exact />
+      <Route path='/calender' component={Calender} />
 
       <Route render={() => 'Page not found!'} />
     </Switch>

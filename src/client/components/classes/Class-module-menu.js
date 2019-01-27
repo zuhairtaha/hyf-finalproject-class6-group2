@@ -15,6 +15,7 @@ import { Consumer } from '../../context'
 import axios from 'axios'
 import swal from 'sweetalert'
 
+
 const ITEM_HEIGHT = 48
 const styles = theme => ({
   menuItem: {
@@ -29,7 +30,7 @@ const styles = theme => ({
   icon: {}
 })
 
-class ClassModuleMenu extends React.Component {
+class ClassMenu extends React.Component {
   state = {
     anchorEl: null
   }
@@ -60,19 +61,53 @@ class ClassModuleMenu extends React.Component {
     })
   }
 
+  handleOptionClick = (actionType, id, dispatch = null, title = null) => {
+    this.setState({ anchorEl: null })
+    switch (actionType) {
+
+
+
+
+      case 'delete_class':
+        swal({
+          title: 'Are you sure?',
+          text: `this will delete ${title} wih all modules, sessions,...etc that belong to it`,
+          icon: 'warning',
+          buttons: true,
+          dangerMode: true
+        }).then(willDelete => {
+          if (willDelete) {
+            dispatch({ type: 'TOGGLE_LOADING', payload: true })
+            axios
+              .delete(`/api/classes/${id}`)
+              .then(res => {
+                if (res.data.deleted)
+                  dispatch({ type: 'DELETE_CLASS', payload: id })
+              })
+              .catch(console.error)
+              .finally(() =>
+                dispatch({ type: 'TOGGLE_LOADING', payload: false })
+              )
+          }
+        })
+
+        break
+
+      default:
+        break
+    }
+  }
+
   render() {
     const { anchorEl } = this.state
     const { classes, id, title } = this.props
-
     const open = Boolean(anchorEl)
     return (
       <Consumer>
         {({ dispatch }) => (
           <>
             <IconButton
-              id={`classModuleMenu-${id}`}
               className='classModuleMenu'
-              color='inherit'
               aria-label='More'
               aria-owns={open ? 'long-menu' : undefined}
               aria-haspopup='true'
@@ -92,6 +127,7 @@ class ClassModuleMenu extends React.Component {
                 }
               }}
             >
+
               {/*Edit ----------------------------------- */}
               <MenuItem component={Link} to={`/classes-modules/edit/${id}`}>
                 <ListItemIcon className={classes.icon}>
@@ -149,6 +185,7 @@ class ClassModuleMenu extends React.Component {
                   primary='Details...'
                 />
               </MenuItem>
+
             </Menu>
           </>
         )}
@@ -157,4 +194,4 @@ class ClassModuleMenu extends React.Component {
   }
 }
 
-export default withRouter(withStyles(styles)(ClassModuleMenu))
+export default withRouter(withStyles(styles)(ClassMenu))

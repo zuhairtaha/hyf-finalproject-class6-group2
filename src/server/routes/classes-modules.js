@@ -17,12 +17,12 @@ const schema = Joi.object().keys({
     .required() // todo: this should be > start_date
 })
 // --------------------------
-
 router
   .get('/', getAll)
   .get('/:id', getClassModule)
   .post('/', AddClassModule)
   .delete('/:id', deleteClassModule)
+  .put('/:id', updateClassModule)
 
 // --------------------------
 // GET all classes-modules (groups and items for calender)
@@ -48,7 +48,7 @@ FROM
   })
 } // --------------------------
 
-// CREATE a new user
+// CREATE a new class-module
 function AddClassModule(req, res, next) {
   const { error } = Joi.validate(req.body, schema)
   if (error) return next(error)
@@ -56,7 +56,7 @@ function AddClassModule(req, res, next) {
   const sql = sqlString.format(`INSERT INTO classes_modules SET ?`, req.body)
   db.execute(sql, (err, result) => {
     if (err) return next(err)
-    res.send({ added: true })
+    res.send({ added: true, id: result.insertId })
   })
 }
 // --------------------------
@@ -97,4 +97,21 @@ function getClassModule(req, res, next) {
     res.send(rows[0])
   })
 }
+
+// --------------------------
+// UPDATE a class by ID
+function updateClassModule(req, res, next) {
+  const sql = sqlString.format(`UPDATE classes_modules SET ? WHERE id = ?`, [
+    req.body,
+    req.params.id
+  ])
+
+  db.execute(sql, (err, result) => {
+    if (err) return next(err)
+    if (!result.affectedRows)
+      return next({ message: 'class_module not found', updated: false })
+    res.send({ updated: true })
+  })
+}
+
 module.exports = router

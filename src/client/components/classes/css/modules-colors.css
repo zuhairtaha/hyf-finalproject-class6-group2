@@ -1,26 +1,3 @@
-.confirm,
-.assign,
-.pending,
-.CSS,
-.HTML,
-.Javascript_1,
-.javascript_2,
-.javascript_3,
-.Node_js,
-.MySQL,
-.React,
-.Final_Project {
-  color: #fff;
-}
-
-.confirm {
-  background-color: #4897d8 !important;
-}
-
-.assign {
-  background-color: #d88948 !important;
-}
-
 .CSS {
   background-color: #ff65b5 !important;
   color: #ffe1f5;
@@ -39,8 +16,8 @@
 }
 
 .HTML {
-  background-color: #c5f0f7 !important;
-  color: rgba(0, 0, 0, 0.5);
+  background-color: #4897d8 !important;
+  color: #fff;
 }
 
 .Javascript_1 {
@@ -101,6 +78,7 @@
 
 .React {
   background-color: #05a0ca !important;
+  color: #fff;
 }
 
 .Final_Project {
@@ -112,4 +90,5 @@
     #fe6f5a 49%,
     #fa6e59 100%
   ) !important;
+  color:#fff;
 }

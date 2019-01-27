@@ -1,5 +1,5 @@
 import React from 'react'
-import { classTitle } from './components/classes/GroupsItems'
+import { classTitle, getItem } from './components/classes/GroupsItems'
 
 const Context = React.createContext()
 
@@ -19,6 +19,25 @@ const reducer = (state, action) => {
 
     case 'ADD_MODULE':
       return { ...state, modules: [...state.modules, action.payload] }
+
+    case 'ADD_CLASS_MODULE':
+      return { ...state, items: [...state.items, getItem(action.payload)] }
+
+    case 'UPDATE_MODULE':
+      return {
+        ...state,
+        modules: state.modules.map(module =>
+          module.id === action.payload.id ? action.payload : module
+        )
+      }
+
+    case 'UPDATE_CLASS_MODULE':
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.payload.item_id ? getItem(action.payload) : item
+        )
+      }
 
     case 'DELETE_MODULE':
       return {
@@ -68,14 +87,6 @@ const reducer = (state, action) => {
 
     case 'GET_ROLES':
       return { ...state, roles: action.payload }
-
-    case 'UPDATE_MODULE':
-      return {
-        ...state,
-        modules: state.modules.map(module =>
-          module.id === action.payload.id ? action.payload : module
-        )
-      }
 
     case 'SET_CLASSES_CALENDER':
       return { ...state, ...action.payload }

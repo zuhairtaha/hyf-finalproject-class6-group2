@@ -8,7 +8,6 @@ const authRouter = require('./auth/routes')
 const passportSetup = require('./auth/passport-setup')
 const passport = require('passport')
 const session = require('./config/session')
-const clientRouter = require('./routes/client')
 const apiRoutes = require('./routes')
 
 const app = express()
@@ -21,7 +20,7 @@ app.use(passport.session())
 
 app.use(logger('dev'))
 app.use(express.json())
-app.use(express.urlencoded({ extended: false }))
+app.use(express.urlencoded({extended: false}))
 app.use(cookieParser())
 
 app.get('/tahasoft', (req, res) => {
