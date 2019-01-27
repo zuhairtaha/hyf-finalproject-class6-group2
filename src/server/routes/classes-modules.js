@@ -105,7 +105,6 @@ function updateClassModule(req, res, next) {
     req.body,
     req.params.id
   ])
-
   db.execute(sql, (err, result) => {
     if (err) return next(err)
     if (!result.affectedRows)

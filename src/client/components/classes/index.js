@@ -51,7 +51,7 @@ class Index extends Component {
         ? Object.assign({}, item, { start, end, group: group.id })
         : item
     )
-    dispatch({ type: 'UPDATE_CLASS_MODULE', payload: updatedItems })
+    dispatch({ type: 'UPDATE_ITEM', payload: updatedItems })
     console.log('Moved', itemId, dragTime, newGroupOrder)
   }
   // --------------------------handleItemResize------------------------------

@@ -86,7 +86,7 @@ class EditClassModule extends React.Component {
       })
     }
 
-    console.log('state after handler',this.state.module_title)
+    console.log('state after handler', this.state.module_title)
   }
 
   // when start date selected, set :
@@ -106,15 +106,7 @@ class EditClassModule extends React.Component {
 
   formSubmitHandler = dispatch => event => {
     event.preventDefault()
-    const {
-      id,
-      classId,
-      moduleId,
-      github,
-      start,
-      end,
-      modules
-    } = this.state
+    const { id, classId, moduleId, github, start, end, modules } = this.state
     axios
       .put(`/api/classes-modules/${id}`, {
         class_id: classId,
@@ -134,11 +126,12 @@ class EditClassModule extends React.Component {
             start_date: start,
             end_date: end
           }
+          console.log(updatedItem)
           dispatch({ type: 'UPDATE_CLASS_MODULE', payload: updatedItem })
           this.props.history.push('/classes')
         }
       })
-      .catch(err => swal('Oops!', err.response.data, 'error'))
+      .catch(err=>console.log('err update class_module',err))
   }
 
   componentDidMount() {
@@ -148,16 +141,16 @@ class EditClassModule extends React.Component {
       .get(`/api/classes-modules/${classModuleId}`)
       .then(res => {
         const {
-          id,
-          class_id,
-          module_id,
-          github_page,
-          start_date,
-          end_date,
-          module_title,
-          length,
-          class_name
-        } = res.data
+                id,
+                class_id,
+                module_id,
+                github_page,
+                start_date,
+                end_date,
+                module_title,
+                length,
+                class_name
+              } = res.data
 
         this.setState({
           id,
@@ -173,33 +166,33 @@ class EditClassModule extends React.Component {
 
         document.title = `Edit ${module_title} for ${class_name} `
 
+        this.setState({
+          modules: [{ id: module_id, title: module_title, length }]
+        })
         // get rest modules for current class
         return axios
           .get(`/api/modules/rest-modules-for-class/${class_id}`)
-          .then(res =>
-            this.setState({
-              modules: [
-                ...res.data,
-                // add current module to rest modules (because here is edit page)
-                { id: module_id, title: module_title, length }
-              ]
-            })
-          )
+          .then(res => {
+            if (res.data)
+              this.setState(state => ({
+                modules: [...state.modules, ...res.data]
+              }))
+          })
       })
-      .catch(error => swal('OOPS!', error.response.data, 'error'))
+      .catch(warning => this.setState({ warning }))
   }
 
   render = () => {
     const { classes } = this.props
     const {
-      github,
-      start,
-      end,
-      module_title,
-      className,
-      moduleId,
-      modules
-    } = this.state
+            github,
+            start,
+            end,
+            module_title,
+            className,
+            moduleId,
+            modules
+          } = this.state
     return (
       <Consumer>
         {({ dispatch }) => {
@@ -209,7 +202,6 @@ class EditClassModule extends React.Component {
                 <EditIcon /> {className} - {module_title}
               </Typography>
               <form onSubmit={this.formSubmitHandler(dispatch)}>
-
                 {/*Modules list*/}
                 <TextField
                   select

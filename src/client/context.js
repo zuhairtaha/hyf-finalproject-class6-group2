@@ -32,6 +32,14 @@ const reducer = (state, action) => {
       }
 
     case 'UPDATE_CLASS_MODULE':
+      return {
+        ...state,
+        items: state.items.map(item =>
+          item.id === action.payload.item_id ? getItem(action.payload) : item
+        )
+      }
+
+    case 'UPDATE_ITEM':
       return { ...state, items: action.payload }
 
     case 'UPDATE_MOVED_ITEM':
