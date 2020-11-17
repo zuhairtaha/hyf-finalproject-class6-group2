@@ -1,5 +1,7 @@
 # HackYourFuture Final Project
 ### (Class 6 - Group 2)
+
+[Demo](class06-fp-02.herokuapp.com/)
  
 ![logo](/public/images/logo_black.svg)
 
